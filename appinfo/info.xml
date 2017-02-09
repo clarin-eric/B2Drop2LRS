@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<info>
+    <id>lrswitchboardbridge</id>
+    <name>EUDAT LRSwitchboard bridge</name>
+    <namespace>lrswitchboardBridge</namespace>
+
+    <description>
+      This owncloud plugin allows the user to directly send files from his personal cloud store to
+      the CLARIN-PLUS Language Resource Switchboard. The user interface of B2DROP is extended with
+      a icon to transfer files. Once transferred, a new browser tab opens with the switchboard app.
+    </description>
+    <licence>AGPL</licence>
+    <author>CLARIN-PLUS/EUDAT</author>
+    <version>0.0.1</version>
+    <dependencies>
+        <owncloud min-version="9.1" max-version="9.1" />
+        <lib>curl</lib>
+        <os>Linux</os>
+        <os>Darwin</os>
+    </dependencies>
+    <rememberlogin>false</rememberlogin>
+    <category>publishing</category>
+    <website>https://eudat.eu</website>
+    <bugs>https://github.com/EUDAT-B2DROP/lrswitchboardbridge/issues</bugs>
+    <repository type="git">https://github.com/EUDAT-B2DROP/lrswitchboardbridge.git</repository>
+</info>
