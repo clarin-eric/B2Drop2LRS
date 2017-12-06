@@ -3,7 +3,7 @@ Code Repository for the B2DROP plugin to bridge to the CLARIN Language Resources
 
 # Module Description
 
-This owncloud plugin allows users to connect their resources from their personal cloud store to the
+This nextcloud plugin allows users to connect their resources from their personal cloud store to the
 CLARIN Language Resource Switchboard.  It extends the user interface of the B2DROP resources
 list. For each resource, the '...' menu is extended to contain a menu item poiting to the LR
 switchboard. Once activated, a new browser tab opens with the switchboard; it fetches the resource
@@ -11,9 +11,9 @@ from the cloud, and processes it as usual.
 
 # Install
 
-1. on your B2DROP server go to the <owncloud>/apps directory
+1. on your B2DROP server go to the <nextcloud>/apps directory
 2. git clone this repository
-3. enable the app on the B2DROP/owncloud web interface
+3. enable the app on the B2DROP/nextcloud web interface
 
 # Website
 
@@ -21,7 +21,7 @@ An temporary B2Drop instance has been set-up and is being served at:
 
 The switchboard is currently being served at:
 
-```http://weblicht.sfs.uni-tuebingen.de/owncloud ```
+```http://weblicht.sfs.uni-tuebingen.de/nextcloud ```
 
 Please contact claus.zinn@uni-tuebingen.de for the login credentials so that you can test the b2drop
 plugin.

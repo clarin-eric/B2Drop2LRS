@@ -1,11 +1,11 @@
 <?php
 /**
- * OwnCloud - Lrswitchboardbridge App
+ * Nextcloud - Lrswitchboardbridge App
  *
  * Settings view for a user, showing the lrswitchboard api url
  * PHP Version 5-7
  *
- * @category  Owncloud
+ * @category  Nextcloud
  * @package   LrswitchboardBridge
  * @author    EUDAT <b2drop-devel@postit.csc.fi>
  * @copyright 2015 EUDAT

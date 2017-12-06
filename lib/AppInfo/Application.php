@@ -1,10 +1,10 @@
 <?php
 /**
- * OwnCloud - lrswitchboardbridge App
+ * Nextcloud - lrswitchboardbridge App
  *
- * PHP Version 5-7
+ * PHP Version 7-2
  *
- * @category  Owncloud
+ * @category  Nextcloud
  * @package   lrswitchboardBridge
  * @author    EUDAT <b2drop-devel@postit.csc.fi>
  * @copyright 2015 EUDAT
@@ -22,9 +22,9 @@ use OCP\Util;
 
 
 /**
- * Implement a ownCloud Application for our lrswitchboardbridge
+ * Implement a nextcloud Application for our lrswitchboardbridge
  *
- * @category Owncloud
+ * @category Nextcloud
  * @package  lrswitchboardBridge
  * @author   EUDAT <b2drop-devel@postit.csc.fi>
  * @license  AGPL3 https://github.com/EUDAT-B2DROP/lrswitchboardbridge/blob/master/LICENSE
@@ -33,7 +33,7 @@ use OCP\Util;
 class Application extends App
 {
     /**
-     * Create a ownCloud application
+     * Create a nextcloud application
      *
      * @param array(string) $urlParams a list of url parameters
      */

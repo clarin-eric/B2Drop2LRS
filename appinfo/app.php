@@ -2,7 +2,7 @@
 /**
  * OwnCloud - lrswitchboardbridge App
  *
- * PHP Version 5-7
+ * PHP Version 7-2
  *
  * @category  Owncloud
  * @package   lrswitchboardBridge
