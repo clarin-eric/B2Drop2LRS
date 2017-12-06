@@ -1,8 +1,8 @@
 <?php
 /**
- * Nextcloud - Lrswitchboardbridge App
+ * Nextcloud - lrswitchboardbridge App
  *
- * PHP Version 5-7
+ * PHP Version 7-2
  *
  * @category  Nextcloud
  * @package   LrswitchboardBridge

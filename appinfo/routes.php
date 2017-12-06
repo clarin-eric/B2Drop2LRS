@@ -1,7 +1,7 @@
 <?php
 
 /**
- * OwnCloud - lrswitchboardbridge App
+ * Nextcloud - lrswitchboardbridge App
  *
  * Create your routes in here. The name is the lowercase name of the Controller
  * without the Controller part, the stuff after the hash is the method.
@@ -13,7 +13,7 @@
  *
  * PHP Version 7-2
  *
- * @category  Owncloud
+ * @category  Nextcloud
  * @package   lrswitchboardBridge
  * @author    EUDAT <claus.zinn@uni-tuebingen.de>
  * @copyright 2017 CLARIN-PLUS/EUDAT

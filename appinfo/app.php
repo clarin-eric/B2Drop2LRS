@@ -1,10 +1,10 @@
 <?php
 /**
- * OwnCloud - lrswitchboardbridge App
+ * Nextcloud - lrswitchboardbridge App
  *
  * PHP Version 7-2
  *
- * @category  Owncloud
+ * @category  Nextcloud
  * @package   lrswitchboardBridge
  * @author    CLARIN-PLUS/EUDAT <claus.zinn@uni-tuebingen.de>
  * @copyright 2017 CLARIN-PLUS/EUDAT

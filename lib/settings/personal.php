@@ -3,7 +3,7 @@
  * Nextcloud - Lrswitchboardbridge App
  *
  * Settings view for a user, showing the lrswitchboard api url
- * PHP Version 5-7
+ * PHP Version 7-2
  *
  * @category  Nextcloud
  * @package   LrswitchboardBridge
