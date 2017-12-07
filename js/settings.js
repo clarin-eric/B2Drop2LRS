@@ -12,6 +12,6 @@ $(document).ready(function() {
         if (this.checked) {
             value = '1';
         }
-        OC.AppConfig.setValue('b2sharebridge', $(this).attr('name'), value);
+        OC.AppConfig.setValue('lrswitchboardbridge', $(this).attr('name'), value);
     });
 });

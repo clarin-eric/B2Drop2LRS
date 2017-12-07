@@ -20,8 +20,9 @@ use OCP\Util;
 User::checkLoggedIn();
 $userId = \OC::$server->getUserSession()->getUser()->getUID();
 
+Util::addScript('lrswitchboardbridge', 'settings-personal');
 
-$tmpl = new Template('lrswitchboardbridge');
+$tmpl = new Template('lrswitchboardbridge', 'settings-personal');
 $tmpl->assign(
     'switchboard_baseurl',
     \OC::$server->getConfig()->getAppValue(
