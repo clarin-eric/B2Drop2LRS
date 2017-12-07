@@ -34,24 +34,6 @@ class AdminTest extends TestCase  {
         return parent::setUp();
     }
 
-    public function formDataProvider() {
-        $params = [
-            'publish_baseurl' => $this->config->getAppValue(
-                'lrswitchboardbridge', 'publish_baseurl'
-            ),
-            'max_uploads' => $this->config->getAppValue(
-                'lrswitchboardbridge', 'max_uploads'
-            ),
-            'max_upload_filesize' => $this->config->getAppValue(
-                'lrswitchboardbridge', 'max_upload_filesize'
-            ),
-            'check_ssl' => $this->config->getAppValue(
-                'lrswitchboardbridge', 'check_ssl'
-            ),
-        ];
-        return $params;
-    }
-
     public function testGetForm() {
         $params = $this->formDataProvider();
 

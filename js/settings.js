@@ -1,17 +1,11 @@
 $(document).ready(function() {
-    $('#b2shareUrl').change(function() {
+    $('#lrswitchboardUrl').change(function() {
         var regex = /(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/i;
         var value = $(this).val();
 
         if (regex.exec(value) !== null) {
-            OC.AppConfig.setValue('b2sharebridge', $(this).attr('name'), value)
+            OC.AppConfig.setValue('lrswitchboardbridge', $(this).attr('name'), value)
         }
-    });
-    $('#maxB2shareUploads').change(function() {
-        OC.AppConfig.setValue('b2sharebridge', $(this).attr('name'), $(this).val())
-    });
-    $('#maxB2shareUploadFilesize').change(function() {
-        OC.AppConfig.setValue('b2sharebridge', $(this).attr('name'), $(this).val())
     });
     $('#checkSsl').change(function() {
         var value = '0';

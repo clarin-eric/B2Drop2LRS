@@ -14,7 +14,6 @@
 namespace OCA\Lrswitchboardbridge\Tests\AppInfo;
 
 use OCA\Lrswitchboardbridge\AppInfo\Application;
-use OCA\Lrswitchboardbridge\Controller\PublishController;
 use PHPUnit\Framework\TestCase;
 
 class ApplicationTest extends TestCase  {
@@ -32,13 +31,6 @@ class ApplicationTest extends TestCase  {
     public function testContainerAppName() {
         $this->app = new Application();
         $this->assertEquals('lrswitchboardbridge', $this->container->getAppName());
-    }
-
-    public function queryData() {
-        return [
-            ['PublishController', PublishController::class],
-        ];
-
     }
 
     /**

@@ -21,23 +21,12 @@ User::checkLoggedIn();
 $userId = \OC::$server->getUserSession()->getUser()->getUID();
 
 
-Util::addScript('lrswitchboardbridge', 'settings-personal');
-
-$tmpl = new Template('lrswitchboardbridge', 'settings-personal');
+$tmpl = new Template('lrswitchboardbridge');
 $tmpl->assign(
-    'publish_baseurl',
+    'switchboard_baseurl',
     \OC::$server->getConfig()->getAppValue(
         'lrswitchboardbridge',
-        'publish_baseurl'
-    )
-);
-
-$tmpl->assign(
-    'lrswitchboard_apitoken',
-    \OC::$server->getConfig()->getUserValue(
-        $userId,
-        'lrswitchboardbridge',
-        'token'
+        'switchboard_baseurl'
     )
 );
 

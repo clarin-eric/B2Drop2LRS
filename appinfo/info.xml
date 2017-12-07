@@ -5,9 +5,10 @@
     <namespace>lrswitchboardBridge</namespace>
 
     <description>
-      This nextcloud plugin allows the user to directly send files from his personal cloud store to
-      the CLARIN-PLUS Language Resource Switchboard. The user interface of B2DROP is extended with
+      This nextcloud plugin allows users to directly send files from their personal cloud store to
+      the CLARIN Language Resource Switchboard. The user interface of B2DROP is extended with
       a icon to transfer files. Once transferred, a new browser tab opens with the switchboard app.
+      From there, the file can be processed by a number of different language-related processing tools.
     </description>
     <licence>AGPL</licence>
     <author>CLARIN-PLUS/EUDAT</author>

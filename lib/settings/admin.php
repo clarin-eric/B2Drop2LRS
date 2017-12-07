@@ -21,26 +21,13 @@ $config = \OC::$server->getConfig();
 
 $tmpl = new Template('lrswitchboardbridge', 'settings-admin');
 $tmpl->assign(
-    'publish_baseurl',
+    'switchboard_baseurl',
     $config->getAppValue(
         'lrswitchboardbridge',
-        'publish_baseurl'
+        'switchboard_baseurl'
     )
 );
-$tmpl->assign(
-    'max_uploads',
-    $config->getAppValue(
-        'lrswitchboardbridge',
-        'max_uploads'
-    )
-);
-$tmpl->assign(
-    'max_upload_filesize',
-    $config->getAppValue(
-        'lrswitchboardbridge',
-        'max_upload_filesize'
-    )
-);
+
 $tmpl->assign(
     'check_ssl',
     $config->getAppValue(

@@ -23,32 +23,8 @@ class Test extends TestCase  {
         $expected = [
             'routes' => [
                 [
-                    'name' => 'Publish#publish',
-                    'url' => '/publish',
-                    'verb' => 'POST'],
-                [
-                    'name' => 'View#depositList',
+                    'name' => 'View#transferFile',
                     'url' => '/',
-                    'verb' => 'GET'
-                ],
-                [
-                    'name' => 'View#set_token',
-                    'url' => '/apitoken',
-                    'verb' => 'POST'
-                ],
-                [
-                    'name' => 'View#delete_token',
-                    'url' => '/apitoken',
-                    'verb' => 'DELETE'
-                ],
-                [
-                    'name' => 'View#getTabViewContent',
-                    'url'=>'/gettabviewcontent',
-                    'verb'=>'GET'
-                ],
-                [
-                    'name' => 'View#initializeB2ShareUI',
-                    'url' => '/initializeb2shareui',
                     'verb' => 'GET'
                 ],
             ]
