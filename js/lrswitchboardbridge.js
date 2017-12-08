@@ -14,6 +14,7 @@
          */
         attach: function(fileList) {
             if (fileList.id === 'trashbin' || fileList.id === 'files.public') {
+		console.log('premature return', fileList.id);
                 return;
             }
             var fileActions = fileList.fileActions;
@@ -38,7 +39,7 @@
 			    var jsonResponse = JSON.parse(xhr.response);
 
 			    // to be configured to global switchboard server, see  "<?php p($_['switchboard_baseurl']) ?>");
-			    console.log('baseurl', 'switchboard_baseurl'
+			    console.log('baseurl', 'switchboard_baseurl to be used from configuration rather than hardwired.', $('#lrswitchboardUrl'));
 			    var switchboardBase = '//switchboard.clarin.eu/#/b2drop/'
 			    
 			    // fetch the share link, plus at download postfix

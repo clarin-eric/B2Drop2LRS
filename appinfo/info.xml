@@ -20,7 +20,7 @@
         <os>Darwin</os>
     </dependencies>
     <rememberlogin>false</rememberlogin>
-    <category>publishing</category>
+    <category>integration</category>
     <website>https://eudat.eu</website>
     <bugs>https://github.com/EUDAT-B2DROP/lrswitchboardbridge/issues</bugs>
     <repository type="git">https://github.com/EUDAT-B2DROP/lrswitchboardbridge.git</repository>
