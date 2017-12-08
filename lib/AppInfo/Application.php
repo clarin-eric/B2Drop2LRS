@@ -22,7 +22,7 @@ use OCP\Util;
 
 
 /**
- * Implement a nextcloud Application for our lrswitchboardbridge
+ * Implement a nextcloud Application to bridge to the CLARIN Language Resource Switchboard
  *
  * @category Nextcloud
  * @package  lrswitchboardBridge

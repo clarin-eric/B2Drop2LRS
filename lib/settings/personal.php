@@ -31,4 +31,13 @@ $tmpl->assign(
     )
 );
 
+$tmpl->assign(
+    'check_ssl',
+    $config->getAppValue(
+        'lrswitchboardbridge',
+        'check_ssl',
+        '1'
+    )
+);
+
 return $tmpl->fetchPage();
