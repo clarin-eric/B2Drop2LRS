@@ -19,9 +19,11 @@ from the cloud, and processes it as usual.
 
 An temporary B2Drop instance has been set-up and is being served at:
 
+```http://weblicht.sfs.uni-tuebingen.de/owncloud/ ```
+
 The switchboard is currently being served at:
 
-```http://weblicht.sfs.uni-tuebingen.de/nextcloud ```
+```http://weblicht.sfs.uni-tuebingen.de/clrs/ ```
 
 Please contact claus.zinn@uni-tuebingen.de for the login credentials so that you can test the b2drop
 plugin.
@@ -30,12 +32,14 @@ plugin.
 
 # Status
 
-This is a quick hack, getting inspirations from the B2Drop plugin b2sharebridge, see
+The code is inspired by the B2Drop plugin b2sharebridge, see
 
 ```https://github.com/EUDAT-B2DROP/b2sharebridge.git ```.
 
 Given the radical changes / deletions from the b2sharebridge code, its git log history has been
 deleted.
 
-The software is currently being developed.  Stay tuned.
+The software is currently being developed and tested.  Stay tuned.
+
+
 

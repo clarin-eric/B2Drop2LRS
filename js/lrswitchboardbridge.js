@@ -29,7 +29,11 @@
 
 		    // use REST API to get the share link for the resource in question
 		    var xhr = new XMLHttpRequest();
-		    var url = OC.linkToOCS('apps/files_sharing/api/v1', 4) + 'shares' + '?format=json' + '&path=/'.concat(fileName) + '&reshares=true';  
+		    var url = OC.linkToOCS('apps/files_sharing/api/v1', 4)
+			+ 'shares'
+			+ '?format=json'
+			+ '&path=/'.concat(fileName)
+			+ '&reshares=true';  
 		    xhr.open('GET', url, true);
 		    xhr.setRequestHeader('Content-Type', "application/x-www-form-urlencoded");
 		    xhr.setRequestHeader('OCS-APIREQUEST', true);
@@ -39,7 +43,8 @@
 			    var jsonResponse = JSON.parse(xhr.response);
 
 			    // to be configured to global switchboard server, see  "<?php p($_['switchboard_baseurl']) ?>");
-			    console.log('baseurl', 'switchboard_baseurl to be used from configuration rather than hardwired.', $('#lrswitchboardUrl'));
+			    console.log('baseurl', 'switchboard_baseurl to be used from configuration rather than hardwired.',
+					$('#lrswitchboardUrl'));
 			    var switchboardBase = '//switchboard.clarin.eu/#/b2drop/'
 			    
 			    // fetch the share link, plus at download postfix
@@ -48,7 +53,6 @@
 				alert('You need to share the file, before calling the switchboard');
 			    } else {
 				var fileLink = jsonResponse.ocs.data[0].url.concat('/download');
-				// create URL and call the switchboard 
 				var clrsCall = switchboardBase.concat( encodeURIComponent(fileLink));
 				window.open(clrsCall, '_blank');
 				window.focus();

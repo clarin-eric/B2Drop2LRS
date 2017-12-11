@@ -22,6 +22,8 @@ $userId = \OC::$server->getUserSession()->getUser()->getUID();
 
 Util::addScript('lrswitchboardbridge', 'settings-personal');
 
+$config = \OC::$server->getConfig();
+
 $tmpl = new Template('lrswitchboardbridge', 'settings-personal');
 $tmpl->assign(
     'switchboard_baseurl',
