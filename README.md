@@ -12,7 +12,10 @@ from the cloud, and processes it as usual.
 # Install
 
 1. on your B2DROP server go to the <nextcloud>/apps directory
-2. git clone this repository using ```git clone https://github.com/clarin-eric/B2Drop2LRSwitchboard.git lrsswitchboardbridge ```
+2. git clone this repository using
+
+   ```git clone https://github.com/clarin-eric/B2Drop2LRSwitchboard.git lrsswitchboardbridge ```
+
 3. enable the app on the B2DROP/nextcloud web interface
 
 # Website
