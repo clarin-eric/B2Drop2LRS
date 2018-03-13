@@ -47,12 +47,21 @@
 					$('#lrswitchboardUrl'));
 			    var switchboardBase = '//switchboard.clarin.eu/#/b2drop/'
 			    
-			    // fetch the share link, plus at download postfix
-			    var sharedP = jsonResponse.ocs.data[0];
-			    if (sharedP === undefined) {
-				alert('You need to share the file, before calling the switchboard');
+			    // first, check whether we have a shared link
+			    var data = jsonResponse.ocs.data;
+			    var numberOfShares = data.length;
+			    var shareOfInterest = undefined;
+			    for (var i = 0; i < numberOfShares; i++) {
+				console.log('share', i, data[i]);
+				if (data[i].share_type == 3) { // a shared link
+				    shareOfInterest = data[i];
+				}
+			    }
+			    // call the switchboard when there is a shared link, otherwise alert the user 
+			    if (shareOfInterest === undefined) {
+				alert('You need to share the file by link (tick box left to "Share link") before calling the switchboard. Also, please do not password protect the link as the tools connected to the switchboard do not have access to any passwords.');
 			    } else {
-				var fileLink = jsonResponse.ocs.data[0].url.concat('/download');
+				var fileLink = shareOfInterest.url.concat('/download');
 				var clrsCall = switchboardBase.concat( encodeURIComponent(fileLink));
 				window.open(clrsCall, '_blank');
 				window.focus();
