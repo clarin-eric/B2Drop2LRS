@@ -12,7 +12,7 @@ from the cloud, and processes it as usual.
 # Install
 
 1. on your B2DROP server go to the <nextcloud>/apps directory
-2. git clone this repository
+2. git clone this repository using ```git clone https://github.com/clarin-eric/B2Drop2LRSwitchboard.git lrsswitchboardbridge ```
 3. enable the app on the B2DROP/nextcloud web interface
 
 # Website
@@ -23,7 +23,7 @@ An temporary B2Drop instance has been set-up and is being served at:
 
 The switchboard is currently being served at:
 
-```http://weblicht.sfs.uni-tuebingen.de/clrs/ ```
+```https://switchboard.clarin.eu ```
 
 Please contact claus.zinn@uni-tuebingen.de for the login credentials so that you can test the b2drop
 plugin.
