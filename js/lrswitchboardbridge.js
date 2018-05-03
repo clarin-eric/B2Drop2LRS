@@ -25,14 +25,15 @@
                 mime: 'all',
                 permissions: OC.PERMISSION_READ,
                 icon: OC.imagePath('lrswitchboardbridge', 'filelisticon.png'),
-                actionHandler: function(fileName) {
+                actionHandler: function(fileName,path) {
 
+		    //console.log('fileName', fileName, path, path.dir);
 		    // use REST API to get the share link for the resource in question
 		    var xhr = new XMLHttpRequest();
 		    var url = OC.linkToOCS('apps/files_sharing/api/v1', 4)
 			+ 'shares'
 			+ '?format=json'
-			+ '&path=/'.concat(fileName)
+			+ '&path='.concat(path.dir).concat('/').concat(fileName)
 			+ '&reshares=true';  
 		    xhr.open('GET', url, true);
 		    xhr.setRequestHeader('Content-Type', "application/x-www-form-urlencoded");
@@ -49,6 +50,8 @@
 			    
 			    // first, check whether we have a shared link
 			    var data = jsonResponse.ocs.data;
+			    console.log('jsonResponse', jsonResponse, data);
+			    console.log('url', url);
 			    var numberOfShares = data.length;
 			    var shareOfInterest = undefined;
 			    for (var i = 0; i < numberOfShares; i++) {

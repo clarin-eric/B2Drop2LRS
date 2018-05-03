@@ -22,7 +22,7 @@ from the cloud, and processes it as usual.
 
 An temporary B2Drop instance has been set-up and is being served at:
 
-```http://weblicht.sfs.uni-tuebingen.de/owncloud/ ```
+```http://weblicht.sfs.uni-tuebingen.de/nextcloud/ ```
 
 The switchboard is currently being served at:
 
