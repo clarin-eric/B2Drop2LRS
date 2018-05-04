@@ -1,5 +1,5 @@
 <div class="section" id="eudat_lrswitchboard">
-    <h2>EUDAT LRSWITCHBOARD Bridge</h2>
+    <h2>CLARIN LRSWITCHBOARD Bridge</h2>
     <p id="lrswitchboardUrlField">
         <input title="switchboard_baseurl" type="text" name="switchboard_baseurl"
                id="lrswitchboardUrl"
