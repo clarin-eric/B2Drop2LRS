@@ -16,7 +16,7 @@ from the cloud, and processes it as usual.
 
    ```git clone https://github.com/clarin-eric/B2Drop2LRSwitchboard.git lrswitchboardbridge ```
 
-3. enable the app on the B2DROP/nextcloud web interface
+3. enable the app on the B2DROP/nextcloud web interface. The menu item for managing the apps is hidden in the collapsible menu under the avatar icon on the top-right corner. 
 
 # Website
 
