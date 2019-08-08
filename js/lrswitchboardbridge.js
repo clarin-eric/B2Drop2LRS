@@ -31,18 +31,18 @@
 					// use REST API to get the share link for the resource in question
 					var xhr = new XMLHttpRequest();
 					var url = OC.linkToOCS('apps/files_sharing/api/v1', 4)
-					+ 'shares'
-					+ '?format=json'
-					+ '&path='+filePath
-					+ '&reshares=true';
-					console.log('url', url);
+						+ 'shares'
+						+ '?format=json'
+						+ '&path='+filePath
+						+ '&reshares=true';
+					//console.log('url', url);
 					xhr.open('GET', url, true);
 					xhr.setRequestHeader('Content-Type', "application/x-www-form-urlencoded");
 					xhr.setRequestHeader('OCS-APIREQUEST', true);
 					xhr.setRequestHeader('requesttoken', oc_requesttoken);
 					xhr.onload = function() {
-						if (xhr.status >= 200 && xhr.status < 300) {
-							var jsonResponse = JSON.parse(xhr.response);
+						if (this.status >= 200 && this.status < 300) {
+							var jsonResponse = JSON.parse(this.response);
 
 							// to be configured to global switchboard server, see  "<?php p($_['switchboard_baseurl']) ?>");
 							var switchboardBase = '//switchboard.clarin.eu/#/b2drop/'
@@ -59,7 +59,30 @@
 							}
 							// call the switchboard when there is a shared link, otherwise alert the user
 							if (shareOfInterest === undefined) {
-								alert('You need to share the file by link (tick box left to "Share link") before calling the switchboard. Also, please do not password protect the link as the tools connected to the switchboard do not have access to any passwords.');
+								var url = '/ocs/v2.php/apps/files_sharing/api/v1/shares?format=json';
+								var data = {
+									'path': filePath,
+									'shareType': 3,    // public link
+									'permissions': 27  // just replicating what pushing the add icon in the UI does...
+								};
+								var xhr = new XMLHttpRequest();
+								xhr.open('POST', url, true);
+								xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
+								xhr.setRequestHeader('Accept', 'application/json, text/javascript');
+								xhr.setRequestHeader('OCS-APIREQUEST', true);
+								xhr.setRequestHeader('requesttoken', oc_requesttoken);
+								xhr.onload = function (data) {
+									if(this.status >= 200 && this.status < 300) {
+										var response = JSON.parse(this.response);
+										var fileLink = response.ocs.data.url + '/download';
+										var clrsCall = switchboardBase + encodeURIComponent(fileLink);
+										window.open(clrsCall, '_blank');
+										window.focus();
+										location.reload();
+									}
+								};
+								xhr.send(JSON.stringify(data));
+
 							} else {
 								var fileLink = shareOfInterest.url + '/download';
 								var clrsCall = switchboardBase + encodeURIComponent(fileLink);
