@@ -14,7 +14,7 @@
     <author>CLARIN-PLUS/EUDAT</author>
     <version>0.2</version>
     <dependencies>
-        <nextcloud min-version="11" max-version="15" />
+        <nextcloud min-version="11" max-version="16" />
         <lib>curl</lib>
         <os>Linux</os>
         <os>Darwin</os>
