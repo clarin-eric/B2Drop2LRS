@@ -23,7 +23,7 @@
                 displayName: 'Switchboard',
                 mime: 'all',
                 permissions: OC.PERMISSION_READ,
-                icon: OC.imagePath('lrswitchboardbridge', 'filelisticon.png'),
+                icon: OC.imagePath('lrswitchboardbridge', 'cog.svg'),
                 actionHandler: function(fileName,path) {
 					//console.log(fileName, path, path.dir);
 					var filePath = path.dir + '/' + fileName;
