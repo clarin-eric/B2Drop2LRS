@@ -77,8 +77,7 @@
 										var fileLink = response.ocs.data.url + '/download';
 										var clrsCall = switchboardBase + encodeURIComponent(fileLink);
 										window.open(clrsCall, '_blank');
-										window.focus();
-										location.reload();
+										OCA.Sharing.Util._updateFileActionIcon(path.$file, false, true);
 									}
 								};
 								xhr.send(JSON.stringify(data));
