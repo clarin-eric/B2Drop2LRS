@@ -12,9 +12,9 @@
     </description>
     <licence>AGPL</licence>
     <author>CLARIN-PLUS/EUDAT</author>
-    <version>0.3</version>
+    <version>0.4</version>
     <dependencies>
-        <nextcloud min-version="11" max-version="17" />
+        <nextcloud min-version="11" max-version="20" />
         <lib>curl</lib>
         <os>Linux</os>
         <os>Darwin</os>
