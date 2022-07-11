@@ -1,36 +1,28 @@
 <?php
 /**
- * Nextcloud - lrswitchboardbridge App
+ * Nextcloud - switchboardBridge App
  *
- * PHP Version 7-2
+ * PHP Version 5-7
  *
  * @category  Nextcloud
- * @package   lrswitchboardBridge
- * @author    EUDAT <b2drop-devel@postit.csc.fi>
- * @copyright 2015 EUDAT
- * @license   AGPL3 https://github.com/EUDAT-B2DROP/lrswitchboardbridge/blob/master/LICENSE
- * @link      https://github.com/EUDAT-B2DROP/lrswitchboardbridge.git
+ * @package   switchboardBridge
+ * @author    claus.zinn@uni-tuebingen.de
+ * @copyright 2015- EUDAT/CLARIN
+ * @license  AGPL3 https://github.com/clarin-eric/B2Drop2LRSwitchboard/blob/master/LICENSE
+ * @link     https://github.com/clarin-eric/B2Drop2LRSwitchboard
  */
 
-namespace OCA\lrswitchboardBridge\AppInfo;
+namespace OCA\switchboardBridge\AppInfo;
 
 
-use OCA\lrswitchboardBridge\Data;
 use OCP\AppFramework\App;
 use OCP\IContainer;
 use OCP\Util;
+use OCP\AppFramework\Bootstrap\IBootContext;
+use OCP\AppFramework\Bootstrap\IBootstrap;
+use OCP\AppFramework\Bootstrap\IRegistrationContext;
 
-
-/**
- * Implement a nextcloud Application to bridge to the CLARIN Language Resource Switchboard
- *
- * @category Nextcloud
- * @package  lrswitchboardBridge
- * @author   EUDAT <b2drop-devel@postit.csc.fi>
- * @license  AGPL3 https://github.com/EUDAT-B2DROP/lrswitchboardbridge/blob/master/LICENSE
- * @link     https://github.com/EUDAT-B2DROP/lrswitchboardbridge.git
- */
-class Application extends App
+class Application extends App implements IBootstrap
 {
     /**
      * Create a nextcloud application
@@ -39,22 +31,64 @@ class Application extends App
      */
     public function __construct(array $urlParams = array())
     {
-        parent::__construct('lrswitchboardbridge', $urlParams);
+        parent::__construct('switchboardBridge', $urlParams);
         $container = $this->getContainer();
         $server = $container->getServer();
     }
+
+
+    /**
+     * Register Navigation Entry
+     *
+     * @return null
+     */
+
+    /* todo
+    public function registerNavigationEntry()
+    {
+        $c = $this->getContainer();
+        $server = $c->getServer();
+
+        $navigationEntry = function () use ($c, $server) {
+            return [
+                'id' => $c->getAppName(),
+                'order' => 100,
+                'name' => 'B2SHARE',
+                'href' => $server->getURLGenerator()
+                    ->linkToRoute('b2sharebridge.View.depositList'),
+                'icon' => $server->getURLGenerator()
+                    ->imagePath('b2sharebridge', 'appbrowsericon.svg'),
+            ];
+        };
+        $server->getNavigationManager()->add($navigationEntry);
+        return;
+    }
+
+    */
     
     /**
-     * Register settings pages
+     * Register Settings pages
      *
      * @return null
      */
     public function registerSettings()
     {
+        return;
+    }
+
+    // todo?
+    /* public function registerSettings()
+    {
         \OCP\App::registerAdmin('lrswitchboardbridge', 'lib/settings/admin');
         \OCP\App::registerPersonal('lrswitchboardbridge', 'lib/settings/personal');
     }
+    */
 
+    /**
+     * Register Jobs
+     *
+     * @return null
+     */
 
     /**
      * Load additional javascript files
@@ -63,6 +97,23 @@ class Application extends App
      */
     public static function loadScripts()
     {
-        Util::addScript('lrswitchboardbridge', 'lrswitchboardbridge');
+        Util::addScript('switchboardBridge', 'switchboardBridge');
+        Util::addStyle('switchboardBridge', 'settings');
+        return;
     }
+
+    public function register(IRegistrationContext $context): void {
+        $context->registerEventListener(
+            LoadSidebar::class,
+            LoadSidebarListener::class
+        );
+    }
+
+    public function boot(IBootContext $context): void {
+      // $this->registerNavigationEntry();
+         $this->loadScripts();
+         $this->registerSettings();
+    }
+
 }
+

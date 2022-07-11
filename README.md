@@ -1,4 +1,4 @@
-# LR SWITCHBOARD -- EUDAT/B2DROP integration
+# SWITCHBOARD -- EUDAT/B2DROP integration
 Code Repository for the B2DROP plugin to bridge to the CLARIN Language Resources Switchboard.
 
 # Module Description
@@ -20,17 +20,13 @@ from the cloud, and processes it as usual.
 
 # Website
 
-An temporary B2Drop instance has been set-up and is being served at:
+The official B2Drop cloud space is served at:
 
-```http://weblicht.sfs.uni-tuebingen.de/nextcloud/ ```
+```https://b2drop.eudat.eu/ ```
 
-The switchboard is currently being served at:
+The switchboard is being served at:
 
 ```https://switchboard.clarin.eu ```
-
-Please contact claus.zinn@uni-tuebingen.de for the login credentials so that you can test the b2drop
-plugin.
-
 
 
 # Status
@@ -42,7 +38,7 @@ The code is inspired by the B2Drop plugin b2sharebridge, see
 Given the radical changes / deletions from the b2sharebridge code, its git log history has been
 deleted.
 
-The software is currently being developed and tested.  Stay tuned.
+The software is currently being updated for newer version of Nextcloud.
 
 
 

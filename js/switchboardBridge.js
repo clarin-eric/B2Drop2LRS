@@ -1,14 +1,14 @@
 
 (function() {
     
-    OCA.lrswitchboardBridge = OCA.lrswitchboardBridge || {};
+    OCA.switchboardBridge = OCA.switchboardBridge || {};
 
     /**
      * @namespace
      */
-    OCA.lrswitchboardBridge.Util = {
+    OCA.switchboardBridge.Util = {
         /**
-         * Initialize the lrswitchboardbridge plugin.
+         * Initialize the switchboardBridge plugin.
          *
          * @param {OCA.Files.FileList} fileList file list to be extended
          */
@@ -19,11 +19,11 @@
             var fileActions = fileList.fileActions;
 
             fileActions.registerAction({
-                name: 'LRSWITCHBOARD',
+                name: 'SWITCHBOARD',
                 displayName: 'Switchboard',
                 mime: 'all',
                 permissions: OC.PERMISSION_READ,
-                icon: OC.imagePath('lrswitchboardbridge', 'cog.svg'),
+                icon: OC.imagePath('switchboardBridge', 'cog.svg'),
                 actionHandler: function(fileName,path) {
 					//console.log(fileName, path, path.dir);
 					var filePath = path.dir + '/' + fileName;
@@ -39,7 +39,7 @@
 					xhr.open('GET', url, true);
 					xhr.setRequestHeader('Content-Type', "application/x-www-form-urlencoded");
 					xhr.setRequestHeader('OCS-APIREQUEST', true);
-					xhr.setRequestHeader('requesttoken', oc_requesttoken);
+					xhr.setRequestHeader('requestoken', OC.requestToken);
 					xhr.onload = function() {
 						if (this.status >= 200 && this.status < 300) {
 							var jsonResponse = JSON.parse(this.response);
@@ -49,12 +49,12 @@
 
 							// first, check whether we have a shared link
 							var data = jsonResponse.ocs.data;
-							//console.log('jsonResponse', jsonResponse, data);
+							console.log('jsonResponse', jsonResponse, data);
 							var shareOfInterest = undefined;
 							for (var i = 0; i < data.length; i++) {
 								if (data[i].share_type == 3) { // a shared link
 									shareOfInterest = data[i];
-									//console.log('share', shareOfInterest);
+									console.log('share', shareOfInterest);
 								}
 							}
 							// call the switchboard when there is a shared link, otherwise alert the user
@@ -70,12 +70,13 @@
 								xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
 								xhr.setRequestHeader('Accept', 'application/json, text/javascript');
 								xhr.setRequestHeader('OCS-APIREQUEST', true);
-								xhr.setRequestHeader('requesttoken', oc_requesttoken);
+								xhr.setRequestHeader('requestToken', OC.requestToken);
 								xhr.onload = function (data) {
 									if(this.status >= 200 && this.status < 300) {
 										var response = JSON.parse(this.response);
 										var fileLink = response.ocs.data.url + '/download';
-										var clrsCall = switchboardBase + encodeURIComponent(fileLink);
+									    var clrsCall = switchboardBase + encodeURIComponent(fileLink);
+									    console.log('clrsCall/share', clrsCall);
 										window.open(clrsCall, '_blank');
 										OCA.Sharing.Util._updateFileActionIcon(path.$file, false, true);
 									}
@@ -84,7 +85,8 @@
 
 							} else {
 								var fileLink = shareOfInterest.url + '/download';
-								var clrsCall = switchboardBase + encodeURIComponent(fileLink);
+							    var clrsCall = switchboardBase + encodeURIComponent(fileLink);
+									    console.log('clrsCall/noshare', clrsCall);
 								window.open(clrsCall, '_blank');
 								window.focus();
 							}
@@ -100,4 +102,4 @@
 
 })();
 
-OC.Plugins.register('OCA.Files.FileList', OCA.lrswitchboardBridge.Util);
+OC.Plugins.register('OCA.Files.FileList', OCA.switchboardBridge.Util);

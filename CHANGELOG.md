@@ -1,3 +1,5 @@
+czinn (0.2)
+	* adapt to NC 21+
 czinn (0.1)
 	* Initial release
 
