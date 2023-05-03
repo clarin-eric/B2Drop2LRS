@@ -28,10 +28,10 @@ use OCP\AppFramework\Bootstrap\IRegistrationContext;
  *
  * @category Nextcloud
  * @package  SwitchboardBridge
- * @author    André Moreira <andre@clarin.eu>
+ * @author   André Moreira <andre@clarin.eu>
  * @author   Claus Zinn <claus.zinn@uni-tuebingen.de>
  * @license  AGPL v3 https://github.com/clarin-eric/B2Drop2LRSwitchboard/blob/master/LICENSE
- * @link     ttps://github.com/clarin-eric/B2Drop2LRSwitchboard
+ * @link     https://github.com/clarin-eric/B2Drop2LRSwitchboard
  */
 class Application extends App implements IBootstrap
 {
