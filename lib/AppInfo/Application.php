@@ -6,10 +6,10 @@
  *
  * @category  Nextcloud
  * @package   SwitchboardBridge
- * @author    claus.zinn@uni-tuebingen.de
- * @copyright 2015- EUDAT/CLARIN
- * @license  AGPL3 https://github.com/clarin-eric/B2Drop2LRSwitchboard/blob/master/LICENSE
- * @link     https://github.com/clarin-eric/B2Drop2LRSwitchboard
+ * @author    Claus Zinn <claus.zinn@uni-tuebingen.de>
+ * @copyright 2015 EUDAT/CLARIN
+ * @license   AGPL v3 https://github.com/clarin-eric/B2Drop2LRSwitchboard/blob/master/LICENSE
+ * @link      https://github.com/clarin-eric/B2Drop2LRSwitchboard
  */
 
 namespace OCA\SwitchboardBridge\AppInfo;
