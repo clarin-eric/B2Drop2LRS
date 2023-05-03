@@ -78,4 +78,5 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           repository: apps/switchboardbridge
+          file_pattern: '*.php *.js *.css'
           commit_message: Apply php-cs-fixer changes
