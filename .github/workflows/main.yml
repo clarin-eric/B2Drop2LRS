@@ -89,13 +89,13 @@ jobs:
         continue-on-error: true
         run: |
           cd apps/switchboardbridge
-          phpcs --extensions=php --ignore=*/tests/* . 
+          phpcs --extensions=php --ignore=*/tests/*,*/node-modules/* . 
 
       - name: PHP lint fix
         continue-on-error: true
         run: |
           cd apps/switchboardbridge
-          phpcbf --extensions=php --ignore=*/tests/* .
+          phpcbf --extensions=php --ignore=*/tests/*,*/node-modules/* .
  
       - name: Commit fixes
         uses: stefanzweifel/git-auto-commit-action@v4
