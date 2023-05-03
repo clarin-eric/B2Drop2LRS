@@ -1,3 +1,4 @@
+import { imagePath, linkToOCS } from '@nextcloud/router'
 
 (function() {
 

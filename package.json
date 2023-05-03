@@ -11,6 +11,7 @@
   "license": "AGPLv3",
   "private": true,
   "dependencies": {
+    "@nextcloud/router": "^2.1.1"
   },
   "browserslist": [
     "extends @nextcloud/browserslist-config"
