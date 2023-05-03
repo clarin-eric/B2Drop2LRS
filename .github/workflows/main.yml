@@ -22,7 +22,6 @@ jobs:
             nextcloud-version-branch: stable25
 
     name: Deploy switchboardBridge plugin in a NC environment
-    needs: build
     env:
       DB_DATABASE: oc_autotest
       DB_ROOT: root
