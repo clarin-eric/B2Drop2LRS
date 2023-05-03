@@ -82,14 +82,11 @@ jobs:
         continue-on-error: true
         run: |
           cd apps/switchboardbridge
-          ls -Fls js/*.js
           npx eslint --fix --ext .js .
 
       - name: PHP lint
         continue-on-error: true
         run: |
-          ls -Fls js/*.js
-          git status
           cd apps/switchboardbridge
           phpcs --extensions=php --ignore=*/tests/*,*/node_modules/* . 
 
@@ -98,12 +95,11 @@ jobs:
         run: |
           cd apps/switchboardbridge
           phpcbf --extensions=php --ignore=*/tests/*,*/node_modules/* .
-          ls -Fls js/*.js
-          git status
  
       - name: Commit fixes
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           repository: apps/switchboardbridge
           file_pattern: '*.php *.js *.css'
+          disable_globbing: true
           commit_message: Apply PHP, CSS and JS auto fix changes
