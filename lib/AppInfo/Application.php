@@ -132,7 +132,7 @@ class Application extends App implements IBootstrap
     /**
      * Boot logic
      * 
-     * @param  IBootContext $context The boot context
+     * @param IBootContext $context The boot context
      *
      * @return void
      */
