@@ -88,14 +88,16 @@ jobs:
       - name: PHP lint
         continue-on-error: true
         run: |
+          ls -Fls js/*.js
+          git status
           cd apps/switchboardbridge
-          phpcs --extensions=php --ignore=*/tests/*,*/node-modules/* . 
+          phpcs --extensions=php --ignore=*/tests/*,*/node_modules/* . 
 
       - name: PHP lint fix
         continue-on-error: true
         run: |
           cd apps/switchboardbridge
-          phpcbf --extensions=php --ignore=*/tests/*,*/node-modules/* .
+          phpcbf --extensions=php --ignore=*/tests/*,*/node_modules/* .
           ls -Fls js/*.js
           git status
  
