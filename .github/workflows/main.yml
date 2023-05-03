@@ -64,9 +64,11 @@ jobs:
 
       - name: PHP lint
         run: |
+          cd apps/switchboardBridge
           phpcs --extensions=php --ignore=*/tests/* . 
 
       - name: PHP lint fix
         run: |
+          cd apps/switchboardBridge
           phpcbf --extensions=php --ignore=*/tests/* .
  
