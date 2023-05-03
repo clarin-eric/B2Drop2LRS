@@ -61,3 +61,12 @@ jobs:
       - name: Deploy switchboardBridge plugin
         run: |
           ./occ app:enable switchboardBridge
+
+      - name: PHP lint
+        run: |
+          phpcs --extensions=php --ignore=*/tests/* . 
+
+      - name: PHP lint fix
+        run: |
+          phpcbf --extensions=php --ignore=*/tests/* .
+ 
