@@ -49,24 +49,24 @@ import { imagePath, linkToOCS } from '@nextcloud/router'
 							const switchboardBase = '//switchboard.clarin.eu/#/b2drop/'
 
 							// first, check whether we have a shared link
-							var data = jsonResponse.ocs.data
-							console.log('jsonResponse', jsonResponse, data)
+							const data = jsonResponse.ocs.data
+							// console.log('jsonResponse', jsonResponse, data)
 							let shareOfInterest
 							for (let i = 0; i < data.length; i++) {
-								if (data[i].share_type == 3) { // a shared link
+								if (data[i].share_type === 3) { // a shared link
 									shareOfInterest = data[i]
-									console.log('share', shareOfInterest)
+									// console.log('share', shareOfInterest)
 								}
 							}
 							// call the switchboard when there is a shared link, otherwise alert the user
 							if (shareOfInterest === undefined) {
 								const url = '/ocs/v2.php/apps/files_sharing/api/v1/shares?format=json'
-								var data = {
+								const data = {
 									path: filePath,
 									shareType: 3, // public link
 									permissions: 27, // just replicating what pushing the add icon in the UI does...
 								}
-								var xhr = new XMLHttpRequest()
+								const xhr = new XMLHttpRequest()
 								xhr.open('POST', url, true)
 								xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8')
 								xhr.setRequestHeader('Accept', 'application/json, text/javascript')
@@ -77,7 +77,7 @@ import { imagePath, linkToOCS } from '@nextcloud/router'
 										const response = JSON.parse(this.response)
 										const fileLink = response.ocs.data.url + '/download'
 									    const clrsCall = switchboardBase + encodeURIComponent(fileLink)
-									    console.log('clrsCall/share', clrsCall)
+									    // console.log('clrsCall/share', clrsCall)
 										window.open(clrsCall, '_blank')
 										OCA.Sharing.Util._updateFileActionIcon(path.$file, false, true)
 									}
@@ -87,12 +87,12 @@ import { imagePath, linkToOCS } from '@nextcloud/router'
 							} else {
 								const fileLink = shareOfInterest.url + '/download'
 							    const clrsCall = switchboardBase + encodeURIComponent(fileLink)
-									    console.log('clrsCall/noshare', clrsCall)
+								// console.log('clrsCall/noshare', clrsCall)
 								window.open(clrsCall, '_blank')
 								window.focus()
 							}
 						} else {
-							console.log('XMLHttpRequest: Error in uploading document!', xhr.response, xhr.status)
+							// console.log('XMLHttpRequest: Error in uploading document!', xhr.response, xhr.status)
 						}
 					}
 					xhr.send()
