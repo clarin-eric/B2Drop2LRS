@@ -77,13 +77,13 @@ jobs:
         continue-on-error: true
         run: |
           cd apps/switchboardbridge
-          npx eslint js/*.js
+          npx eslint --ext .js .
       - name: Fix Js Lint
         continue-on-error: true
         run: |
           cd apps/switchboardbridge
           ls -Fls js/*.js
-          npx eslint js/*.js --fix
+          npx eslint --fix --ext .js .
           ls -Fls js/*.js
           git status
 
