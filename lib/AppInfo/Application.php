@@ -117,7 +117,7 @@ class Application extends App implements IBootstrap
      * Register the composer autoloader for packages shipped by this app, 
      * if applicable
      *
-     * @param  IRegistrationContext $context The registration context
+     * @param IRegistrationContext $context The registration context
      * 
      * @return void
      **/
