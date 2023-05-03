@@ -23,14 +23,14 @@
                 displayName: 'Switchboard',
                 mime: 'all',
                 permissions: OC.PERMISSION_READ,
-                icon: OC.imagePath('switchboardbridge', 'cog.svg'),
+                icon: imagePath('switchboardbridge', 'cog.svg'),
                 actionHandler: function(fileName,path) {
 					//console.log(fileName, path, path.dir);
 					var filePath = path.dir + '/' + fileName;
 					filePath = filePath.replace('//', '/');
 					// use REST API to get the share link for the resource in question
 					var xhr = new XMLHttpRequest();
-					var url = OC.linkToOCS('apps/files_sharing/api/v1', 4)
+					var url = linkToOCS('apps/files_sharing/api/v1', 4)
 						+ 'shares'
 						+ '?format=json'
 						+ '&path='+filePath
@@ -63,7 +63,7 @@
 								var data = {
 									'path': filePath,
 									'shareType': 3,    // public link
-									'permissions': 27  // just replicating what pushing the add icon in the UI does...
+									'permissions': 27,  // just replicating what pushing the add icon in the UI does...
 								};
 								var xhr = new XMLHttpRequest();
 								xhr.open('POST', url, true);
@@ -95,9 +95,9 @@
 						}
 					};
 					xhr.send();
-                }
+                },
             });
-        }
+        },
     };
 
 })();
