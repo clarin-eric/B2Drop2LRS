@@ -84,8 +84,6 @@ jobs:
           cd apps/switchboardbridge
           ls -Fls js/*.js
           npx eslint --fix --ext .js .
-          ls -Fls js/*.js
-          git status
 
       - name: PHP lint
         continue-on-error: true
@@ -98,6 +96,8 @@ jobs:
         run: |
           cd apps/switchboardbridge
           phpcbf --extensions=php --ignore=*/tests/*,*/node-modules/* .
+          ls -Fls js/*.js
+          git status
  
       - name: Commit fixes
         uses: stefanzweifel/git-auto-commit-action@v4
