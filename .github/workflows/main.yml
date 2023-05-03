@@ -77,4 +77,5 @@ jobs:
       - name: Commit fixes
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
+          repository: apps/switchboardbridge
           commit_message: Apply php-cs-fixer changes
