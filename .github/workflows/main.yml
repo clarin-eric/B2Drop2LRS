@@ -61,3 +61,7 @@ jobs:
       - name: Deploy switchboardBridge plugin
         run: |
           ./occ app:enable switchboardBridge
+
+      - name: test
+        run: |
+          ./occ 
