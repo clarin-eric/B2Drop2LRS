@@ -82,7 +82,10 @@ jobs:
         continue-on-error: true
         run: |
           cd apps/switchboardbridge
-          npx eslint js/*.js --fix --debug
+          ls -Fls js/*.js
+          npx eslint js/*.js --fix
+          ls -Fls js/*.js
+          git status
 
       - name: PHP lint
         continue-on-error: true
