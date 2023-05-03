@@ -78,12 +78,12 @@ jobs:
         run: |
           cd apps/switchboardbridge
           npm install --force
-          npx eslint --ext js/*.js
+          npx eslint js/*.js
       - name: Fix Js Lint
         continue-on-error: true
         run: |
           cd apps/switchboardbridge
-          npx eslint --ext js/*.js --fix
+          npx eslint js/*.js --fix
 
       - name: PHP lint
         continue-on-error: true
