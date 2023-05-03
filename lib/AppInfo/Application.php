@@ -2,7 +2,7 @@
 /**
  * Nextcloud - switchboardBridge App
  *
- * PHP Version 5-7
+ * PHP Version 5-8
  *
  * @category  Nextcloud
  * @package   switchboardBridge
