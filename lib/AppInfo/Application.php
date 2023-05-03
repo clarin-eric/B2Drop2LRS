@@ -114,9 +114,11 @@ class Application extends App implements IBootstrap
     }
 
     /**
-     * Register the composer autoloader for packages shipped by this app, if applicable
+     * Register the composer autoloader for packages shipped by this app, 
+     * if applicable
      *
-     * @param  IRegistrationContext $context
+     * @param  IRegistrationContext $context The registration context
+     * 
      * @return void
      **/
     public function register(IRegistrationContext $context): void 
@@ -127,6 +129,11 @@ class Application extends App implements IBootstrap
         );
     }
 
+    /**
+     * Boot logic
+     *
+     * @return void
+     */
     public function boot(IBootContext $context): void
     {
         // $this->registerNavigationEntry();
