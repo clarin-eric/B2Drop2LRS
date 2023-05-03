@@ -1,0 +1,27 @@
+{
+  "name": "switchboardbridge",
+  "description": "An app to connect b2drop with the CLARIN Language Resource Switchboard",
+  "version": "1.0.0",
+  "author": "André Moreira <andre@clarin.eu>",
+  "repository": {
+    "url": "https://github.com/clarin-eric/B2Drop2LRSwitchboard",
+    "type": "git"
+  },
+  "homepage": "https://github.com/clarin-eric/B2Drop2LRSwitchboard",
+  "license": "AGPLv3",
+  "private": true,
+  "dependencies": {
+  },
+  "browserslist": [
+    "extends @nextcloud/browserslist-config"
+  ],
+  "engines": {
+    "node": "^18.0.0",
+    "npm": "^7.0.0 || ^8.0.0"
+  },
+  "devDependencies": {
+    "@nextcloud/eslint-config": "^8.2.0",
+    "@nextcloud/stylelint-config": "^2.3.0",
+    "stylelint": "^14.16.1"
+  }
+}
