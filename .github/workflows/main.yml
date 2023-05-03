@@ -73,3 +73,7 @@ jobs:
           cd apps/switchboardbridge
           phpcbf --extensions=php --ignore=*/tests/* .
  
+      - name: Commit fixes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Apply php-cs-fixer changes
