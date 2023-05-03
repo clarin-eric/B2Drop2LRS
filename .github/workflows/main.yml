@@ -15,10 +15,10 @@ jobs:
     strategy:
       matrix:
         php-version: [ 8.0, 8.1, 8.2 ]
-        nextcloud-version-branch: [ stable25, stable26 ]  # see https://github.com/nextcloud/server/branches
+        nextcloud-version-branch: [ stable24, stable25, stable26 ]  # see https://github.com/nextcloud/server/branches
         exclude:
           - php-version: 8.2
-            nextcloud-version-branch: stable25
+            nextcloud-version-branch: [ stable24, stable25 ]
 
     name: NC ${{matrix.nextcloud-version-branch}} on PHP ${{ matrix.php-version }}
     env:
