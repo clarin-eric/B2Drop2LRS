@@ -20,7 +20,7 @@ jobs:
           - php-version: 8.2
             nextcloud-version-branch: stable25
 
-    name: Deploy switchboardBridge plugin in a NC ${{matrix.nextcloud-version-branch}} environment
+    name: NC ${{matrix.nextcloud-version-branch}} on PHP ${{ matrix.php-version }}
     env:
       DB_DATABASE: oc_autotest
       DB_ROOT: root
@@ -61,7 +61,3 @@ jobs:
       - name: Deploy switchboardBridge plugin
         run: |
           ./occ app:enable switchboardBridge
-
-      - name: test
-        run: |
-          ./occ 
