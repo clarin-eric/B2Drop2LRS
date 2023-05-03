@@ -51,7 +51,7 @@ jobs:
       - name: Install npm dependencies for switchboardbridge
         run: |
           cd apps/switchboardbridge
-          npm ci
+          npm ci --force --save-dev
 
       - name: Install PHP ${{ matrix.php-version }}
         uses: shivammathur/setup-php@v2
