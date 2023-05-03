@@ -66,7 +66,7 @@ jobs:
         continue-on-error: true
         run: |
           cd apps/switchboardbridge
-          npm install -g stylelint^14.16.1 @nextcloud/stylelint-config^2.3.0 --save-dev
+          npm install -g stylelint^14.16.1 @nextcloud/stylelint-config@2.3.0 --save-dev
           npx stylelint css/*.css
       - name: Fix Style Lint
         run: |
@@ -77,7 +77,7 @@ jobs:
         continue-on-error: true
         run: |
           cd apps/switchboardbridge
-          npm install -g eslint @nextcloud/eslint-config^8.2.0 -save-dev
+          npm install -g eslint @nextcloud/eslint-config@8.2.0 --save-dev
           npx eslint --ext js/*.js
       - name: Fix Js Lint
         continue-on-error: true
