@@ -67,23 +67,23 @@ jobs:
         run: |
           cd apps/switchboardbridge
           npm install -g stylelint
-          npm run stylelint css/*.css
+          npx stylelint css/*.css
       - name: Fix Style Lint
         run: |
           cd apps/switchboardbridge
-          npm run stylelint css/*.css --fix
+          npx stylelint css/*.css --fix
 
       - name: Js Lint checking
         continue-on-error: true
         run: |
           cd apps/switchboardbridge
           npm install -g eslint
-          npm run eslint --ext js/*.js
+          npx eslint --ext js/*.js
       - name: Fix Js Lint
         continue-on-error: true
         run: |
           cd apps/switchboardbridge
-          npm run eslint --ext js/*.js --fix
+          npx eslint --ext js/*.js --fix
 
       - name: PHP lint
         continue-on-error: true
