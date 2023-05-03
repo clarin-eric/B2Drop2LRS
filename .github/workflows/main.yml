@@ -69,6 +69,7 @@ jobs:
           phpcs --extensions=php --ignore=*/tests/* . 
 
       - name: PHP lint fix
+        continue-on-error: true
         run: |
           cd apps/switchboardbridge
           phpcbf --extensions=php --ignore=*/tests/* .
