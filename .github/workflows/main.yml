@@ -77,13 +77,12 @@ jobs:
         continue-on-error: true
         run: |
           cd apps/switchboardbridge
-          npm install --force
           npx eslint js/*.js
       - name: Fix Js Lint
         continue-on-error: true
         run: |
           cd apps/switchboardbridge
-          npx eslint js/*.js --fix
+          npx eslint js/*.js --fix --debug
 
       - name: PHP lint
         continue-on-error: true
@@ -102,4 +101,4 @@ jobs:
         with:
           repository: apps/switchboardbridge
           file_pattern: '*.php *.js *.css'
-          commit_message: Apply php-cs-fixer changes
+          commit_message: Apply PHP, CSS and JS auto fix changes
