@@ -1,14 +1,13 @@
 name: Deploy
 
 on:
-  workflow_dispatch:  # Allow for manual trigger!
   push:
-    branches:
-      - $default-branch,
-      - '**pipeline'
   pull_request:
-    branches:
-      - '**'
+  release:
+    types: [published]
+  workflow_dispatch:
+  schedule:
+  - cron: "23 4 5 * *"
 
 jobs:
   deploy:
