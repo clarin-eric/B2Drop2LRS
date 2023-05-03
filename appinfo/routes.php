@@ -2,7 +2,7 @@
 /**
  * Nextcloud - switchboardbridge App
  *
- * PHP Version 7-2
+ * PHP Version 8-2
  *
  * @category  Nextcloud
  * @package   switchboardBridge
@@ -12,6 +12,6 @@
  * @link     https://github.com/clarin-eric/B2Drop2LRSwitchboard
  */
 
-namespace OCA\switchboardBridge\AppInfo;
+namespace OCA\SwitchboardBridge\AppInfo;
 
 return [];

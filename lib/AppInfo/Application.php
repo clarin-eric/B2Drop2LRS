@@ -1,18 +1,18 @@
 <?php
 /**
- * Nextcloud - switchboardBridge App
+ * Nextcloud - SwitchboardBridge App
  *
  * PHP Version 5-8
  *
  * @category  Nextcloud
- * @package   switchboardBridge
+ * @package   SwitchboardBridge
  * @author    claus.zinn@uni-tuebingen.de
  * @copyright 2015- EUDAT/CLARIN
  * @license  AGPL3 https://github.com/clarin-eric/B2Drop2LRSwitchboard/blob/master/LICENSE
  * @link     https://github.com/clarin-eric/B2Drop2LRSwitchboard
  */
 
-namespace OCA\switchboardBridge\AppInfo;
+namespace OCA\SwitchboardBridge\AppInfo;
 
 
 use OCP\AppFramework\App;
@@ -31,7 +31,7 @@ class Application extends App implements IBootstrap
      */
     public function __construct(array $urlParams = array())
     {
-        parent::__construct('switchboardBridge', $urlParams);
+        parent::__construct('SwitchboardBridge', $urlParams);
         $container = $this->getContainer();
         $server = $container->getServer();
     }
@@ -97,8 +97,8 @@ class Application extends App implements IBootstrap
      */
     public static function loadScripts()
     {
-        Util::addScript('switchboardBridge', 'switchboardBridge');
-        Util::addStyle('switchboardBridge', 'settings');
+        Util::addScript('SwitchboardBridge', 'SwitchboardBridge');
+        Util::addStyle('SwitchboardBridge', 'settings');
         return;
     }
 

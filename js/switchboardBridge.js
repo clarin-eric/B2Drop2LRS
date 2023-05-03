@@ -1,14 +1,14 @@
 
 (function() {
     
-    OCA.switchboardBridge = OCA.switchboardBridge || {};
+    OCA.SwitchboardBridge = OCA.SwitchboardBridge || {};
 
     /**
      * @namespace
      */
-    OCA.switchboardBridge.Util = {
+    OCA.SwitchboardBridge.Util = {
         /**
-         * Initialize the switchboardBridge plugin.
+         * Initialize the switchboardbridge plugin.
          *
          * @param {OCA.Files.FileList} fileList file list to be extended
          */
@@ -23,7 +23,7 @@
                 displayName: 'Switchboard',
                 mime: 'all',
                 permissions: OC.PERMISSION_READ,
-                icon: OC.imagePath('switchboardBridge', 'cog.svg'),
+                icon: OC.imagePath('switchboardbridge', 'cog.svg'),
                 actionHandler: function(fileName,path) {
 					//console.log(fileName, path, path.dir);
 					var filePath = path.dir + '/' + fileName;
@@ -102,4 +102,4 @@
 
 })();
 
-OC.Plugins.register('OCA.Files.FileList', OCA.switchboardBridge.Util);
+OC.Plugins.register('OCA.Files.FileList', OCA.SwitchboardBridge.Util);

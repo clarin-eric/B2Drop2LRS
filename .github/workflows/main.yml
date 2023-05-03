@@ -42,15 +42,15 @@ jobs:
           submodules: true  # 'Composer autoloader' is required in order to run the code check
 
       - uses: actions/checkout@v3
-        name: Add switchboardBridge to nextcloud
+        name: Add switchboardbridge to nextcloud
         with:
-          path: apps/switchboardBridge
+          path: apps/switchboardbridge
 
       - name: Install PHP ${{ matrix.php-version }}
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-version }}
-          ini-file: apps/switchboardBridge/tests/php.ini
+          ini-file: apps/switchboardbridge/tests/php.ini
           tools: phpunit:9.5, phpcs, phpcbf
 
       - name: Configure NC
@@ -58,17 +58,17 @@ jobs:
           mkdir data
           ./occ maintenance:install --database-name $DB_DATABASE --database-user oc_autotest --admin-user admin --admin-pass admin --database mysql --database-pass=''
 
-      - name: Deploy switchboardBridge plugin
+      - name: Deploy switchboardbridge plugin
         run: |
-          ./occ app:enable switchboardBridge
+          ./occ app:enable switchboardbridge
 
       - name: PHP lint
         run: |
-          cd apps/switchboardBridge
+          cd apps/switchboardbridge
           phpcs --extensions=php --ignore=*/tests/* . 
 
       - name: PHP lint fix
         run: |
-          cd apps/switchboardBridge
+          cd apps/switchboardbridge
           phpcbf --extensions=php --ignore=*/tests/* .
  
