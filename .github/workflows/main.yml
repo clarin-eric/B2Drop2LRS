@@ -1,4 +1,4 @@
-name: Build
+name: Deploy
 
 on:
   workflow_dispatch:  # Allow for manual trigger!
@@ -21,7 +21,7 @@ jobs:
           - php-version: 8.2
             nextcloud-version-branch: stable25
 
-    name: Deploy switchboardBridge plugin in a NC environment
+    name: Deploy switchboardBridge plugin in a NC ${{matrix.nextcloud-version-branch}} environment
     env:
       DB_DATABASE: oc_autotest
       DB_ROOT: root
