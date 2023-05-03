@@ -6,6 +6,7 @@
  *
  * @category  Nextcloud
  * @package   SwitchboardBridge
+ * @author    André Moreira <andre@clarin.eu>
  * @author    Claus Zinn <claus.zinn@uni-tuebingen.de>
  * @copyright 2015 EUDAT/CLARIN
  * @license   AGPL v3 https://github.com/clarin-eric/B2Drop2LRSwitchboard/blob/master/LICENSE
@@ -22,6 +23,16 @@ use OCP\AppFramework\Bootstrap\IBootContext;
 use OCP\AppFramework\Bootstrap\IBootstrap;
 use OCP\AppFramework\Bootstrap\IRegistrationContext;
 
+/**
+ * Implement a ownCloud Application for our b2sharebridge
+ *
+ * @category Nextcloud
+ * @package  SwitchboardBridge
+ * @author    André Moreira <andre@clarin.eu>
+ * @author   Claus Zinn <claus.zinn@uni-tuebingen.de>
+ * @license  AGPL v3 https://github.com/clarin-eric/B2Drop2LRSwitchboard/blob/master/LICENSE
+ * @link     ttps://github.com/clarin-eric/B2Drop2LRSwitchboard
+ */
 class Application extends App implements IBootstrap
 {
     /**
@@ -102,7 +113,14 @@ class Application extends App implements IBootstrap
         return;
     }
 
-    public function register(IRegistrationContext $context): void {
+    /**
+     * Register the composer autoloader for packages shipped by this app, if applicable
+     *
+     * @param IRegistrationContext $context
+     * @return void
+     **/
+    public function register(IRegistrationContext $context): void 
+    {
         $context->registerEventListener(
             LoadSidebar::class,
             LoadSidebarListener::class
@@ -110,9 +128,9 @@ class Application extends App implements IBootstrap
     }
 
     public function boot(IBootContext $context): void {
-      // $this->registerNavigationEntry();
-         $this->loadScripts();
-         $this->registerSettings();
+        // $this->registerNavigationEntry();
+        $this->loadScripts();
+        $this->registerSettings();
     }
 
 }
