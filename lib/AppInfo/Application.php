@@ -41,7 +41,7 @@ class Application extends App implements IBootstrap
      */
     public function __construct(array $urlParams = array())
     {
-        parent::__construct('SwitchboardBridge', $urlParams);
+        parent::__construct('switchboardbridge', $urlParams);
         $container = $this->getContainer();
         $server = $container->getServer();
     }
@@ -107,8 +107,8 @@ class Application extends App implements IBootstrap
      */
     public static function loadScripts()
     {
-        Util::addScript('SwitchboardBridge', 'SwitchboardBridge');
-        Util::addStyle('SwitchboardBridge', 'settings');
+        Util::addScript('switchboardbridge', 'switchboardbridge');
+        Util::addStyle('switchboardbridge', 'settings');
         return;
     }
 
