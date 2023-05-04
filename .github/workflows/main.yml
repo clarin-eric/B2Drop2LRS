@@ -75,7 +75,6 @@ jobs:
           cd apps/switchboardbridge
           npx stylelint css/*.css
       - name: Fix Style Lint
-        continue-on-error: true
         run: |
           cd apps/switchboardbridge
           npx stylelint css/*.css --fix
@@ -86,7 +85,6 @@ jobs:
           cd apps/switchboardbridge
           npx eslint --ext .js .
       - name: Fix Js Lint
-        continue-on-error: true
         run: |
           cd apps/switchboardbridge
           npx eslint --fix --ext .js .
@@ -98,7 +96,6 @@ jobs:
           phpcs --extensions=php --ignore=*/tests/*,*/node_modules/* . 
 
       - name: PHP lint fix
-        continue-on-error: true
         run: |
           cd apps/switchboardbridge
           phpcbf --extensions=php --ignore=*/tests/*,*/node_modules/* .
