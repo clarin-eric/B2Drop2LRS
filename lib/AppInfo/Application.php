@@ -9,12 +9,11 @@
  * @author    André Moreira <andre@clarin.eu>
  * @author    Claus Zinn <claus.zinn@uni-tuebingen.de>
  * @copyright 2015 EUDAT/CLARIN
- * @license   AGPL v3 https://github.com/clarin-eric/B2Drop2LRSwitchboard/blob/master/LICENSE
+ * @license   https://github.com/clarin-eric/B2Drop2LRSwitchboard/blob/master/LICENSE AGPL v3
  * @link      https://github.com/clarin-eric/B2Drop2LRSwitchboard
  */
 
 namespace OCA\SwitchboardBridge\AppInfo;
-
 
 use OCP\AppFramework\App;
 use OCP\IContainer;
@@ -30,7 +29,7 @@ use OCP\AppFramework\Bootstrap\IRegistrationContext;
  * @package  SwitchboardBridge
  * @author   André Moreira <andre@clarin.eu>
  * @author   Claus Zinn <claus.zinn@uni-tuebingen.de>
- * @license  AGPL v3 https://github.com/clarin-eric/B2Drop2LRSwitchboard/blob/master/LICENSE
+ * @license  https://github.com/clarin-eric/B2Drop2LRSwitchboard/blob/master/LICENSE AGPL v3
  * @link     https://github.com/clarin-eric/B2Drop2LRSwitchboard
  */
 class Application extends App implements IBootstrap
@@ -76,7 +75,7 @@ class Application extends App implements IBootstrap
     }
 
     */
-    
+
     /**
      * Register Settings pages
      *
@@ -114,14 +113,14 @@ class Application extends App implements IBootstrap
     }
 
     /**
-     * Register the composer autoloader for packages shipped by this app, 
+     * Register the composer autoloader for packages shipped by this app,
      * if applicable
      *
      * @param IRegistrationContext $context The registration context
-     * 
+     *
      * @return void
      **/
-    public function register(IRegistrationContext $context): void 
+    public function register(IRegistrationContext $context): void
     {
         $context->registerEventListener(
             LoadSidebar::class,
@@ -131,7 +130,7 @@ class Application extends App implements IBootstrap
 
     /**
      * Boot logic
-     * 
+     *
      * @param IBootContext $context The boot context
      *
      * @return void
@@ -144,4 +143,3 @@ class Application extends App implements IBootstrap
     }
 
 }
-
