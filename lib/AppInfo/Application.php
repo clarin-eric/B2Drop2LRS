@@ -9,8 +9,8 @@
  * @author    André Moreira <andre@clarin.eu>
  * @author    Claus Zinn <claus.zinn@uni-tuebingen.de>
  * @copyright 2015 EUDAT/CLARIN
- * @license   https://github.com/clarin-eric/B2Drop2LRSwitchboard/blob/master/LICENSE AGPL v3
- * @link      https://github.com/clarin-eric/B2Drop2LRSwitchboard
+ * @license   https://github.com/clarin-eric/B2Drop2LRS/blob/master/LICENSE AGPL v3
+ * @link      https://github.com/clarin-eric/B2Drop2LRS
  */
 
 namespace OCA\SwitchboardBridge\AppInfo;
@@ -29,8 +29,8 @@ use OCP\AppFramework\Bootstrap\IRegistrationContext;
  * @package  SwitchboardBridge
  * @author   André Moreira <andre@clarin.eu>
  * @author   Claus Zinn <claus.zinn@uni-tuebingen.de>
- * @license  https://github.com/clarin-eric/B2Drop2LRSwitchboard/blob/master/LICENSE AGPL v3
- * @link     https://github.com/clarin-eric/B2Drop2LRSwitchboard
+ * @license  https://github.com/clarin-eric/B2Drop2LRS/blob/master/LICENSE AGPL v3
+ * @link     https://github.com/clarin-eric/B2Drop2LRS
  */
 class Application extends App implements IBootstrap
 {
