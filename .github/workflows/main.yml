@@ -90,7 +90,6 @@ jobs:
           npx eslint --fix --ext .js .
 
       - name: PHP lint
-        continue-on-error: true
         run: |
           cd apps/switchboardbridge
           phpcs --extensions=php --ignore=*/tests/*,*/node_modules/* . 
