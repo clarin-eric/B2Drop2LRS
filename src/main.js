@@ -1,4 +1,4 @@
-import { imagePath, generateOcsUrl } from '@nextcloud/router'
+import { generateOcsUrl } from '@nextcloud/router'
 
 (function() {
 
@@ -24,7 +24,7 @@ import { imagePath, generateOcsUrl } from '@nextcloud/router'
 				displayName: 'Switchboard',
 				mime: 'all',
 				permissions: OC.PERMISSION_READ,
-				icon: imagePath('switchboardbridge', 'cog.svg'),
+				iconClass: 'icon-settings-dark',
 				actionHandler(fileName, path) {
 					// console.log(fileName, path, path.dir);
 					let filePath = path.dir + '/' + fileName

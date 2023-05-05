@@ -31,7 +31,7 @@ jobs:
         with:
           php-version: ${{ matrix.php-version }}
           ini-file: apps/switchboardbridge/tests/php.ini
-          tools: phpunit:9.5, phpcs, phpcbf
+          tools: phpcs, phpcbf
 
       - uses: actions/checkout@v3
         name: Checkout switchboardbridge
@@ -51,14 +51,15 @@ jobs:
       - name: Fix Js Lint
         run: npm run lint:fix
 
-      - name: PHP lint
-        run: phpcs --extensions=php --ignore=*/tests/*,*/node_modules/* . 
-
-      - name: PHP lint fix
+      - name: PHP lint and fix
+        continue-on-error: true
         run: phpcbf --extensions=php --ignore=*/tests/*,*/node_modules/* .
 
+      - name: PHP lint verify
+        run: phpcs --extensions=php --ignore=*/tests/*,*/node_modules/* . 
+
       - name: Archive workspace
-        run: tar cvf switchboardbridge-lint_node${{matrix.node-version}}_php${{ matrix.php-version }}.tar .
+        run: tar cf switchboardbridge-lint_node${{matrix.node-version}}_php${{ matrix.php-version }}.tar .
 
       - name: Upload lint result workspace
         uses: actions/upload-artifact@v3
@@ -76,7 +77,7 @@ jobs:
         node-version: [ 16.x, 18.x ]
         php-version: [ 8.0, 8.1, 8.2 ]
 
-    name: Build Js on Node${{matrix.node-version}}
+    name: Build Js on Node${{matrix.node-version}}, PHP${{ matrix.php-version }}
 
     steps:
       - name: Setup Node.js ${{ matrix.node-version }}
@@ -90,13 +91,13 @@ jobs:
           name: switchboardbridge-lint_node${{matrix.node-version}}_php${{ matrix.php-version }}
 
       - name: Extract workspace 
-        run: tar xvf switchboardbridge-lint_node${{matrix.node-version}}_php${{ matrix.php-version }}.tar .
+        run: tar xf switchboardbridge-lint_node${{matrix.node-version}}_php${{ matrix.php-version }}.tar .
 
       - name: Build target Js
         run: npm run build
 
       - name: Archive workspace
-        run: tar cvf switchboardbridge-build_node${{matrix.node-version}}_php${{ matrix.php-version }}.tar .
+        run: tar cf switchboardbridge-build_node${{matrix.node-version}}_php${{ matrix.php-version }}.tar .
 
       - name: Upload build result workspace
         uses: actions/upload-artifact@v3
@@ -147,14 +148,14 @@ jobs:
       - name: Extract workspace 
         run: |
           mkdir apps/switchboardbridge 
-          tar xvf switchboardbridge-build_node18.x_php${{ matrix.php-version }}.tar -C apps/switchboardbridge     
+          tar xf switchboardbridge-build_node18.x_php${{ matrix.php-version }}.tar -C apps/switchboardbridge     
 
       - name: Install PHP ${{ matrix.php-version }}
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-version }}
           ini-file: apps/switchboardbridge/tests/php.ini
-          tools: phpunit:9.5, phpcs, phpcbf
+          tools: phpcs, phpcbf
 
       - name: Configure NC
         run: |
@@ -176,14 +177,21 @@ jobs:
     name: Commit from PHP${{ matrix.php-version }} and Node${{ matrix.node-version }}
 
     steps:
-      - name: Get switchboardbridge worspace
+      - uses: actions/checkout@v3
+        name: Checkout switchboardbridge
+
+      - name: Get switchboardbridge build job workspace
         uses: actions/download-artifact@v3
         with:
-          name: switchboardbridge-build_node18.x_php8.2
+          name: switchboardbridge-build_node${{ matrix.node-version }}_php${{ matrix.php-version }}
+
+      - name: Extract job build workspace 
+        run: tar xvf switchboardbridge-build_node${{ matrix.node-version }}_php${{ matrix.php-version }}.tar -C . --exclude=.git --exclude=node_modules
 
       - name: Commit lint fixes and target Js
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
+          repository: .
           file_pattern: '*.php *.js *.map *.css'
           disable_globbing: true
           commit_message: Apply PHP, CSS and JS auto fix changes
