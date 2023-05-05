@@ -73,21 +73,26 @@ jobs:
         continue-on-error: true
         run: |
           cd apps/switchboardbridge
-          npx stylelint css/*.css
+          npm run stylelint
       - name: Fix Style Lint
         run: |
           cd apps/switchboardbridge
-          npx stylelint css/*.css --fix
+          npm run stylelint:fix
 
       - name: Js Lint checking
         continue-on-error: true
         run: |
           cd apps/switchboardbridge
-          npx eslint --ext .js .
+          npm run lint
       - name: Fix Js Lint
         run: |
           cd apps/switchboardbridge
-          npx eslint --fix --ext .js .
+          npm run lint:fix
+
+      - name: Build start Js
+        run: |
+          cd apps/switchboardbridge
+          npm run build
 
       - name: PHP lint
         run: |

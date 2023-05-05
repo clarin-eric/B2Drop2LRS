@@ -1,3 +1,4 @@
+import { imagePath, generateOcsUrl } from '@nextcloud/router'
 
 (function() {
 
@@ -23,14 +24,14 @@
 				displayName: 'Switchboard',
 				mime: 'all',
 				permissions: OC.PERMISSION_READ,
-				icon: OC.imagePath('switchboardbridge', 'cog.svg'),
+				icon: imagePath('switchboardbridge', 'cog.svg'),
 				actionHandler(fileName, path) {
 					// console.log(fileName, path, path.dir);
 					let filePath = path.dir + '/' + fileName
 					filePath = filePath.replace('//', '/')
 					// use REST API to get the share link for the resource in question
 					const xhr = new XMLHttpRequest()
-					const url = OC.linkToOCS('apps/files_sharing/api/v1', 4)
+					const url = generateOcsUrl('apps/files_sharing/api/v1/', 4)
 						+ 'shares'
 						+ '?format=json'
 						+ '&path=' + filePath

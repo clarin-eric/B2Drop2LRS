@@ -10,6 +10,15 @@
   "homepage": "https://github.com/clarin-eric/B2Drop2LRSwitchboard",
   "license": "AGPLv3",
   "private": true,
+  "scripts": {
+    "build": "NODE_ENV=production webpack --progress --config webpack.js",
+    "dev": "NODE_ENV=development webpack --progress --config webpack.js",
+    "watch": "NODE_ENV=development webpack --progress --watch --config webpack.js",
+    "lint": "eslint --ext .js,.vue --ignore-pattern js/ .",
+    "lint:fix": "eslint --ext .js,.vue --ignore-pattern js/ . --fix",
+    "stylelint": "stylelint css/*.css css/*.scss src/**/*.scss src/**/*.vue",
+    "stylelint:fix": "stylelint css/*.css css/*.scss src/**/*.scss src/**/*.vue --fix"
+  },
   "dependencies": {
     "@nextcloud/router": "^2.1.1"
   },
@@ -24,6 +33,7 @@
     "@nextcloud/browserslist-config": "^2.3.0",
     "@nextcloud/eslint-config": "^8.2.1",
     "@nextcloud/stylelint-config": "^2.3.0",
+    "@nextcloud/webpack-vue-config": "^5.5.1",
     "stylelint": "^14.16.1"
   }
 }
