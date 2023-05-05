@@ -107,7 +107,7 @@ class Application extends App implements IBootstrap
      */
     public static function loadScripts()
     {
-        Util::addScript('switchboardbridge', 'switchboardbridge');
+        Util::addScript('switchboardbridge', 'switchboardbridge-main');
         Util::addStyle('switchboardbridge', 'settings');
         return;
     }
