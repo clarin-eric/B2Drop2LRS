@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <info>
-    <id>switchboardBridge</id>
+    <id>switchboardbridge</id>
     <name>EUDAT Switchboard bridge</name>
     <summary>The Switchboard bridge sends a file from B2DROP to the CLARIN
     Language Resource Switchboard.</summary>
@@ -13,13 +13,13 @@
     <version>2.0</version>
     <licence>AGPL</licence>
     <author>CLARIN-PLUS/EUDAT</author>
-    <namespace>switchboardBridge</namespace>
+    <namespace>switchboardbridge</namespace>
     <category>integration</category>
     <website>https://www.clarin.eu</website>    
     <bugs>https://github.com/clarin-eric/B2Drop2LRSwitchboard/issues</bugs>
     <repository	type="git">https://github.com/clarin-eric/B2Drop2LRSwitchboard.git</repository>
     <dependencies>
-        <nextcloud min-version="21" max-version="24" />
+        <nextcloud min-version="21" max-version="26" />
         <lib>curl</lib>
     </dependencies>
     <rememberlogin>false</rememberlogin>

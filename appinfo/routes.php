@@ -2,16 +2,17 @@
 /**
  * Nextcloud - switchboardbridge App
  *
- * PHP Version 7-2
+ * PHP Version 8-2
  *
  * @category  Nextcloud
- * @package   switchboardBridge
+ * @package   SwitchboardBridge
+ * @author    André Moreira <andre@clarin.eu>
  * @author    CLARIN-PLUS/EUDAT <claus.zinn@uni-tuebingen.de>
- * @copyright 2017- CLARIN-PLUS/EUDAT
- * @license  AGPL3 https://github.com/clarin-eric/B2Drop2LRSwitchboard/blob/master/LICENSE
- * @link     https://github.com/clarin-eric/B2Drop2LRSwitchboard
+ * @copyright 2017 CLARIN-PLUS/EUDAT
+ * @license   AGPL v3 https://github.com/clarin-eric/B2Drop2LRS/blob/master/LICENSE
+ * @link      https://github.com/clarin-eric/B2Drop2LRS
  */
 
-namespace OCA\switchboardBridge\AppInfo;
+namespace OCA\SwitchboardBridge\AppInfo;
 
 return [];

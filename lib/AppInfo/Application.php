@@ -1,19 +1,19 @@
 <?php
 /**
- * Nextcloud - switchboardBridge App
+ * Nextcloud - SwitchboardBridge App
  *
- * PHP Version 5-7
+ * PHP Version 5-8
  *
  * @category  Nextcloud
- * @package   switchboardBridge
- * @author    claus.zinn@uni-tuebingen.de
- * @copyright 2015- EUDAT/CLARIN
- * @license  AGPL3 https://github.com/clarin-eric/B2Drop2LRSwitchboard/blob/master/LICENSE
- * @link     https://github.com/clarin-eric/B2Drop2LRSwitchboard
+ * @package   SwitchboardBridge
+ * @author    André Moreira <andre@clarin.eu>
+ * @author    Claus Zinn <claus.zinn@uni-tuebingen.de>
+ * @copyright 2015 EUDAT/CLARIN
+ * @license   https://github.com/clarin-eric/B2Drop2LRS/blob/master/LICENSE AGPL v3
+ * @link      https://github.com/clarin-eric/B2Drop2LRS
  */
 
-namespace OCA\switchboardBridge\AppInfo;
-
+namespace OCA\SwitchboardBridge\AppInfo;
 
 use OCP\AppFramework\App;
 use OCP\IContainer;
@@ -22,6 +22,16 @@ use OCP\AppFramework\Bootstrap\IBootContext;
 use OCP\AppFramework\Bootstrap\IBootstrap;
 use OCP\AppFramework\Bootstrap\IRegistrationContext;
 
+/**
+ * Implement a ownCloud Application for our b2sharebridge
+ *
+ * @category Nextcloud
+ * @package  SwitchboardBridge
+ * @author   André Moreira <andre@clarin.eu>
+ * @author   Claus Zinn <claus.zinn@uni-tuebingen.de>
+ * @license  https://github.com/clarin-eric/B2Drop2LRS/blob/master/LICENSE AGPL v3
+ * @link     https://github.com/clarin-eric/B2Drop2LRS
+ */
 class Application extends App implements IBootstrap
 {
     /**
@@ -31,7 +41,7 @@ class Application extends App implements IBootstrap
      */
     public function __construct(array $urlParams = array())
     {
-        parent::__construct('switchboardBridge', $urlParams);
+        parent::__construct('switchboardbridge', $urlParams);
         $container = $this->getContainer();
         $server = $container->getServer();
     }
@@ -65,7 +75,7 @@ class Application extends App implements IBootstrap
     }
 
     */
-    
+
     /**
      * Register Settings pages
      *
@@ -97,23 +107,39 @@ class Application extends App implements IBootstrap
      */
     public static function loadScripts()
     {
-        Util::addScript('switchboardBridge', 'switchboardBridge');
-        Util::addStyle('switchboardBridge', 'settings');
+        Util::addScript('switchboardbridge', 'switchboardbridge-main');
+        Util::addStyle('switchboardbridge', 'settings');
         return;
     }
 
-    public function register(IRegistrationContext $context): void {
+    /**
+     * Register the composer autoloader for packages shipped by this app,
+     * if applicable
+     *
+     * @param IRegistrationContext $context The registration context
+     *
+     * @return void
+     **/
+    public function register(IRegistrationContext $context): void
+    {
         $context->registerEventListener(
             LoadSidebar::class,
             LoadSidebarListener::class
         );
     }
 
-    public function boot(IBootContext $context): void {
-      // $this->registerNavigationEntry();
-         $this->loadScripts();
-         $this->registerSettings();
+    /**
+     * Boot logic
+     *
+     * @param IBootContext $context The boot context
+     *
+     * @return void
+     */
+    public function boot(IBootContext $context): void
+    {
+        // $this->registerNavigationEntry();
+        $this->loadScripts();
+        $this->registerSettings();
     }
 
 }
-

@@ -1,0 +1,197 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  release:
+    types: [published]
+  workflow_dispatch:
+  schedule:
+  - cron: "23 4 5 * *"
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [ 16.x, 18.x ]
+        php-version: [ 8.0, 8.1, 8.2 ]
+
+    name: Lint on Node${{matrix.node-version}}, PHP${{ matrix.php-version }}
+
+    steps:
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Setup PHP ${{ matrix.php-version }}
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+          ini-file: apps/switchboardbridge/tests/php.ini
+          tools: phpcs, phpcbf
+
+      - uses: actions/checkout@v3
+        name: Checkout switchboardbridge
+
+      - name: Install npm dependencies for switchboardbridge
+        run: npm ci --force --save-dev
+
+      - name: Style checking
+        continue-on-error: true
+        run: npm run stylelint
+      - name: Fix Style Lint
+        run: npm run stylelint:fix
+
+      - name: Js Lint checking
+        continue-on-error: true
+        run: npm run lint
+      - name: Fix Js Lint
+        run: npm run lint:fix
+
+      - name: PHP lint and fix
+        continue-on-error: true
+        run: phpcbf --extensions=php --ignore=*/tests/*,*/node_modules/* .
+
+      - name: PHP lint verify
+        run: phpcs --extensions=php --ignore=*/tests/*,*/node_modules/* . 
+
+      - name: Archive workspace
+        run: tar cf switchboardbridge-lint_node${{matrix.node-version}}_php${{ matrix.php-version }}.tar .
+
+      - name: Upload lint result workspace
+        uses: actions/upload-artifact@v3
+        with:
+          name: switchboardbridge-lint_node${{matrix.node-version}}_php${{ matrix.php-version }}
+          path: switchboardbridge-lint_node${{matrix.node-version}}_php${{ matrix.php-version }}.tar
+
+
+  build:
+    needs: [lint]
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [ 16.x, 18.x ]
+        php-version: [ 8.0, 8.1, 8.2 ]
+
+    name: Build Js on Node${{matrix.node-version}}, PHP${{ matrix.php-version }}
+
+    steps:
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Download lint job workspace
+        uses: actions/download-artifact@v3
+        with:
+          name: switchboardbridge-lint_node${{matrix.node-version}}_php${{ matrix.php-version }}
+
+      - name: Extract workspace 
+        run: tar xf switchboardbridge-lint_node${{matrix.node-version}}_php${{ matrix.php-version }}.tar .
+
+      - name: Build target Js
+        run: npm run build
+
+      - name: Archive workspace
+        run: tar cf switchboardbridge-build_node${{matrix.node-version}}_php${{ matrix.php-version }}.tar .
+
+      - name: Upload build result workspace
+        uses: actions/upload-artifact@v3
+        with:
+          name: switchboardbridge-build_node${{matrix.node-version}}_php${{ matrix.php-version }}
+          path: switchboardbridge-build_node${{matrix.node-version}}_php${{ matrix.php-version }}.tar
+
+  deploy:
+    needs: [build]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [ 18.x ]
+        php-version: [ 8.0, 8.1, 8.2 ]
+        nextcloud-version-branch: [ stable24, stable25, stable26 ]  # see https://github.com/nextcloud/server/branches
+        exclude:
+          - php-version: 8.2
+            nextcloud-version-branch: stable24
+          - php-version: 8.2
+            nextcloud-version-branch: stable25
+
+    name: Deploy on NC${{matrix.nextcloud-version-branch}}, PHP${{ matrix.php-version }}
+    env:
+      DB_DATABASE: oc_autotest
+      DB_ROOT: root
+
+    steps:
+      - name: Setup MySQL
+        run: |
+          sudo /etc/init.d/mysql start
+          mysql -u${{ env.DB_ROOT }} -p${{ env.DB_ROOT }} -e 'CREATE DATABASE ${{ env.DB_DATABASE }};'
+          mysql -u${{ env.DB_ROOT }} -p${{ env.DB_ROOT }} -e "CREATE USER 'oc_autotest'@'localhost' IDENTIFIED BY '';"
+          mysql -u${{ env.DB_ROOT }} -p${{ env.DB_ROOT }} -e "grant all on oc_autotest.* to 'oc_autotest'@'localhost';"
+
+      - uses: actions/checkout@v3
+        name: Checkout Nextcloud ${{matrix.nextcloud-version-branch}}
+        with:
+          repository: nextcloud/server
+          ref: ${{matrix.nextcloud-version-branch}}
+          fetch-depth: 1
+          submodules: true  # 'Composer autoloader' is required in order to run the code check
+
+      - name: Add switchboardbridge to nextcloud from build job workspace
+        uses: actions/download-artifact@v3
+        with:
+          name: switchboardbridge-build_node${{matrix.node-version}}_php${{ matrix.php-version }} # node version not relevant for this job
+
+      - name: Extract workspace 
+        run: |
+          mkdir apps/switchboardbridge 
+          tar xf switchboardbridge-build_node18.x_php${{ matrix.php-version }}.tar -C apps/switchboardbridge     
+
+      - name: Install PHP ${{ matrix.php-version }}
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+          ini-file: apps/switchboardbridge/tests/php.ini
+          tools: phpcs, phpcbf
+
+      - name: Configure NC
+        run: |
+          mkdir data
+          ./occ maintenance:install --database-name $DB_DATABASE --database-user oc_autotest --admin-user admin --admin-pass admin --database mysql --database-pass=''
+
+      - name: Deploy switchboardbridge plugin
+        run: |
+          ./occ app:enable switchboardbridge
+ 
+  commit:
+    needs: [build, deploy]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [ 18.x ]
+        php-version: [ 8.2 ]
+
+    name: Commit from PHP${{ matrix.php-version }} and Node${{ matrix.node-version }}
+
+    steps:
+      - uses: actions/checkout@v3
+        name: Checkout switchboardbridge
+
+      - name: Get switchboardbridge build job workspace
+        uses: actions/download-artifact@v3
+        with:
+          name: switchboardbridge-build_node${{ matrix.node-version }}_php${{ matrix.php-version }}
+
+      - name: Extract job build workspace 
+        run: tar xvf switchboardbridge-build_node${{ matrix.node-version }}_php${{ matrix.php-version }}.tar -C . --exclude=.git --exclude=node_modules
+
+      - name: Commit lint fixes and target Js
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          repository: .
+          file_pattern: '*.php *.js *.map *.css'
+          disable_globbing: true
+          commit_message: Apply PHP, CSS and JS auto fix changes
