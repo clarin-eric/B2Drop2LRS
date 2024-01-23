@@ -112,12 +112,7 @@ jobs:
       matrix:
         node-version: [ 18.x ]
         php-version: [ 8.0, 8.1, 8.2 ]
-        nextcloud-version-branch: [ stable24, stable25, stable26 ]  # see https://github.com/nextcloud/server/branches
-        exclude:
-          - php-version: 8.2
-            nextcloud-version-branch: stable24
-          - php-version: 8.2
-            nextcloud-version-branch: stable25
+        nextcloud-version-branch: [ stable26, stable27, stable28 ]  # see https://github.com/nextcloud/server/branches
 
     name: Deploy on NC${{matrix.nextcloud-version-branch}}, PHP${{ matrix.php-version }}
     env:
