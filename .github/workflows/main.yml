@@ -88,7 +88,7 @@ jobs:
       - name: Download lint job workspace
         uses: actions/download-artifact@v3
         with:
-          name: switchboardbridge-lint_node${{matrix.node-version}}_php${{ matrix.php-version }}
+          name: switchboardbridge-lint_node${{matrix.node-version}}_php${{ matrix.php-version }}.zip
 
       - name: Extract workspace 
         run: tar xf switchboardbridge-lint_node${{matrix.node-version}}_php${{ matrix.php-version }}.zip .
@@ -138,7 +138,7 @@ jobs:
       - name: Add switchboardbridge to nextcloud from build job workspace
         uses: actions/download-artifact@v3
         with:
-          name: switchboardbridge-build_node${{matrix.node-version}}_php${{ matrix.php-version }} # node version not relevant for this job
+          name: switchboardbridge-build_node${{matrix.node-version}}_php${{ matrix.php-version }}.zip # node version not relevant for this job
 
       - name: Extract workspace 
         run: |
@@ -178,7 +178,7 @@ jobs:
       - name: Get switchboardbridge build job workspace
         uses: actions/download-artifact@v3
         with:
-          name: switchboardbridge-build_node${{ matrix.node-version }}_php${{ matrix.php-version }}
+          name: switchboardbridge-build_node${{ matrix.node-version }}_php${{ matrix.php-version }}.zip
 
       - name: Extract job build workspace 
         run: tar xvf switchboardbridge-build_node${{ matrix.node-version }}_php${{ matrix.php-version }}.zip -C . --exclude=.git --exclude=node_modules
