@@ -110,7 +110,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-deploy-version: [ 20.x ]
+        node-version: [ 20.x ]
         nextcloud-version-branch: [ stable28, stable29, stable30 ]  # see https://github.com/nextcloud/server/branches
         php-version: [ 8.1, 8.2, 8.3 ]
 
@@ -138,12 +138,12 @@ jobs:
       - name: Add switchboardbridge to nextcloud from build job workspace
         uses: actions/download-artifact@v4
         with:
-          name: switchboardbridge-build_node${{matrix.node-deploy-version}}_php${{ matrix.php-version }} # node version not relevant for this job
+          name: switchboardbridge-build_node${{matrix.node-version}}_php${{ matrix.php-version }} # node version not relevant for this job
 
       - name: Extract workspace 
         run: |
           mkdir apps/switchboardbridge 
-          tar xf switchboardbridge-build_node18.x_php${{ matrix.php-version }}.zip -C apps/switchboardbridge     
+          tar xf switchboardbridge-build_node${{matrix.node-version}}_php${{ matrix.php-version }}.zip -C apps/switchboardbridge     
 
       - name: Install PHP ${{ matrix.php-version }}
         uses: shivammathur/setup-php@v2
@@ -166,10 +166,10 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-deploy-version: [ 20.x ]
-        php-commit-version: [ 8.3 ]
+        node-version: [ 20.x ]
+        php-version: [ 8.3 ]
 
-    name: Commit from PHP${{ matrix.php-commit-version}} and Node${{ matrix.node-deploy-version }}
+    name: Commit from PHP${{ matrix.php-version}} and Node${{ matrix.node-version }}
 
     steps:
       - uses: actions/checkout@v4
@@ -178,10 +178,10 @@ jobs:
       - name: Get switchboardbridge build job workspace
         uses: actions/download-artifact@v3
         with:
-          name: switchboardbridge-build_node${{ matrix.node-deploy-version }}_php${{ matrix.php-commit-version }}
+          name: switchboardbridge-build_node${{ matrix.node-version }}_php${{ matrix.php-version }}
 
       - name: Extract job build workspace 
-        run: tar xvf switchboardbridge-build_node${{ matrix.node-deploy-version }}_php${{ matrix.php-commit-version }}.zip -C . --exclude=.git --exclude=node_modules
+        run: tar xvf switchboardbridge-build_node${{ matrix.node-version }}_php${{ matrix.php-version }}.zip -C . --exclude=.git --exclude=node_modules
 
       - name: Commit lint fixes and target Js
         uses: stefanzweifel/git-auto-commit-action@v4
