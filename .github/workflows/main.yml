@@ -59,13 +59,13 @@ jobs:
         run: phpcs --extensions=php --ignore=*/tests/*,*/node_modules/* . 
 
       - name: Archive workspace
-        run: tar czf switchboardbridge-lint_node${{matrix.node-version}}_php${{ matrix.php-version }}.zip --exclude=./switchboardbridge-lint_node${{matrix.node-version}}_php${{ matrix.php-version }}.tar .
+        run: tar czf switchboardbridge-lint_node${{matrix.node-version}}_php${{ matrix.php-version }}.zip --exclude=./switchboardbridge-lint_node${{matrix.node-version}}_php${{ matrix.php-version }}.zip .
 
       - name: Upload lint result workspace
         uses: actions/upload-artifact@v4
         with:
           name: switchboardbridge-lint_node${{matrix.node-version}}_php${{ matrix.php-version }}
-          path: switchboardbridge-lint_node${{matrix.node-version}}_php${{ matrix.php-version }}.tar
+          path: switchboardbridge-lint_node${{matrix.node-version}}_php${{ matrix.php-version }}.zip
 
 
   build:
@@ -97,13 +97,13 @@ jobs:
         run: npm run build
 
       - name: Archive workspace
-        run: tar czf switchboardbridge-build_node${{matrix.node-version}}_php${{ matrix.php-version }}.zip --exclude=./switchboardbridge-build_node${{matrix.node-version}}_php${{ matrix.php-version }}.tar .
+        run: tar czf switchboardbridge-build_node${{matrix.node-version}}_php${{ matrix.php-version }}.zip --exclude=./switchboardbridge-build_node${{matrix.node-version}}_php${{ matrix.php-version }}.zip .
 
       - name: Upload build result workspace
         uses: actions/upload-artifact@v4
         with:
           name: switchboardbridge-build_node${{matrix.node-version}}_php${{ matrix.php-version }}
-          path: switchboardbridge-build_node${{matrix.node-version}}_php${{ matrix.php-version }}.tar
+          path: switchboardbridge-build_node${{matrix.node-version}}_php${{ matrix.php-version }}.zip
 
   deploy:
     needs: [build]
