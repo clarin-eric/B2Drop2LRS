@@ -59,7 +59,7 @@ jobs:
         run: phpcs --extensions=php --ignore=*/tests/*,*/node_modules/* . 
 
       - name: Archive workspace
-        run: tar czf switchboardbridge-lint_node${{matrix.node-version}}_php${{ matrix.php-version }}.zip --exclude=./switchboardbridge-lint_node${{matrix.node-version}}_php${{ matrix.php-version }}.zip .
+        run: tar cf switchboardbridge-lint_node${{matrix.node-version}}_php${{ matrix.php-version }}.zip --exclude=./switchboardbridge-lint_node${{matrix.node-version}}_php${{ matrix.php-version }}.zip .
 
       - name: Upload lint result workspace
         uses: actions/upload-artifact@v4
@@ -97,7 +97,7 @@ jobs:
         run: npm run build
 
       - name: Archive workspace
-        run: tar czf switchboardbridge-build_node${{matrix.node-version}}_php${{ matrix.php-version }}.zip --exclude=./switchboardbridge-build_node${{matrix.node-version}}_php${{ matrix.php-version }}.zip .
+        run: tar cf switchboardbridge-build_node${{matrix.node-version}}_php${{ matrix.php-version }}.zip --exclude=./switchboardbridge-build_node${{matrix.node-version}}_php${{ matrix.php-version }}.zip .
 
       - name: Upload build result workspace
         uses: actions/upload-artifact@v4
@@ -143,7 +143,7 @@ jobs:
       - name: Extract workspace 
         run: |
           mkdir apps/switchboardbridge 
-          tar zxf switchboardbridge-build_node18.x_php${{ matrix.php-version }}.zip -C apps/switchboardbridge     
+          tar xf switchboardbridge-build_node18.x_php${{ matrix.php-version }}.zip -C apps/switchboardbridge     
 
       - name: Install PHP ${{ matrix.php-version }}
         uses: shivammathur/setup-php@v2
@@ -181,7 +181,7 @@ jobs:
           name: switchboardbridge-build_node${{ matrix.node-version }}_php${{ matrix.php-version }}
 
       - name: Extract job build workspace 
-        run: tar zxvf switchboardbridge-build_node${{ matrix.node-version }}_php${{ matrix.php-version }}.zip -C . --exclude=.git --exclude=node_modules
+        run: tar xvf switchboardbridge-build_node${{ matrix.node-version }}_php${{ matrix.php-version }}.zip -C . --exclude=.git --exclude=node_modules
 
       - name: Commit lint fixes and target Js
         uses: stefanzweifel/git-auto-commit-action@v4
