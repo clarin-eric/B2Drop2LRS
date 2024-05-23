@@ -74,6 +74,11 @@ jobs:
 
     name: Build Js on Node${{matrix.node-version}}, PHP${{ matrix.php-version }}
 
+    strategy:
+      matrix:
+        node-version: [ 18.x, 20.x ]
+        php-version: [ 8.1, 8.2, 8.3 ]
+
     steps:
       - name: Setup Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
@@ -107,6 +112,7 @@ jobs:
       matrix:
         node-deploy-version: [ 20.x ]
         nextcloud-version-branch: [ stable28, stable29, stable30 ]  # see https://github.com/nextcloud/server/branches
+        php-version: [ 8.1, 8.2, 8.3 ]
 
     name: Deploy on NC${{matrix.nextcloud-version-branch}}, PHP${{ matrix.php-version }}
     env:
@@ -160,9 +166,10 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
+        node-deploy-version: [ 20.x ]
         php-commit-version: [ 8.3 ]
 
-    name: Commit from PHP${{ matrix.php-version }} and Node${{ matrix.node-deploy-version }}
+    name: Commit from PHP${{ matrix.php-commit-version}} and Node${{ matrix.node-deploy-version }}
 
     steps:
       - uses: actions/checkout@v4
