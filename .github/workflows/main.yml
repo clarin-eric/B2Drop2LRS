@@ -59,7 +59,7 @@ jobs:
         run: phpcs --extensions=php --ignore=*/tests/*,*/node_modules/* . 
 
       - name: Archive workspace
-        run: tar cf switchboardbridge-lint_node${{matrix.node-version}}_php${{ matrix.php-version }}.tar .
+        run: tar cf switchboardbridge-lint_node${{matrix.node-version}}_php${{ matrix.php-version }}.tar --exclude=./switchboardbridge-lint_node${{matrix.node-version}}_php${{ matrix.php-version }}.tar .
 
       - name: Upload lint result workspace
         uses: actions/upload-artifact@v4
@@ -97,7 +97,7 @@ jobs:
         run: npm run build
 
       - name: Archive workspace
-        run: tar cf switchboardbridge-build_node${{matrix.node-version}}_php${{ matrix.php-version }}.tar .
+        run: tar cf switchboardbridge-build_node${{matrix.node-version}}_php${{ matrix.php-version }}.tar --exclude=./switchboardbridge-build_node${{matrix.node-version}}_php${{ matrix.php-version }}.tar .
 
       - name: Upload build result workspace
         uses: actions/upload-artifact@v4
