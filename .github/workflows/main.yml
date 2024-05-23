@@ -15,14 +15,14 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [ 16.x, 18.x ]
-        php-version: [ 8.0, 8.1, 8.2 ]
+        node-version: [ 18.x, 20.x ]
+        php-version: [ 8.1, 8.2, 8.3 ]
 
     name: Lint on Node${{matrix.node-version}}, PHP${{ matrix.php-version }}
 
     steps:
       - name: Setup Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
 
@@ -33,7 +33,7 @@ jobs:
           ini-file: apps/switchboardbridge/tests/php.ini
           tools: phpcs, phpcbf
 
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         name: Checkout switchboardbridge
 
       - name: Install npm dependencies for switchboardbridge
@@ -62,7 +62,7 @@ jobs:
         run: tar cf switchboardbridge-lint_node${{matrix.node-version}}_php${{ matrix.php-version }}.tar .
 
       - name: Upload lint result workspace
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: switchboardbridge-lint_node${{matrix.node-version}}_php${{ matrix.php-version }}
           path: switchboardbridge-lint_node${{matrix.node-version}}_php${{ matrix.php-version }}.tar
@@ -74,14 +74,14 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [ 16.x, 18.x ]
-        php-version: [ 8.0, 8.1, 8.2 ]
+        node-version: [ 18.x, 20.x ]
+        php-version: [ 8.1, 8.2, 8.3 ]
 
     name: Build Js on Node${{matrix.node-version}}, PHP${{ matrix.php-version }}
 
     steps:
       - name: Setup Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
 
@@ -100,7 +100,7 @@ jobs:
         run: tar cf switchboardbridge-build_node${{matrix.node-version}}_php${{ matrix.php-version }}.tar .
 
       - name: Upload build result workspace
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: switchboardbridge-build_node${{matrix.node-version}}_php${{ matrix.php-version }}
           path: switchboardbridge-build_node${{matrix.node-version}}_php${{ matrix.php-version }}.tar
@@ -110,9 +110,9 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [ 18.x ]
-        php-version: [ 8.0, 8.1, 8.2 ]
-        nextcloud-version-branch: [ stable26, stable27, stable28 ]  # see https://github.com/nextcloud/server/branches
+        node-version: [ 20.x ]
+        php-version: [ 8.1, 8.2, 8.3 ]
+        nextcloud-version-branch: [ stable28, stable29, stable30 ]  # see https://github.com/nextcloud/server/branches
 
     name: Deploy on NC${{matrix.nextcloud-version-branch}}, PHP${{ matrix.php-version }}
     env:
@@ -127,7 +127,7 @@ jobs:
           mysql -u${{ env.DB_ROOT }} -p${{ env.DB_ROOT }} -e "CREATE USER 'oc_autotest'@'localhost' IDENTIFIED BY '';"
           mysql -u${{ env.DB_ROOT }} -p${{ env.DB_ROOT }} -e "grant all on oc_autotest.* to 'oc_autotest'@'localhost';"
 
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         name: Checkout Nextcloud ${{matrix.nextcloud-version-branch}}
         with:
           repository: nextcloud/server
@@ -166,13 +166,13 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [ 18.x ]
-        php-version: [ 8.2 ]
+        node-version: [ 20.x ]
+        php-version: [ 8.3 ]
 
     name: Commit from PHP${{ matrix.php-version }} and Node${{ matrix.node-version }}
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         name: Checkout switchboardbridge
 
       - name: Get switchboardbridge build job workspace
