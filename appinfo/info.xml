@@ -19,7 +19,7 @@
     <bugs>https://github.com/clarin-eric/B2Drop2LRSwitchboard/issues</bugs>
     <repository	type="git">https://github.com/clarin-eric/B2Drop2LRSwitchboard.git</repository>
     <dependencies>
-        <nextcloud min-version="21" max-version="28" />
+        <nextcloud min-version="21" max-version="31" />
         <lib>curl</lib>
     </dependencies>
     <rememberlogin>false</rememberlogin>
