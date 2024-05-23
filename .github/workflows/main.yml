@@ -59,7 +59,7 @@ jobs:
         run: phpcs --extensions=php --ignore=*/tests/*,*/node_modules/* . 
 
       - name: Archive workspace
-        run: tar cf switchboardbridge-lint_node${{matrix.node-version}}_php${{ matrix.php-version }}.tar --exclude=./switchboardbridge-lint_node${{matrix.node-version}}_php${{ matrix.php-version }}.tar .
+        run: tar czf switchboardbridge-lint_node${{matrix.node-version}}_php${{ matrix.php-version }}.zip --exclude=./switchboardbridge-lint_node${{matrix.node-version}}_php${{ matrix.php-version }}.tar .
 
       - name: Upload lint result workspace
         uses: actions/upload-artifact@v4
@@ -91,13 +91,13 @@ jobs:
           name: switchboardbridge-lint_node${{matrix.node-version}}_php${{ matrix.php-version }}
 
       - name: Extract workspace 
-        run: tar xf switchboardbridge-lint_node${{matrix.node-version}}_php${{ matrix.php-version }}.tar .
+        run: tar xf switchboardbridge-lint_node${{matrix.node-version}}_php${{ matrix.php-version }}.zip .
 
       - name: Build target Js
         run: npm run build
 
       - name: Archive workspace
-        run: tar cf switchboardbridge-build_node${{matrix.node-version}}_php${{ matrix.php-version }}.tar --exclude=./switchboardbridge-build_node${{matrix.node-version}}_php${{ matrix.php-version }}.tar .
+        run: tar czf switchboardbridge-build_node${{matrix.node-version}}_php${{ matrix.php-version }}.zip --exclude=./switchboardbridge-build_node${{matrix.node-version}}_php${{ matrix.php-version }}.tar .
 
       - name: Upload build result workspace
         uses: actions/upload-artifact@v4
@@ -143,7 +143,7 @@ jobs:
       - name: Extract workspace 
         run: |
           mkdir apps/switchboardbridge 
-          tar xf switchboardbridge-build_node18.x_php${{ matrix.php-version }}.tar -C apps/switchboardbridge     
+          tar zxf switchboardbridge-build_node18.x_php${{ matrix.php-version }}.zip -C apps/switchboardbridge     
 
       - name: Install PHP ${{ matrix.php-version }}
         uses: shivammathur/setup-php@v2
@@ -181,7 +181,7 @@ jobs:
           name: switchboardbridge-build_node${{ matrix.node-version }}_php${{ matrix.php-version }}
 
       - name: Extract job build workspace 
-        run: tar xvf switchboardbridge-build_node${{ matrix.node-version }}_php${{ matrix.php-version }}.tar -C . --exclude=.git --exclude=node_modules
+        run: tar zxvf switchboardbridge-build_node${{ matrix.node-version }}_php${{ matrix.php-version }}.zip -C . --exclude=.git --exclude=node_modules
 
       - name: Commit lint fixes and target Js
         uses: stefanzweifel/git-auto-commit-action@v4
