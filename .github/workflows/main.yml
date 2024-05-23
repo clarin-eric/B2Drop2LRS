@@ -86,7 +86,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Download lint job workspace
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: switchboardbridge-lint_node${{matrix.node-version}}_php${{ matrix.php-version }}
 
@@ -136,7 +136,7 @@ jobs:
           submodules: true  # 'Composer autoloader' is required in order to run the code check
 
       - name: Add switchboardbridge to nextcloud from build job workspace
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: switchboardbridge-build_node${{matrix.node-version}}_php${{ matrix.php-version }} # node version not relevant for this job
 
