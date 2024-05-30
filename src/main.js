@@ -1,13 +1,14 @@
 import { generateOcsUrl } from '@nextcloud/router'
-import { DefaultType, FileAction, FileType, Permission, registerFileAction } from '@nextcloud/files'
+import { DefaultType, FileAction, FileType, File, Permission, registerFileAction } from '@nextcloud/files'
 import { emit } from '@nextcloud/event-bus'
 
 const appid = 'switchboardbridge'
 const nextcloudVersionIsGreaterThanOr28 = parseInt(OC.config.version.split('.')[0]) >= 28
 
 /**
+ * Handle click on 'Switchboard' option in the file context menu.
  *
- * @param file
+ * @param {File} file for which the Switchboard is being called
  */
 function handleClick(file) {
 	const filePath = file.path
