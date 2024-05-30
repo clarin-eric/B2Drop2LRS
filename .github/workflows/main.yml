@@ -184,7 +184,7 @@ jobs:
         run: tar xvf switchboardbridge-build_node${{ matrix.node-version }}_php${{ matrix.php-version }}.zip -C . --exclude=.git --exclude=node_modules
 
       - name: Commit lint fixes and target Js
-        uses: stefanzweifel/git-auto-commit-action@v4
+        uses: stefanzweifel/git-auto-commit-action@v5
         with:
           repository: .
           file_pattern: '*.php *.js *.map *.css'
