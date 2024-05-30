@@ -23,7 +23,8 @@
     "@mdi/svg": "^7.4.47",
     "@nextcloud/event-bus": "^3.3.1",
     "@nextcloud/files": "^3.1.1",
-    "@nextcloud/router": "^3.0.1"
+    "@nextcloud/router": "^3.0.1",
+    "@nextcloud/webpack-vue-config": "^6.0.1"
   },
   "browserslist": [
     "extends @nextcloud/browserslist-config"
