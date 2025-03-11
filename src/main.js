@@ -1,6 +1,7 @@
 import { generateOcsUrl } from '@nextcloud/router'
-import { DefaultType, FileAction, FileType, File, Permission, registerFileAction } from '@nextcloud/files'
+import { FileAction, FileType, File, Permission, registerFileAction } from '@nextcloud/files'
 import { emit } from '@nextcloud/event-bus'
+import { t } from '@nextcloud/l10n'
 
 const appid = 'switchboardbridge'
 const nextcloudVersionIsGreaterThanOr28 = parseInt(OC.config.version.split('.')[0]) >= 28
@@ -91,8 +92,7 @@ OCA.SwitchboardBridge = OCA.SwitchboardBridge || {}
 if (nextcloudVersionIsGreaterThanOr28) {
 	registerFileAction(new FileAction({
 		id: appid,
-		displayName: () => 'Switchboard',
-		default: DefaultType.DEFAULT,
+		displayName: () => t(appid, 'Switchboard'),
 		enabled: (nodes) => {
 			if (nodes.length !== 1) {
 				return false
@@ -111,6 +111,7 @@ if (nextcloudVersionIsGreaterThanOr28) {
 		},
 		inline: () => false,
 		order: 22,
+		priority: 0,
 	}))
 } else {
 	OCA.SwitchboardBridge.Util = {
