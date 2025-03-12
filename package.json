@@ -1,7 +1,7 @@
 {
   "name": "switchboardbridge",
-  "description": "An app to connect b2drop with the CLARIN Language Resource Switchboard",
-  "version": "1.1.0",
+  "description": "An app to connect B2Drop with the CLARIN Language Resource Switchboard",
+  "version": "1.2.0",
   "author": "André Moreira <andre@clarin.eu>",
   "repository": {
     "url": "https://github.com/clarin-eric/B2Drop2LRSwitchboard",
@@ -20,22 +20,22 @@
     "stylelint:fix": "stylelint css/*.css css/*.scss src/**/*.scss src/**/*.vue --fix"
   },
   "dependencies": {
-    "@nextcloud/event-bus": "^3.3.1",
-    "@nextcloud/files": "^3.4.0",
+    "@nextcloud/event-bus": "^3.3.2",
+    "@nextcloud/files": "^3.10.2",
     "@nextcloud/router": "^3.0.1",
-    "@nextcloud/webpack-vue-config": "^6.0.1"
+    "@nextcloud/webpack-vue-config": "^6.2.0"
   },
   "browserslist": [
     "extends @nextcloud/browserslist-config"
   ],
   "engines": {
     "node": "^20.0.0",
-    "npm": "^10.0.0"
+    "npm": "^11.2.0"
   },
   "devDependencies": {
     "@nextcloud/browserslist-config": "^3.0.1",
-    "@nextcloud/eslint-config": "^8.4.1",
+    "@nextcloud/eslint-config": "^8.4.2",
     "@nextcloud/stylelint-config": "^3.0.1",
-    "stylelint": "^16.6.0"
+    "stylelint": "^16.15.0"
   }
 }
