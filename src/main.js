@@ -111,7 +111,6 @@ if (nextcloudVersionIsGreaterThanOr28) {
 		},
 		inline: () => false,
 		order: 22,
-		priority: 0,
 	}))
 } else {
 	OCA.SwitchboardBridge.Util = {
