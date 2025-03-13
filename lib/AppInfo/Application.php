@@ -2,13 +2,12 @@
 /**
  * Nextcloud - SwitchboardBridge App
  *
- * PHP Version 5-8
+ * PHP Version 8
  *
  * @category  Nextcloud
  * @package   SwitchboardBridge
  * @author    André Moreira <andre@clarin.eu>
- * @author    Claus Zinn <claus.zinn@uni-tuebingen.de>
- * @copyright 2015 EUDAT/CLARIN
+ * @copyright 2025 EUDAT/CLARIN
  * @license   https://github.com/clarin-eric/B2Drop2LRS/blob/master/LICENSE AGPL v3
  * @link      https://github.com/clarin-eric/B2Drop2LRS
  */
@@ -23,12 +22,11 @@ use OCP\AppFramework\Bootstrap\IBootstrap;
 use OCP\AppFramework\Bootstrap\IRegistrationContext;
 
 /**
- * Implement a ownCloud Application for our b2sharebridge
+ * Implement a NextCloud Application for our switchboardbridge
  *
  * @category Nextcloud
  * @package  SwitchboardBridge
  * @author   André Moreira <andre@clarin.eu>
- * @author   Claus Zinn <claus.zinn@uni-tuebingen.de>
  * @license  https://github.com/clarin-eric/B2Drop2LRS/blob/master/LICENSE AGPL v3
  * @link     https://github.com/clarin-eric/B2Drop2LRS
  */
@@ -46,36 +44,6 @@ class Application extends App implements IBootstrap
         $server = $container->getServer();
     }
 
-
-    /**
-     * Register Navigation Entry
-     *
-     * @return null
-     */
-
-    /* todo
-    public function registerNavigationEntry()
-    {
-        $c = $this->getContainer();
-        $server = $c->getServer();
-
-        $navigationEntry = function () use ($c, $server) {
-            return [
-                'id' => $c->getAppName(),
-                'order' => 100,
-                'name' => 'B2SHARE',
-                'href' => $server->getURLGenerator()
-                    ->linkToRoute('b2sharebridge.View.depositList'),
-                'icon' => $server->getURLGenerator()
-                    ->imagePath('b2sharebridge', 'appbrowsericon.svg'),
-            ];
-        };
-        $server->getNavigationManager()->add($navigationEntry);
-        return;
-    }
-
-    */
-
     /**
      * Register Settings pages
      *
@@ -85,20 +53,6 @@ class Application extends App implements IBootstrap
     {
         return;
     }
-
-    // todo?
-    /* public function registerSettings()
-    {
-        \OCP\App::registerAdmin('lrswitchboardbridge', 'lib/settings/admin');
-        \OCP\App::registerPersonal('lrswitchboardbridge', 'lib/settings/personal');
-    }
-    */
-
-    /**
-     * Register Jobs
-     *
-     * @return null
-     */
 
     /**
      * Load additional javascript files
@@ -137,7 +91,6 @@ class Application extends App implements IBootstrap
      */
     public function boot(IBootContext $context): void
     {
-        // $this->registerNavigationEntry();
         $this->loadScripts();
         $this->registerSettings();
     }
