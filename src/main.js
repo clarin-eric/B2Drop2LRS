@@ -134,6 +134,5 @@ if (nextcloudVersionIsGreaterThanOr28) {
 			})
 		},
 	}
+	OC.Plugins.register('OCA.Files.FileList', OCA.SwitchboardBridge.Util)
 }
-
-OC.Plugins.register('OCA.Files.FileList', OCA.SwitchboardBridge.Util)
