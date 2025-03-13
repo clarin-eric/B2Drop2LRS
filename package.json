@@ -23,7 +23,8 @@
     "@nextcloud/event-bus": "^3.3.2",
     "@nextcloud/files": "^3.10.2",
     "@nextcloud/router": "^3.0.1",
-    "@nextcloud/webpack-vue-config": "^6.2.0"
+    "@nextcloud/webpack-vue-config": "^6.2.0",
+    "webpack-shell-plugin-next": "^2.3.2"
   },
   "browserslist": [
     "extends @nextcloud/browserslist-config"
