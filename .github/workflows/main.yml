@@ -112,10 +112,8 @@ jobs:
       matrix:
         node-version: [ 20.x ]
         nextcloud-version-branch: [ stable28, stable29, stable30, stable31 ]  # see https://github.com/nextcloud/server/branches
+        php-version: [ 8.1, 8.2, 8.3 ]
         include:
-          - php-version: 8.1
-          - php-version: 8.2
-          - php-version: 8.3
           - nextcloud-version-branch: stable31
             php-version: 8.4
 
