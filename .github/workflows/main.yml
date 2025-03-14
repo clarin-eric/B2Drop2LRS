@@ -216,25 +216,6 @@ jobs:
     name: Update release tag
 
     steps:
-      - uses: actions/checkout@v4
-        name: Checkout switchboardbridge
-
-      - name: Get switchboardbridge build job workspace
-        uses: actions/download-artifact@v4
-        with:
-          name: switchboardbridge-build_node${{ matrix.node-version }}_php${{ matrix.php-version }}
-
-      - name: Extract job build workspace 
-        run: tar xvf switchboardbridge-build_node${{ matrix.node-version }}_php${{ matrix.php-version }}.zip -C . --exclude=.git --exclude=node_modules
-
-      - name: Commit package version upgrade
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          repository: .
-          file_pattern: 'appinfo/info.xml'
-          disable_globbing: true
-          commit_message: Upgrade version number in app info file
-
       - name: Tag Repo
         uses: richardsimko/update-tag@v1
         with:
