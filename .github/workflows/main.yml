@@ -222,7 +222,7 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           repository: .
-          file_pattern: 'info.xml'
+          file_pattern: '*appinfo/info.xml'
           disable_globbing: true
           commit_message: Upgrade version number in app info file
 
