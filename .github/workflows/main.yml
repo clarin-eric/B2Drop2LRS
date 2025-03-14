@@ -116,8 +116,8 @@ jobs:
           - php-version: 8.1
           - php-version: 8.2
           - php-version: 8.3
-          - php-version: 8.4
-            nextcloud-version-branch: stable31
+          - nextcloud-version-branch: stable31
+            php-version: 8.4
 
     name: Deploy on NC${{matrix.nextcloud-version-branch}}, PHP${{ matrix.php-version }}
     env:
