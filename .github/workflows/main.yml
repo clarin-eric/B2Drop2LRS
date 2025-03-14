@@ -176,14 +176,8 @@ jobs:
     name: Commit from PHP${{ matrix.php-version}} and Node${{ matrix.node-version }}
 
     steps:
-      - name: Get branch names.
-        id: branch-names
-        uses: tj-actions/branch-names@v8
-  
       - uses: actions/checkout@v4
         name: Checkout switchboardbridge
-        with:
-          ref: ${{ steps.branch-names.outputs.base_ref_branch }}
 
       - name: Get switchboardbridge build job workspace
         uses: actions/download-artifact@v4
@@ -200,6 +194,12 @@ jobs:
           file_pattern: '*.php *.js *.map *.css'
           disable_globbing: true
           commit_message: Apply PHP, CSS and JS auto fix changes
+
+      - name: Checkout master branch
+        if: github.event_name == 'release'
+        uses: actions/checkout@v4
+        with:
+          ref: master
 
       - name: Commit package version upgrade
         if: github.event_name == 'release'
