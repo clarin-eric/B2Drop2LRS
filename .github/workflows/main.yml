@@ -192,9 +192,9 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           repository: .
-          file_pattern: '*.php *.js *.map *.css *.xml'
+          file_pattern: '*.php *.js *.map *.css'
           disable_globbing: true
-          commit_message: Apply PHP, CSS and JS auto fix changes and update app version to latest tag
+          commit_message: Apply PHP, CSS and JS auto fix changes
 
   release:
     needs: [commit]
@@ -205,9 +205,28 @@ jobs:
         node-version: [ 20.x ]
         php-version: [ 8.4 ]
 
-    name: Update release tag with latest changes from commit stage
+    name: Update release tag
 
     steps:
+      - uses: actions/checkout@v4
+        name: Checkout switchboardbridge
+
+      - name: Get switchboardbridge build job workspace
+        uses: actions/download-artifact@v4
+        with:
+          name: switchboardbridge-build_node${{ matrix.node-version }}_php${{ matrix.php-version }}
+
+      - name: Extract job build workspace 
+        run: tar xvf switchboardbridge-build_node${{ matrix.node-version }}_php${{ matrix.php-version }}.zip -C . --exclude=.git --exclude=node_modules
+
+      - name: Commit package version upgrade
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          repository: .
+          file_pattern: 'info.xml'
+          disable_globbing: true
+          commit_message: Upgrade version number in app info file
+
       - name: Tag Repo
         uses: richardsimko/update-tag@v1
         with:
