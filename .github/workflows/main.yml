@@ -219,9 +219,19 @@ jobs:
     name: Update release tag
 
     steps:
+      - uses: actions/checkout@v4
+        name: Checkout switchboardbridge
+        with:
+          ref: ${{ github.ref_name }}
+
+      - name: Set outputs
+        id: vars
+        run: echo "sha=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
+
       - name: Tag Repo
         uses: richardsimko/update-tag@v1
         with:
           tag_name: ${{ github.ref_name }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_SHA: ${{ steps.vars.outputs.sha_short }}
