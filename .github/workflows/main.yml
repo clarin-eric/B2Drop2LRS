@@ -232,9 +232,10 @@ jobs:
         run: echo "sha=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
 
       - name: Tag Repo
-        uses: richardsimko/update-tag@v1
+        uses: rickstaa/action-create-tag@v1
+        id: "tag_create"
         with:
-          tag_name: ${{ github.ref_name }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_SHA: ${{ steps.vars.outputs.sha }}
+          tag: ${{ github.ref_name }}
+          commit_sha: ${{ steps.vars.outputs.sha }}
+          tag_exists_error: false
+          message: "Automatically updated tag by CI"
