@@ -201,6 +201,9 @@ jobs:
         with:
           ref: master
 
+      - name: Extract job build workspace 
+        run: tar xvf switchboardbridge-build_node${{ matrix.node-version }}_php${{ matrix.php-version }}.zip -C . --exclude=.git --exclude=node_modules
+
       - name: Commit package version upgrade
         if: github.event_name == 'release'
         uses: stefanzweifel/git-auto-commit-action@v5
@@ -224,7 +227,7 @@ jobs:
       - uses: actions/checkout@v4
         name: Checkout switchboardbridge
         with:
-          ref: ${{ github.ref_name }}
+          ref: master
 
       - name: Get latest commit sha
         id: vars
