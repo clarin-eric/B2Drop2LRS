@@ -219,7 +219,7 @@ jobs:
         with:
           name: switchboardbridge-build_node${{ matrix.node-version }}_php${{ matrix.php-version }}
 
-      - name: Extract job build workspace 
+      - name: Extract new appinfo/info.xml file
         run: tar xvf switchboardbridge-build_node${{ matrix.node-version }}_php${{ matrix.php-version }}.zip ./appinfo/info.xml -C .
 
       - name: Commit package version upgrade
@@ -241,4 +241,4 @@ jobs:
           commit_sha: ${{ steps.vars.outputs.sha }}
           force_push_tag: true
           tag_exists_error: false
-          message: "Automatically updated tag by CI"
+          message: "Tag automatically updated by CI"
