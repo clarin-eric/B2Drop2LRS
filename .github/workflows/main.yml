@@ -115,6 +115,7 @@ jobs:
         php-version: [ 8.1, 8.2, 8.3 ]
         include:
           - nextcloud-version-branch: stable31
+            node-version: 20.x
             php-version: 8.4
 
     name: Deploy on NC${{matrix.nextcloud-version-branch}}, PHP${{ matrix.php-version }}
