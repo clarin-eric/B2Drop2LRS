@@ -222,7 +222,7 @@ jobs:
         with:
           ref: ${{ github.ref_name }}
 
-      - name: Set outputs
+      - name: Get latest commit sha
         id: vars
         run: echo "sha=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
 
@@ -232,4 +232,4 @@ jobs:
           tag_name: ${{ github.ref_name }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_SHA: ${{ steps.vars.outputs.sha_short }}
+          GITHUB_SHA: ${{ steps.vars.outputs.sha }}
