@@ -237,5 +237,6 @@ jobs:
         with:
           tag: ${{ github.ref_name }}
           commit_sha: ${{ steps.vars.outputs.sha }}
+          force_push_tag: true
           tag_exists_error: false
           message: "Automatically updated tag by CI"
