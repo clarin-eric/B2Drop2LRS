@@ -195,23 +195,6 @@ jobs:
           disable_globbing: true
           commit_message: Apply PHP, CSS and JS auto fix changes
 
-      - name: Checkout master branch
-        if: github.event_name == 'release'
-        uses: actions/checkout@v4
-        with:
-          ref: master
-
-      - name: Extract job build workspace 
-        run: tar xvf switchboardbridge-build_node${{ matrix.node-version }}_php${{ matrix.php-version }}.zip -C . --exclude=.git --exclude=node_modules
-
-      - name: Commit package version upgrade
-        if: github.event_name == 'release'
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          repository: .
-          file_pattern: 'appinfo/info.xml'
-          commit_message: Upgrade version number in app info file
-
   release:
     needs: [commit]
     if: github.event_name == 'release'
@@ -228,6 +211,21 @@ jobs:
         name: Checkout switchboardbridge
         with:
           ref: master
+
+      - name: Get switchboardbridge build job workspace
+        uses: actions/download-artifact@v4
+        with:
+          name: switchboardbridge-build_node${{ matrix.node-version }}_php${{ matrix.php-version }}
+
+      - name: Extract job build workspace 
+        run: tar xvf switchboardbridge-build_node${{ matrix.node-version }}_php${{ matrix.php-version }}.zip -C . --exclude=.git --exclude=node_modules
+
+      - name: Commit package version upgrade
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          repository: .
+          file_pattern: 'appinfo/info.xml'
+          commit_message: Upgrade version number in app info file
 
       - name: Get latest commit sha
         id: vars
