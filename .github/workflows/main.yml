@@ -202,6 +202,7 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           repository: .
+          branch: ${{ github.ref_name }}
           file_pattern: 'appinfo/info.xml'
           commit_message: Upgrade version number in app info file
 
