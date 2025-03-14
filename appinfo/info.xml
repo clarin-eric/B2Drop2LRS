@@ -10,7 +10,7 @@
       a icon to transfer files. Once transferred, a new browser tab opens with the switchboard app.
       From there, the file can be processed by a number of different language-related processing tools.
     </description>
-    <version>2.3.1</version>
+    <version>master</version>
     <licence>AGPL</licence>
     <author>CLARIN-PLUS/EUDAT</author>
     <namespace>switchboardbridge</namespace>
