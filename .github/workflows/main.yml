@@ -195,7 +195,7 @@ jobs:
     needs: [commit]
     if: github.event_name == 'release'
     runs-on: ubuntu-latest
-        strategy:
+    strategy:
       matrix:
         node-version: [ 20.x ]
         php-version: [ 8.4 ]
