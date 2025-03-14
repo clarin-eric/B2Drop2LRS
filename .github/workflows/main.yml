@@ -196,6 +196,7 @@ jobs:
           commit_message: Apply PHP, CSS and JS auto fix changes
 
       - name: Update local repository
+        if: github.event_name == 'release'
         run: git pull
 
       - name: Commit package version upgrade
@@ -204,6 +205,7 @@ jobs:
         with:
           repository: .
           file_pattern: 'appinfo/info.xml'
+          skip_checkout: false
           disable_globbing: true
           commit_message: Upgrade version number in app info file
 
