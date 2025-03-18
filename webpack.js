@@ -8,7 +8,7 @@ webpackConfig.plugins.push(
 			scripts: [
 				// eslint-disable-next-line no-multi-str, no-template-curly-in-string
 				'VERSION="${GITHUB_REF##*/}";\
-			if [ -n "VERSION" ];\
+			if [ -n "${VERSION}" ];\
 			then\
 				echo "Github ref exists -> updating App version number to: "${VERSION}"";\
 				NEW_INFO=$(sed -E "s/<version>[0-9]{1,3}\.[0-9]{1,3}(\.[0-9]{1,3})?<\\/version>/<version>${VERSION}<\\/version>/g" appinfo/info.xml);\
