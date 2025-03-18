@@ -211,10 +211,18 @@ jobs:
     name: Update release tag
 
     steps:
+      - name: Get base branch for tag
+        id: branchstep
+        run: |
+          raw=$(git branch -r --contains ${{ github.ref }})
+          branch=$(echo ${raw##*/} | tr [:upper:] [:lower:])
+          echo "branch=$branch" >> $GITHUB_OUTPUT
+          echo "Branch is $branch."
+
       - uses: actions/checkout@v4
         name: Checkout switchboardbridge
         with:
-          ref: master
+          ref: ${{ steps.branchstep.outputs.branch }}
 
       - name: Get switchboardbridge build job workspace
         uses: actions/download-artifact@v4
@@ -232,7 +240,7 @@ jobs:
           commit_message: Upgrade version number in app info file
 
       - name: Get latest commit sha
-        id: vars
+        id: shastep
         run: echo "sha=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
 
       - name: Tag Repo
@@ -240,7 +248,7 @@ jobs:
         id: "tag_create"
         with:
           tag: ${{ github.ref_name }}
-          commit_sha: ${{ steps.vars.outputs.sha }}
+          commit_sha: ${{ steps.shastep.outputs.sha }}
           force_push_tag: true
           tag_exists_error: false
           message: "Tag automatically updated by CI"
