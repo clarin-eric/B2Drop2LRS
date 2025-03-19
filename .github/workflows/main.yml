@@ -213,8 +213,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         name: Checkout switchboardbridge
-          with:
-            fetch-depth: 0
+        with:
+          fetch-depth: 0
 
       - name: Get base branch for tag
         id: branchstep
