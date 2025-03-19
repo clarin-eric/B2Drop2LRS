@@ -219,7 +219,7 @@ jobs:
       - name: Get base branch for tag
         id: branchstep
         run: |
-          raw=$(git branch -r --contains ${{ github.ref }})
+          raw=$(git branch -r --contains ${{ github.ref }} --sort=-committerdate)
           branch=$(echo ${raw##*/} | tr [:upper:] [:lower:])
           echo "branch=$branch" >> $GITHUB_OUTPUT
           echo "Branch is $branch."
