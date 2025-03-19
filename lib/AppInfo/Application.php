@@ -14,6 +14,12 @@
 
 namespace OCA\SwitchboardBridge\AppInfo;
 
+use OCP\AppFramework\App;
+use OCP\Util;
+use OCP\AppFramework\Bootstrap\IBootContext;
+use OCP\AppFramework\Bootstrap\IBootstrap;
+use OCP\AppFramework\Bootstrap\IRegistrationContext;
+
 /**
  * Implement a NextCloud Application for our switchboardbridge
  *
