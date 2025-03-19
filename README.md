@@ -1,12 +1,14 @@
 # LR SWITCHBOARD -- EUDAT/B2DROP integration
-Code Repository for the B2DROP plugin to bridge to the CLARIN Language Resources Switchboard.
+Code Repository for the B2DROP application bridge to the CLARIN Language Resources Switchboard.
+Although this app is intended to be used with [B2Drop](https://b2drop.eudat.eu), it is developed
+and tested generically against vanilla NextCloud and should be deployable on it.
 
 # Module Description
 
-This nextcloud plugin allows users to connect their resources from their personal cloud store to the
+This Nextcloud plugin allows users to connect their resources from their personal cloud store to the
 CLARIN Language Resource Switchboard.  It extends the user interface of the B2DROP resources
 list. For each resource, the '...' menu is extended to contain a menu item poiting to the LR
-switchboard. Once activated, a new browser tab opens with the switchboard; it fetches the resource
+Switchboard. Once activated, a new browser tab opens with the Switchboard; it fetches the resource
 from the cloud, and processes it as usual.
 
 # Install
@@ -40,10 +42,7 @@ The code is inspired by the B2Drop plugin b2sharebridge, see
 
 ```https://github.com/EUDAT-B2DROP/b2sharebridge.git ```.
 
-Given the radical changes / deletions from the b2sharebridge code, its git log history has been
-deleted.
-
-The software is currently being updated for newer version of Nextcloud.
+The software is continuously being updated for newer versions of Nextcloud.
 
 
 

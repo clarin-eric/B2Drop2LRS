@@ -2,6 +2,10 @@ name: CI
 
 on:
   push:
+    branches-ignore:
+      - '!**'
+    tags-ignore:
+      - '**'
   pull_request:
   release:
     types: [published]
@@ -113,6 +117,10 @@ jobs:
         node-version: [ 20.x ]
         nextcloud-version-branch: [ stable28, stable29, stable30, stable31 ]  # see https://github.com/nextcloud/server/branches
         php-version: [ 8.1, 8.2, 8.3 ]
+        include:
+          - nextcloud-version-branch: stable31
+            node-version: 20.x
+            php-version: 8.4
 
     name: Deploy on NC${{matrix.nextcloud-version-branch}}, PHP${{ matrix.php-version }}
     env:
@@ -190,3 +198,62 @@ jobs:
           file_pattern: '*.php *.js *.map *.css'
           disable_globbing: true
           commit_message: Apply PHP, CSS and JS auto fix changes
+
+  release:
+    needs: [commit]
+    if: github.event_name == 'release'
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [ 20.x ]
+        php-version: [ 8.4 ]
+
+    name: Update release tag
+
+    steps:
+      - uses: actions/checkout@v4
+        name: Checkout switchboardbridge
+        with:
+          fetch-depth: 0
+
+      - name: Get base branch for tag
+        id: branchstep
+        run: |
+          raw=$(git branch -r --contains ${{ github.ref }})
+          branch=$(echo ${raw##*/} | tr [:upper:] [:lower:])
+          echo "branch=$branch" >> $GITHUB_OUTPUT
+          echo "Branch is $branch."
+
+      - uses: actions/checkout@v4
+        name: Checkout switchboardbridge
+        with:
+          ref: ${{ steps.branchstep.outputs.branch }}
+
+      - name: Get switchboardbridge build job workspace
+        uses: actions/download-artifact@v4
+        with:
+          name: switchboardbridge-build_node${{ matrix.node-version }}_php${{ matrix.php-version }}
+
+      - name: Extract new appinfo/info.xml file
+        run: tar xvf switchboardbridge-build_node${{ matrix.node-version }}_php${{ matrix.php-version }}.zip ./appinfo/info.xml -C .
+
+      - name: Commit package version upgrade
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          repository: .
+          file_pattern: 'appinfo/info.xml'
+          commit_message: Upgrade version number in app info file
+
+      - name: Get latest commit sha
+        id: shastep
+        run: echo "sha=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
+
+      - name: Tag Repo
+        uses: rickstaa/action-create-tag@v1
+        id: "tag_create"
+        with:
+          tag: ${{ github.ref_name }}
+          commit_sha: ${{ steps.shastep.outputs.sha }}
+          force_push_tag: true
+          tag_exists_error: false
+          message: "Tag automatically updated by CI"
