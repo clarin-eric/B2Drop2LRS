@@ -20,11 +20,7 @@
     "stylelint:fix": "stylelint css/*.css css/*.scss src/**/*.scss src/**/*.vue --fix"
   },
   "dependencies": {
-    "@nextcloud/event-bus": "^3.3.2",
-    "@nextcloud/files": "^3.10.2",
-    "@nextcloud/router": "^3.0.1",
-    "@nextcloud/webpack-vue-config": "^6.2.0",
-    "webpack-shell-plugin-next": "^2.3.2"
+    "@nextcloud/files": "^3.10.2"
   },
   "browserslist": [
     "extends @nextcloud/browserslist-config"
@@ -34,9 +30,13 @@
     "npm": "^11.2.0"
   },
   "devDependencies": {
+    "@nextcloud/event-bus": "^3.3.2",
+    "@nextcloud/router": "^3.0.1",
     "@nextcloud/browserslist-config": "^3.0.1",
     "@nextcloud/eslint-config": "^8.4.2",
     "@nextcloud/stylelint-config": "^3.0.1",
+    "@nextcloud/webpack-vue-config": "^6.2.0",
+    "webpack-shell-plugin-next": "^2.3.2",
     "stylelint": "^16.15.0"
   }
 }

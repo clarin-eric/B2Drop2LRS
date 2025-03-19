@@ -15,7 +15,6 @@
 namespace OCA\SwitchboardBridge\AppInfo;
 
 use OCP\AppFramework\App;
-use OCP\IContainer;
 use OCP\Util;
 use OCP\AppFramework\Bootstrap\IBootContext;
 use OCP\AppFramework\Bootstrap\IBootstrap;
