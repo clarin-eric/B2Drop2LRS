@@ -211,6 +211,9 @@ jobs:
     name: Update release tag
 
     steps:
+      - uses: actions/checkout@v4
+        name: Checkout switchboardbridge
+
       - name: Get base branch for tag
         id: branchstep
         run: |
