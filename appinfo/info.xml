@@ -1,13 +1,12 @@
 <?xml version="1.0"?>
 <info>
     <id>switchboardbridge</id>
-    <name>EUDAT Switchboard bridge</name>
-    <summary>The Switchboard bridge sends a file from B2DROP to the CLARIN
-    Language Resource Switchboard.</summary>
+    <name>CLARIN Switchboard bridge</name>
+    <summary>The Switchboard bridge sends selected files to the CLARIN Language Resource Switchboard.</summary>
     <description>
-      This nextcloud plugin allows users to directly send files from their personal cloud store to
-      the CLARIN Language Resource Switchboard. The user interface of B2DROP is extended with
-      a icon to transfer files. Once transferred, a new browser tab opens with the switchboard app.
+      This Nextcloud plugin allows users to directly send files from their personal cloud store to
+      the CLARIN Language Resource Switchboard. The user interface of Nextcloud is extended with
+      a icon to transfer files. Once transferred, a new browser tab opens with the Switchboard app.
       From there, the file can be processed by a number of different language-related processing tools.
     </description>
     <version>2.3.3-RC1</version>
