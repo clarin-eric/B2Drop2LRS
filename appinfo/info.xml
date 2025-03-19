@@ -11,7 +11,7 @@
     </description>
     <version>2.3.3-RC1</version>
     <licence>AGPL</licence>
-    <author>CLARIN-PLUS/EUDAT</author>
+    <author>CLARIN</author>
     <namespace>switchboardbridge</namespace>
     <category>integration</category>
     <website>https://switchboard.clarin.eu</website>    
