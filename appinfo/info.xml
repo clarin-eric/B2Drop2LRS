@@ -21,5 +21,4 @@
         <nextcloud min-version="21" max-version="31" />
         <lib>curl</lib>
     </dependencies>
-    <rememberlogin>false</rememberlogin>
 </info>
