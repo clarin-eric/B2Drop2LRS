@@ -14,9 +14,21 @@ from the cloud, and processes it as usual.
 # Install
 
 1. on your B2DROP server go to the <nextcloud>/apps directory
-2. git clone this repository using
+2. 
+   a) git clone this repository using
 
    ```git clone https://github.com/clarin-eric/B2Drop2LRS.git switchboardbridge ```
+
+   or
+
+   b) download and extract a release package
+
+
+   ```curl -L -O https://github.com/clarin-eric/B2Drop2LRS/archive/refs/tags/<release tag>.tar.gz```
+
+   ```tar xvf <release tag>.tar.gz```
+      
+   ```mv B2Drop2LRS-<release tag> switchboardbridge```
 
 3. enable the app on the B2DROP/nextcloud web interface. The menu item for
    managing the apps is hidden in the collapsible menu under the avatar icon on
@@ -43,6 +55,3 @@ The code is inspired by the B2Drop plugin b2sharebridge, see
 ```https://github.com/EUDAT-B2DROP/b2sharebridge.git ```.
 
 The software is continuously being updated for newer versions of Nextcloud.
-
-
-
