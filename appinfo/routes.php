@@ -7,8 +7,7 @@
  * @category  Nextcloud
  * @package   SwitchboardBridge
  * @author    André Moreira <andre@clarin.eu>
- * @author    CLARIN-PLUS/EUDAT <claus.zinn@uni-tuebingen.de>
- * @copyright 2017 CLARIN-PLUS/EUDAT
+ * @copyright 2025 EUDAT/CLARIN
  * @license   AGPL v3 https://github.com/clarin-eric/B2Drop2LRS/blob/master/LICENSE
  * @link      https://github.com/clarin-eric/B2Drop2LRS
  */
