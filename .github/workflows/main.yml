@@ -189,9 +189,9 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           repository: .
-          file_pattern: '*.php *.js *.map *.css'
+          file_pattern: '*.php *.js *.map'
           disable_globbing: true
-          commit_message: Apply PHP, CSS and JS auto fix changes
+          commit_message: Apply PHP and JS auto fix changes
 
   release:
     needs: [commit]
