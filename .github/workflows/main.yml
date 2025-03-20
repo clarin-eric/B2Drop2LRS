@@ -43,12 +43,6 @@ jobs:
       - name: Install npm dependencies for switchboardbridge
         run: npm ci --force --save-dev
 
-      - name: Style checking
-        continue-on-error: true
-        run: npm run stylelint
-      - name: Fix Style Lint
-        run: npm run stylelint:fix
-
       - name: Js Lint checking
         continue-on-error: true
         run: npm run lint

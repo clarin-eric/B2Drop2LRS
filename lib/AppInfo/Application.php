@@ -44,16 +44,6 @@ class Application extends App implements IBootstrap
     }
 
     /**
-     * Register Settings pages
-     *
-     * @return null
-     */
-    public function registerSettings()
-    {
-        return;
-    }
-
-    /**
      * Load additional javascript files
      *
      * @return null
@@ -61,7 +51,6 @@ class Application extends App implements IBootstrap
     public static function loadScripts()
     {
         Util::addScript('switchboardbridge', 'switchboardbridge-main');
-        Util::addStyle('switchboardbridge', 'settings');
         return;
     }
 
