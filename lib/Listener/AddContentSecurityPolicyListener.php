@@ -26,13 +26,14 @@ use OCP\Security\CSP\AddContentSecurityPolicyEvent;
  * allowed domains of NC CSP.
  * This is needed in order to POST data from NC to the Switchboard
  *
- * @category  Nextcloud
- * @package   SwitchboardBridge
- * @author    André Moreira <andre@clarin.eu>
- * @license   https://github.com/clarin-eric/B2Drop2LRS/blob/master/LICENSE AGPL v3
- * @link      https://github.com/clarin-eric/B2Drop2LRS
+ * @category Nextcloud
+ * @package  SwitchboardBridge
+ * @author   André Moreira <andre@clarin.eu>
+ * @license  https://github.com/clarin-eric/B2Drop2LRS/blob/master/LICENSE AGPL v3
+ * @link     https://github.com/clarin-eric/B2Drop2LRS
  */
-class AddContentSecurityPolicyListener implements IEventListener {
+class AddContentSecurityPolicyListener implements IEventListener
+{
 
     /**
      * Handle event
@@ -41,7 +42,8 @@ class AddContentSecurityPolicyListener implements IEventListener {
      *
      * @return void
      */
-    public function handle(Event $event): void {
+    public function handle(Event $event): void
+    {
         if (!($event instanceof AddContentSecurityPolicyEvent)) {
             return;
         }

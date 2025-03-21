@@ -5,32 +5,32 @@ import { emit } from '@nextcloud/event-bus'
 const nextcloudVersionIsGreaterThanOr28 = parseInt(OC.config.version.split('.')[0]) >= 28
 const switchboardBase = 'https://switchboard.clarin.eu/'
 
-
 /**
  * Open an online resource  in the Switchboard
+ * @param resourceURI
  */
 function openInSwitchboard(resourceURI) {
 	const data = {
 		origin: 'nc-switchboard-bridge',
-		url: resourceURI
+		url: resourceURI,
 	}
-	var form = document.createElement("form")
-    form.target = "_blank";
-    form.method = "POST";
-    form.action = switchboardBase;
-    form.enctype = "multipart/form-data";
-    form.style.display = "none";
+	const form = document.createElement('form')
+	form.target = '_blank'
+	form.method = 'POST'
+	form.action = switchboardBase
+	form.enctype = 'multipart/form-data'
+	form.style.display = 'none'
 
-    for (var key in data) {
-        var input = document.createElement('input');
-        input.type = 'hidden';
-        input.name = key;
-        input.value = data[key];
-        form.appendChild(input);
-    }
-    document.body.appendChild(form);
-    form.submit();
-    document.body.removeChild(form);
+	for (const key in data) {
+		const input = document.createElement('input')
+		input.type = 'hidden'
+		input.name = key
+		input.value = data[key]
+		form.appendChild(input)
+	}
+	document.body.appendChild(form)
+	form.submit()
+	document.body.removeChild(form)
 }
 
 /**
@@ -54,7 +54,7 @@ function handleClick(file) {
 	xhr.setRequestHeader('requestoken', OC.requestToken)
 	xhr.onload = function() {
 		if (this.status >= 200 && this.status < 300) {
-			const jsonResponse = JSON.parse(this.response)			
+			const jsonResponse = JSON.parse(this.response)
 
 			// first, check whether we have a shared link
 			const data = jsonResponse.ocs.data
