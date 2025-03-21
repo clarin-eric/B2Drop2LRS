@@ -18,6 +18,7 @@ function openInSwitchboard(resourceURI) {
     form.target = "_blank";
     form.method = "POST";
     form.action = switchboardBase;
+    form.enctype = "multipart/form-data";
     form.style.display = "none";
 
     for (var key in data) {
