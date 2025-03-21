@@ -3,6 +3,34 @@ import { FileAction, FileType, File, Permission, registerFileAction } from '@nex
 import { emit } from '@nextcloud/event-bus'
 
 const nextcloudVersionIsGreaterThanOr28 = parseInt(OC.config.version.split('.')[0]) >= 28
+const switchboardBase = 'https://switchboard.clarin.eu/'
+
+
+/**
+ * Open an online resource  in the Switchboard
+ */
+function openInSwitchboard(resourceURI) {
+	const data = {
+		origin: 'nc-switchboard-bridge',
+		url: resourceURI
+	}
+	var form = document.createElement("form")
+    form.target = "_blank";
+    form.method = "POST";
+    form.action = switchboardBase;
+    form.style.display = "none";
+
+    for (var key in data) {
+        var input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = key;
+        input.value = data[key];
+        form.appendChild(input);
+    }
+    document.body.appendChild(form);
+    form.submit();
+    document.body.removeChild(form);
+}
 
 /**
  * Handle click on 'Switchboard' option in the file context menu.
@@ -25,10 +53,7 @@ function handleClick(file) {
 	xhr.setRequestHeader('requestoken', OC.requestToken)
 	xhr.onload = function() {
 		if (this.status >= 200 && this.status < 300) {
-			const jsonResponse = JSON.parse(this.response)
-
-			// to be configured to global switchboard server, see  "<?php p($_['switchboard_baseurl']) ?>");
-			const switchboardBase = '//switchboard.clarin.eu/#/b2drop/'
+			const jsonResponse = JSON.parse(this.response)			
 
 			// first, check whether we have a shared link
 			const data = jsonResponse.ocs.data
@@ -59,8 +84,7 @@ function handleClick(file) {
 					if (this.status >= 200 && this.status < 300) {
 						const response = JSON.parse(this.response)
 						const fileLink = response.ocs.data.url + '/download'
-					    const clrsCall = switchboardBase + encodeURIComponent(fileLink)
-						window.open(clrsCall, '_blank')
+					    openInSwitchboard(fileLink)
 						emit('files_sharing:share:created', file)
 					}
 				}
@@ -68,8 +92,7 @@ function handleClick(file) {
 
 			} else {
 				const fileLink = shareOfInterest.url + '/download'
-				const clrsCall = switchboardBase + encodeURIComponent(fileLink)
-				window.open(clrsCall, '_blank')
+				openInSwitchboard(fileLink)
 				window.focus()
 			}
 		} else {

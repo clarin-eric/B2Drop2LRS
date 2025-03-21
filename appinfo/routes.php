@@ -12,6 +12,4 @@
  * @link      https://github.com/clarin-eric/B2Drop2LRS
  */
 
-namespace OCA\SwitchboardBridge\AppInfo;
-
 return [];
