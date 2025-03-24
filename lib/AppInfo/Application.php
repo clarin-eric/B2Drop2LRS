@@ -65,10 +65,6 @@ class Application extends App implements IBootstrap
     public function register(IRegistrationContext $context): void
     {
         $context->registerEventListener(
-            LoadSidebar::class,
-            LoadSidebarListener::class
-        );
-        $context->registerEventListener(
             AddContentSecurityPolicyEvent::class,
             AddContentSecurityPolicyListener::class
         );
