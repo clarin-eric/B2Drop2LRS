@@ -115,9 +115,13 @@ async function getResourcePublicLink(resource) {
  */
 async function handleClick(resource) {
 	let resourceURI
+	let shareType = resource.data.attributes['share-types']['share-type']
 
-	// Use existing public share link if we have one
-	if (resource.data.attributes['share-types']['share-type'].some((value) => value === 3)) {
+	if (!Array.isArray(shareType)) {
+		shareType = [shareType]
+	}
+
+	if (shareType.some((value) => value === 3)) {
 		resourceURI = await getResourcePublicLink(resource) + '/download'
 	} else {
 		// There is currently no public share link -> generate direct dowload link
