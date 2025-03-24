@@ -1,13 +1,18 @@
 import { generateOcsUrl } from '@nextcloud/router'
-import { FileAction, FileType, File, Permission, registerFileAction } from '@nextcloud/files'
+import { FileAction, FileType, File, Permission, registerFileAction, davGetDefaultPropfind } from '@nextcloud/files'
+import { getClient, resultToNode } from '@nextcloud/files/dav'
 import { emit } from '@nextcloud/event-bus'
 
 const nextcloudVersionIsGreaterThanOr28 = parseInt(OC.config.version.split('.')[0]) >= 28
 const switchboardBase = 'https://switchboard.clarin.eu/'
 
+// Get the DAV client for the default remote
+const client = getClient()
+
 /**
- * Open an online resource  in the Switchboard
- * @param resourceURI
+ * Helper function to open a publicly shared resource in the Switchboard using a new browser tab
+ *
+ * @param {string} resourceURI the URI of the resource to open in the Switchboard
  */
 function openInSwitchboard(resourceURI) {
 	const data = {
@@ -34,73 +39,128 @@ function openInSwitchboard(resourceURI) {
 }
 
 /**
- * Handle click on 'Switchboard' option in the file context menu.
+ * Helper function to get a resource public share link (if existing)
  *
- * @param {File} file for which the Switchboard is being called
+ * @param {File} resource file to get the share link of
  */
-function handleClick(file) {
-	const filePath = file.path
-	// use REST API to get the share link for the resource in question
-	const xhr = new XMLHttpRequest()
+async function getResourcePublicLink(resource) {
 	const url = generateOcsUrl('apps/files_sharing/api/v1/', 4)
 		+ 'shares'
 		+ '?format=json'
-		+ '&path=' + filePath
+		+ '&path=' + resource.path
 		+ '&reshares=true'
 
-	xhr.open('GET', url, true)
-	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
-	xhr.setRequestHeader('OCS-APIREQUEST', true)
-	xhr.setRequestHeader('requestoken', OC.requestToken)
-	xhr.onload = function() {
-		if (this.status >= 200 && this.status < 300) {
-			const jsonResponse = JSON.parse(this.response)
+	try {
+		const response = await fetch(url, {
+			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded',
+				'OCS-APIREQUEST': 'true',
+				requestoken: OC.requestToken,
+			},
+		})
 
-			// first, check whether we have a shared link
-			const data = jsonResponse.ocs.data
-			// console.log('jsonResponse', jsonResponse, data)
-			let shareOfInterest
-			for (let i = 0; i < data.length; i++) {
-				if (data[i].share_type === 3) { // a shared link
-					shareOfInterest = data[i]
-					// console.log('share', shareOfInterest)
-				}
-			}
-			// call the switchboard when there is a shared link, otherwise create it
-			if (shareOfInterest === undefined) {
-				const url = '/ocs/v2.php/apps/files_sharing/api/v1/shares?format=json'
-				const xhr = new XMLHttpRequest()
-				const data = {
-					path: filePath,
-					shareType: 3, // public link
-					permissions: 27, // just replicating what pushing the add icon in the UI does...
-				}
-
-				xhr.open('POST', url, true)
-				xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8')
-				xhr.setRequestHeader('Accept', 'application/json, text/javascript')
-				xhr.setRequestHeader('OCS-APIREQUEST', true)
-				xhr.setRequestHeader('requestToken', OC.requestToken)
-				xhr.onload = function(data) {
-					if (this.status >= 200 && this.status < 300) {
-						const response = JSON.parse(this.response)
-						const fileLink = response.ocs.data.url + '/download'
-					    openInSwitchboard(fileLink)
-						emit('files_sharing:share:created', file)
-					}
-				}
-				xhr.send(JSON.stringify(data))
-
-			} else {
-				const fileLink = shareOfInterest.url + '/download'
-				openInSwitchboard(fileLink)
-				window.focus()
-			}
-		} else {
-			// console.log('XMLHttpRequest: Error in uploading document!', xhr.response, xhr.status)
+		if (!response.ok) {
+			throw new Error(`Response status: ${response.status}`)
 		}
+
+		const json = await response.json()
+		const data = json.ocs.data
+		let shareOfInterest
+		for (let i = 0; i < data.length; i++) {
+			if (data[i].share_type === 3) { // a shared link
+				shareOfInterest = data[i]
+			}
+		}
+		return shareOfInterest.url
+	} catch (error) {
+		console.error(error.message)
 	}
-	xhr.send()
+}
+
+/**
+ * Helper function to share a resource file pubicly and return its share link
+ *
+ * @param {File} resource file to share
+ */
+async function shareResourcePublicly(resource) {
+	const shareUrl = generateOcsUrl('/apps/files_sharing/api/v1/shares')
+	const data = {
+		path: resource.path,
+		shareType: 3, // public link
+		permissions: 1, // read
+	}
+
+	try {
+		const response = await fetch(shareUrl, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json; charset=utf-8',
+				Accept: 'application/json, text/javascript',
+				'OCS-APIREQUEST': true,
+				requestoken: OC.requestToken,
+			},
+			body: JSON.stringify(data),
+		})
+		if (!response.ok) {
+			throw new Error(`Response status: ${response.status}`)
+		}
+
+		client.stat(resource.data.attributes.filename, {
+			details: true,
+			data: davGetDefaultPropfind(),
+		}).then((result) => {
+			// Refresh files list
+			const node = resultToNode(result.data)
+			emit('files:node:updated', node)
+			// Refresh tab if open
+			const file = OCA.Files.Sidebar.state.file
+			if (file.length > 0) {
+				OCA.Files.Sidebar.close()
+				OCA.Files.Sidebar.open(file)
+			}
+		})
+
+		const json = await response.json()
+
+		return json.ocs.data.url
+	} catch (error) {
+		console.error(error.message)
+	}
+}
+
+/**
+ * Handle click on 'Switchboard' option in the file context menu.
+ *
+ * @param {File} resource file for which the Switchboard is being called
+ */
+async function handleClick(resource) {
+	let resourceURI
+
+	if (resource.data.attributes['share-types']['share-type'] !== 3) {
+
+		// There is currently no public share for the selected file
+		// -> ask the user if it is OK to create it
+		let createShare = false
+		await OC.dialogs.confirmHtml(
+			'<p>In order to open the resource in the CLARIN Language Resource Switchboard, the resource must first be sharred publicly via a link.</p><br/><p> Do you really want to publicly share this file?</p>',
+			'Create public share link for file?',
+			(decision) => {
+				if (!decision) {
+					return
+				}
+				createShare = decision
+			}, false)
+		if (createShare !== true) {
+			return
+		}
+
+		// We have OK from the user -> create public share link for resource
+		resourceURI = await shareResourcePublicly(resource)
+	} else {
+		resourceURI = await getResourcePublicLink(resource)
+	}
+
+	openInSwitchboard(resourceURI + '/download')
 }
 
 export const openSwitchboardAction = new FileAction({
