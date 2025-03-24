@@ -136,7 +136,7 @@ async function shareResourcePublicly(resource) {
 async function handleClick(resource) {
 	let resourceURI
 
-	if (resource.data.attributes['share-types']['share-type'] !== 3) {
+	if (resource.data.attributes['share-types']['share-type'].some((value) => value === 3)) {
 
 		// There is currently no public share for the selected file
 		// -> ask the user if it is OK to create it
