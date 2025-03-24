@@ -187,7 +187,7 @@ jobs:
 
       - name: Update repository
         id: pullrepo
-        run: git pull ${{ github.ref }}
+        run: git pull ${GITHUB_REF##*/}
 
       - name: Commit lint fixes and target Js
         uses: stefanzweifel/git-auto-commit-action@v5
