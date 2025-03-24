@@ -135,9 +135,15 @@ async function shareResourcePublicly(resource) {
  */
 async function handleClick(resource) {
 	let resourceURI
+	let shareType = resource.data.attributes['share-types']['share-type']
 
-	if (resource.data.attributes['share-types']['share-type'].some((value) => value === 3)) {
+	if (!Array.isArray(shareType)) {
+		shareType = [shareType]
+	}
 
+	if (shareType.some((value) => value === 3)) {
+		resourceURI = await getResourcePublicLink(resource)
+	} else {
 		// There is currently no public share for the selected file
 		// -> ask the user if it is OK to create it
 		let createShare = false
@@ -156,8 +162,6 @@ async function handleClick(resource) {
 
 		// We have OK from the user -> create public share link for resource
 		resourceURI = await shareResourcePublicly(resource)
-	} else {
-		resourceURI = await getResourcePublicLink(resource)
 	}
 
 	openInSwitchboard(resourceURI + '/download')
