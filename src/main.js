@@ -1,13 +1,8 @@
 import { generateOcsUrl } from '@nextcloud/router'
-import { FileAction, FileType, File, Permission, registerFileAction, davGetDefaultPropfind } from '@nextcloud/files'
-import { getClient, resultToNode } from '@nextcloud/files/dav'
-import { emit } from '@nextcloud/event-bus'
+import { FileAction, FileType, File, Permission, registerFileAction } from '@nextcloud/files'
 
 const nextcloudVersionIsGreaterThanOr28 = parseInt(OC.config.version.split('.')[0]) >= 28
 const switchboardBase = 'https://switchboard.clarin.eu/'
-
-// Get the DAV client for the default remote
-const client = getClient()
 
 /**
  * Helper function to open a publicly shared resource in the Switchboard using a new browser tab
@@ -36,6 +31,42 @@ function openInSwitchboard(resourceURI) {
 	document.body.appendChild(form)
 	form.submit()
 	document.body.removeChild(form)
+}
+
+/**
+ * Helper function to generate a temporary public share link
+ * see:
+ * https://docs.nextcloud.com/server/30/developer_manual/client_apis/OCS/ocs-api-overview.html#direct-download
+ *
+ * @param {File} resource file to get the link for
+ */
+async function generateDirectDownloadLink(resource) {
+	const genDrLinkUrl = generateOcsUrl('apps/dav/api/v1/direct')
+	const data = {
+		fileId: resource.data.id,
+	}
+
+	try {
+		const response = await fetch(genDrLinkUrl, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json; charset=utf-8',
+				Accept: 'application/json, text/javascript',
+				'OCS-APIREQUEST': true,
+				requestoken: OC.requestToken,
+			},
+			body: JSON.stringify(data),
+		})
+		if (!response.ok) {
+			throw new Error(`Response status: ${response.status}`)
+		}
+
+		const json = await response.json()
+
+		return json.ocs.data.url
+	} catch (error) {
+		console.error(error.message)
+	}
 }
 
 /**
@@ -78,57 +109,6 @@ async function getResourcePublicLink(resource) {
 }
 
 /**
- * Helper function to share a resource file pubicly and return its share link
- *
- * @param {File} resource file to share
- */
-async function shareResourcePublicly(resource) {
-	const shareUrl = generateOcsUrl('/apps/files_sharing/api/v1/shares')
-	const data = {
-		path: resource.path,
-		shareType: 3, // public link
-		permissions: 1, // read
-	}
-
-	try {
-		const response = await fetch(shareUrl, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json; charset=utf-8',
-				Accept: 'application/json, text/javascript',
-				'OCS-APIREQUEST': true,
-				requestoken: OC.requestToken,
-			},
-			body: JSON.stringify(data),
-		})
-		if (!response.ok) {
-			throw new Error(`Response status: ${response.status}`)
-		}
-
-		client.stat(resource.data.attributes.filename, {
-			details: true,
-			data: davGetDefaultPropfind(),
-		}).then((result) => {
-			// Refresh files list
-			const node = resultToNode(result.data)
-			emit('files:node:updated', node)
-			// Refresh tab if open
-			const file = OCA.Files.Sidebar.state.file
-			if (file.length > 0) {
-				OCA.Files.Sidebar.close()
-				OCA.Files.Sidebar.open(file)
-			}
-		})
-
-		const json = await response.json()
-
-		return json.ocs.data.url
-	} catch (error) {
-		console.error(error.message)
-	}
-}
-
-/**
  * Handle click on 'Switchboard' option in the file context menu.
  *
  * @param {File} resource file for which the Switchboard is being called
@@ -142,29 +122,13 @@ async function handleClick(resource) {
 	}
 
 	if (shareType.some((value) => value === 3)) {
-		resourceURI = await getResourcePublicLink(resource)
+		resourceURI = await getResourcePublicLink(resource) + '/download'
 	} else {
-		// There is currently no public share for the selected file
-		// -> ask the user if it is OK to create it
-		let createShare = false
-		await OC.dialogs.confirmHtml(
-			'<p>In order to open the resource in the CLARIN Language Resource Switchboard, the resource must first be sharred publicly via a link.</p><br/><p> Do you really want to publicly share this file?</p>',
-			'Create public share link for file?',
-			(decision) => {
-				if (!decision) {
-					return
-				}
-				createShare = decision
-			}, false)
-		if (createShare !== true) {
-			return
-		}
-
-		// We have OK from the user -> create public share link for resource
-		resourceURI = await shareResourcePublicly(resource)
+		// There is currently no public share link -> generate direct dowload link
+		resourceURI = await generateDirectDownloadLink(resource)
 	}
 
-	openInSwitchboard(resourceURI + '/download')
+	openInSwitchboard(resourceURI)
 }
 
 export const openSwitchboardAction = new FileAction({

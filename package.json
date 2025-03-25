@@ -1,7 +1,7 @@
 {
   "name": "switchboardbridge",
-  "description": "An app to connect B2Drop with the CLARIN Language Resource Switchboard",
-  "version": "1.2.0",
+  "description": "A simple Nextcloud app to enable calling the CLARIN Language Resource Switchboard directly from within the Nextcloud files app",
+  "version": "3.0.0",
   "author": "André Moreira <andre@clarin.eu>",
   "repository": {
     "url": "https://github.com/clarin-eric/B2Drop2LRSwitchboard",
