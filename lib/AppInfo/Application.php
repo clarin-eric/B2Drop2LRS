@@ -19,6 +19,8 @@ use OCP\Util;
 use OCP\AppFramework\Bootstrap\IBootContext;
 use OCP\AppFramework\Bootstrap\IBootstrap;
 use OCP\AppFramework\Bootstrap\IRegistrationContext;
+use OCP\Security\CSP\AddContentSecurityPolicyEvent;
+use OCA\SwitchboardBridge\Listener\AddContentSecurityPolicyListener;
 
 /**
  * Implement a NextCloud Application for our switchboardbridge
@@ -39,18 +41,6 @@ class Application extends App implements IBootstrap
     public function __construct(array $urlParams = array())
     {
         parent::__construct('switchboardbridge', $urlParams);
-        $container = $this->getContainer();
-        $server = $container->getServer();
-    }
-
-    /**
-     * Register Settings pages
-     *
-     * @return null
-     */
-    public function registerSettings()
-    {
-        return;
     }
 
     /**
@@ -61,7 +51,6 @@ class Application extends App implements IBootstrap
     public static function loadScripts()
     {
         Util::addScript('switchboardbridge', 'switchboardbridge-main');
-        Util::addStyle('switchboardbridge', 'settings');
         return;
     }
 
@@ -76,8 +65,8 @@ class Application extends App implements IBootstrap
     public function register(IRegistrationContext $context): void
     {
         $context->registerEventListener(
-            LoadSidebar::class,
-            LoadSidebarListener::class
+            AddContentSecurityPolicyEvent::class,
+            AddContentSecurityPolicyListener::class
         );
     }
 
@@ -91,7 +80,6 @@ class Application extends App implements IBootstrap
     public function boot(IBootContext $context): void
     {
         $this->loadScripts();
-        $this->registerSettings();
     }
 
 }
