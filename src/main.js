@@ -8,11 +8,13 @@ const switchboardBase = 'https://switchboard.clarin.eu/'
  * Helper function to open a publicly shared resource in the Switchboard using a new browser tab
  *
  * @param {string} resourceURI the URI of the resource to open in the Switchboard
+ * @param {string} mime the mimetpe of the resource to open in the Switchboard (optional)
  */
-function openInSwitchboard(resourceURI) {
+function openInSwitchboard(resourceURI, mime = '') {
 	const data = {
 		origin: 'nc-switchboard-bridge',
 		url: resourceURI,
+		mimetype: mime,
 	}
 	const form = document.createElement('form')
 	form.target = '_blank'
@@ -128,7 +130,7 @@ async function handleClick(resource) {
 		resourceURI = await generateDirectDownloadLink(resource)
 	}
 
-	openInSwitchboard(resourceURI)
+	openInSwitchboard(resourceURI, resource.data.mime)
 }
 
 export const openSwitchboardAction = new FileAction({
