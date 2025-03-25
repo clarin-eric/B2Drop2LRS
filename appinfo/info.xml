@@ -3,11 +3,13 @@
     <id>switchboardbridge</id>
     <name>CLARIN Switchboard bridge</name>
     <summary>The Switchboard bridge sends selected files to the CLARIN Language Resource Switchboard.</summary>
-    <description>
+    <description><![CDATA[
       This Nextcloud plugin allows users to directly send files from their personal cloud store to
-      the CLARIN Language Resource Switchboard. The user interface of Nextcloud is extended with
-      a icon to transfer files. Once transferred, a new browser tab opens with the Switchboard app.
-      From there, the file can be processed by a number of different language-related processing tools.
+      the CLARIN Language Resource Switchboard. 
+      The user interface of Nextcloud is extended with an icon to open the files in the Switchboard. Once clicked, a new browser tab opens with the Switchboard website pre-loaded with the desired file. From there, the file can be processed by a number of different language-related processing tools.
+      When selecting multiple files within Nextcloud, an option button is also made available in the files-batch
+      options section.
+      This option will open a new tab with the Switchboard for each selected resource.]]>
     </description>
     <version>3.0.0-dev</version>
     <licence>AGPL</licence>

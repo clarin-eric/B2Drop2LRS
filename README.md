@@ -13,7 +13,7 @@ for the desired resources.
 For each file, the '...' menu is extended to contain a menu item poiting to the CLARIN Language
 Resource Switchboard. Once activated, a new browser tab opens with the Switchboard pre-loaded with
 the desired resource. It fetches the file from the cloud, and processes it as usual.
-When selecting multiple files from the Nextcloud/B2DROP cloud space, and option button is also
+When selecting multiple files from the Nextcloud/B2DROP cloud space, an option button is also
 made available in the files-batch option section. This option will open a new tab with the Switchboard
 for each selected resource following the process decribed above for each file.
 
