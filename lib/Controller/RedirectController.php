@@ -80,9 +80,11 @@ class RedirectController extends Controller
             Http::STATUS_OK
         );
 
-        $response->getContentSecurityPolicy()->addAllowedFormActionDomain($sbUrl);
-        $response->getContentSecurityPolicy()->addAllowedFrameDomain($sbUrl);
-        $response->getContentSecurityPolicy()->addAllowedScriptDomain("'unsafe-inline'");
+        $csp = $response->getContentSecurityPolicy();
+
+        $csp->addAllowedFormActionDomain($sbUrl);
+        $csp->addAllowedFrameDomain($sbUrl);
+        $csp->addAllowedScriptDomain("'unsafe-inline'");
 
         return $response;
     }
