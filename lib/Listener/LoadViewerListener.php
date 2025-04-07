@@ -30,11 +30,11 @@ use OCP\Util;
  * This listener is triggered when the files app main screen is loaded and 
  * loads our app
  *
- * @category Nextcloud
- * @package  SwitchboardBridge
- * @author   André Moreira <andre@clarin.eu>
- * @license  https://github.com/clarin-eric/B2Drop2LRS/blob/master/LICENSE AGPL v3
- * @link     https://github.com/clarin-eric/B2Drop2LRS
+ * @category   Nextcloud
+ * @package    SwitchboardBridge
+ * @author     André Moreira <andre@clarin.eu>
+ * @license    https://github.com/clarin-eric/B2Drop2LRS/blob/master/LICENSE AGPL v3
+ * @link       https://github.com/clarin-eric/B2Drop2LRS
  * @implements IEventListener<Event|LoadViewer>
  */
 class LoadViewerListener implements IEventListener
@@ -46,9 +46,9 @@ class LoadViewerListener implements IEventListener
      * Counstructor
      *
      * @param InitialStateProvider $initialStateProvider InitialStateprovider.php
-     * @param IEventDispatcher $eventDispatcher the dispatcher
-     * @param ConfigService $configService the configuration service
-     * @param ?string $userId the user id
+     * @param IEventDispatcher     $eventDispatcher      the dispatcher
+     * @param ConfigService        $configService        the configuration service
+     * @param ?string              $userId               the user id
      */
     public function __construct(
         InitialStateProvider $initialStateProvider,
@@ -76,8 +76,10 @@ class LoadViewerListener implements IEventListener
         Util::addScript(Application::APP_NAME, 'switchboardbridge-main');
 
         if ($this->configService->getSwitchboardUsePopUpForUser($this->userId)) {
-            Util::addScript(Application::APP_NAME,
-                'switchboardbridge-switchboardpopuplocal');
+            Util::addScript(
+                Application::APP_NAME,
+                'switchboardbridge-switchboardpopuplocal'
+            );
         }
 
         $this->_eventDispatcher->dispatchTyped(new RenderReferenceEvent());

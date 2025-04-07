@@ -35,7 +35,7 @@ class ConfigService
      * Constructor
      *
      * @param IAppConfig $appConfig app configuration
-     * @param IConfig $config the configuration object
+     * @param IConfig    $config    the configuration object
      */
     public function __construct(
         private IAppConfig $appConfig,
@@ -56,8 +56,10 @@ class ConfigService
         if ($userId === null) {
             return Application::SB_DEFAULT_URL;
         }
-        return $this->config->getUserValue($userId, Application::APP_NAME, 'switchboard_url',
-            Application::SB_DEFAULT_URL);
+        return $this->config->getUserValue(
+            $userId, Application::APP_NAME, 'switchboard_url',
+            Application::SB_DEFAULT_URL
+        );
     }
 
     /**
@@ -72,7 +74,9 @@ class ConfigService
         if ($userId === null) {
             return false;
         }
-        return $this->config->getUserValue($userId, Application::APP_NAME,
-            'use_switchboard_popup', false);
+        return $this->config->getUserValue(
+            $userId, Application::APP_NAME,
+            'use_switchboard_popup', false
+        );
     }
 }

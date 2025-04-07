@@ -39,7 +39,7 @@ class AddContentSecurityPolicyListener implements IEventListener
      * Constructor
      *
      * @param ConfigService $configService the configuration service
-     * @param ?string $userId the user id
+     * @param ?string       $userId        the user id
      */
     public function __construct(
         private ConfigService $configService,
