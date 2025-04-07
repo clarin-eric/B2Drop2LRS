@@ -47,7 +47,7 @@ class LoadViewerListener implements IEventListener
      *
      * @param IEventDispatcher $eventDispatcher
      * @param InitialStateProvider $initialStateProvider
-     * @param ConfigService $configService the configuration service, see: ConfigService.php
+     * @param ConfigService $configService the configuration service
      * @param ?string $userId the user id
      */
     public function __construct(
@@ -76,7 +76,8 @@ class LoadViewerListener implements IEventListener
         Util::addScript(Application::APP_NAME, 'switchboardbridge-main');
 
         if ($this->configService->getSwitchboardUsePopUpForUser($this->userId)) {
-            Util::addScript(Application::APP_NAME, 'switchboardbridge-switchboardpopuplocal');
+            Util::addScript(Application::APP_NAME,
+                'switchboardbridge-switchboardpopuplocal');
         }
 
         $this->eventDispatcher->dispatchTyped(new RenderReferenceEvent());
