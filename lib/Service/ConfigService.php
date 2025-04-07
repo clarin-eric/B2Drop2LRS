@@ -48,6 +48,7 @@ class ConfigService
      * Return the Switchboard URL for the user
      *
      * @param ?string $userId the user id
+     *
      * @return string the URL of the Switchboard
      */
     public function getSwitchboardUrlForUser(?string $userId): string
@@ -63,6 +64,7 @@ class ConfigService
      * Return the wether to use the Switchboard pop up
      *
      * @param ?string $userId the user id
+     *
      * @return string wether to use the Switchboard pop-up
      */
     public function getSwitchboardUsePopUpForUser(?string $userId): string

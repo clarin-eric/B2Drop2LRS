@@ -34,7 +34,7 @@ class InitialStateProvider
      * Counstructor
      *
      * @param IInitialState $initialState the initial state
-     * @param ConfigService $configService the configuration service, see: ConfigService.php
+     * @param ConfigService $configService the configuration service
      * @param IManager $taskProcessingManager task manager
      * @param ?string $userId the user id
      */
