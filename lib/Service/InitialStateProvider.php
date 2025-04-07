@@ -31,7 +31,7 @@ class InitialStateProvider
 {
 
     /**
-     * Counstructor
+     * Constructor
      *
      * @param IInitialState $initialState the initial state
      * @param ConfigService $configService the configuration service

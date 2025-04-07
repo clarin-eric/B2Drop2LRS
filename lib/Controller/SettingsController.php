@@ -39,7 +39,7 @@ class SettingsController extends Controller
     ];
 
     /**
-     * Counstructor
+     * Constructor
      *
      * @param string $appName this app name
      * @param IRequest $request the request

@@ -32,7 +32,7 @@ class ConfigService
 {
 
     /**
-     * Counstructor
+     * Constructor
      *
      * @param IAppConfig $appConfig app configuration
      * @param IConfig $config the configuration object

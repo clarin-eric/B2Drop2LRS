@@ -36,7 +36,7 @@ use OCP\Security\CSP\AddContentSecurityPolicyEvent;
 class AddContentSecurityPolicyListener implements IEventListener
 {
     /**
-     * Counstructor
+     * Constructor
      *
      * @param ConfigService $configService the configuration service
      * @param ?string $userId the user id
