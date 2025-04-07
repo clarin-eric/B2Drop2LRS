@@ -39,7 +39,10 @@ class RedirectController extends Controller
     /**
      * Counstructor
      *
-     * @param array(string) $urlParams a list of url parameters
+     * @param string $appName this app name
+     * @param IRequest $request the request
+     * @param ConfigService $configService the configuration service, see: ConfigService.php
+     * @param ?string $userId the user id
      */
     public function __construct(
         string $appName,
