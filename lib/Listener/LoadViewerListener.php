@@ -80,7 +80,7 @@ class LoadViewerListener implements IEventListener
                 'switchboardbridge-switchboardpopuplocal');
         }
 
-        $this->eventDispatcher->dispatchTyped(new RenderReferenceEvent());
-        $this->initialStateProvider->provideState();
+        $this->_eventDispatcher->dispatchTyped(new RenderReferenceEvent());
+        $this->_initialStateProvider->provideState();
     }
 }
