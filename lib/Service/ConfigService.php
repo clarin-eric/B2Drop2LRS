@@ -34,7 +34,7 @@ class ConfigService
     /**
      * Counstructor
      *
-     * @param IAppConfig $appConfig
+     * @param IAppConfig $appConfig app configuration
      * @param IConfig $config the configuration object
      */
     public function __construct(
@@ -48,25 +48,29 @@ class ConfigService
      * Return the Switchboard URL for the user
      *
      * @param ?string $userId the user id
+     * @return string the URL of the Switchboard
      */
     public function getSwitchboardUrlForUser(?string $userId): string
     {
         if ($userId === null) {
             return Application::SB_DEFAULT_URL;
         }
-        return $this->config->getUserValue($userId, Application::APP_NAME, 'switchboard_url', Application::SB_DEFAULT_URL);
+        return $this->config->getUserValue($userId, Application::APP_NAME, 'switchboard_url',
+            Application::SB_DEFAULT_URL);
     }
 
     /**
      * Return the wether to use the Switchboard pop up
      *
      * @param ?string $userId the user id
+     * @return string wether to use the Switchboard pop-up
      */
     public function getSwitchboardUsePopUpForUser(?string $userId): string
     {
         if ($userId === null) {
             return false;
         }
-        return $this->config->getUserValue($userId, Application::APP_NAME, 'use_switchboard_popup', false);
+        return $this->config->getUserValue($userId, Application::APP_NAME,
+            'use_switchboard_popup', false);
     }
 }

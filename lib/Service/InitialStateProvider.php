@@ -33,7 +33,10 @@ class InitialStateProvider
     /**
      * Counstructor
      *
-     * @param array(string) $urlParams a list of url parameters
+     * @param IInitialState $initialState the initial state
+     * @param ConfigService $configService the configuration service, see: ConfigService.php
+     * @param IManager $taskProcessingManager task manager
+     * @param ?string $userId the user id
      */
     public function __construct(
         private IInitialState $initialState,
