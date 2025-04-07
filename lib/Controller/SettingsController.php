@@ -16,6 +16,11 @@ class SettingsController extends Controller
         'use_switchboard_popup'
     ];
 
+    /**
+     * Counstructor
+     *
+     * @param array(string) $urlParams a list of url parameters
+     */
     public function __construct(
         string $appName,
         IRequest $request,
@@ -26,9 +31,14 @@ class SettingsController extends Controller
     }
 
     /**
+     * Store configuration value sent from the client
+     * 
+     * @param string $key the configuration option
+     * @param string $value the value of the configuration option
      * @throws \OCP\PreConditionNotMetException
      *
-     * @psalm-return DataResponse<200|400, array{switchboard_url?: mixed, message?: 'Invalid config key'}, array<never, never>>
+     * @return DataResponse<key, value>
+     * @psalm-return DataResponse<200>
      */
     #[NoAdminRequired]
     public function updateConfig(string $key, int|string $value): DataResponse

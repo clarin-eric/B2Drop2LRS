@@ -35,6 +35,12 @@ use OCP\Security\CSP\AddContentSecurityPolicyEvent;
  */
 class AddContentSecurityPolicyListener implements IEventListener
 {
+    /**
+     * Counstructor
+     *
+     * @param ConfigService $configService the configuration service, see: ConfigService.php
+     * @param ?string $userId the user id
+     */
     public function __construct(
         private ConfigService $configService,
         private ?string $userId,

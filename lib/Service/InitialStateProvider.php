@@ -1,12 +1,40 @@
 <?php
 
+/**
+ * Nextcloud - SwitchboardBridge App
+ *
+ * PHP Version 8
+ *
+ * @category  Nextcloud
+ * @package   SwitchboardBridge
+ * @author    André Moreira <andre@clarin.eu>
+ * @copyright 2025 EUDAT/CLARIN
+ * @license   https://github.com/clarin-eric/B2Drop2LRS/blob/master/LICENSE AGPL v3
+ * @link      https://github.com/clarin-eric/B2Drop2LRS
+ */
+
 namespace OCA\SwitchboardBridge\Service;
 
 use OCP\AppFramework\Services\IInitialState;
 use OCP\TaskProcessing\IManager;
 
+/**
+ * Initial State Provider - provides the initial app settings values
+ *
+ * @category Nextcloud
+ * @package  SwitchboardBridge
+ * @author   André Moreira <andre@clarin.eu>
+ * @license  https://github.com/clarin-eric/B2Drop2LRS/blob/master/LICENSE AGPL v3
+ * @link     https://github.com/clarin-eric/B2Drop2LRS
+ */
 class InitialStateProvider
 {
+
+    /**
+     * Counstructor
+     *
+     * @param array(string) $urlParams a list of url parameters
+     */
     public function __construct(
         private IInitialState $initialState,
         private ConfigService $configService,
@@ -15,6 +43,11 @@ class InitialStateProvider
     ) {
     }
 
+    /**
+     * Handle event
+     *
+     * @return void
+     */
     public function provideState(): void
     {
         $this->initialState->provideInitialState(

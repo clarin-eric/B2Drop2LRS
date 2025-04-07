@@ -1,5 +1,18 @@
 <?php
 
+/**
+ * Nextcloud - SwitchboardBridge App
+ *
+ * PHP Version 8
+ *
+ * @category  Nextcloud
+ * @package   SwitchboardBridge
+ * @author    André Moreira <andre@clarin.eu>
+ * @copyright 2025 EUDAT/CLARIN
+ * @license   https://github.com/clarin-eric/B2Drop2LRS/blob/master/LICENSE AGPL v3
+ * @link      https://github.com/clarin-eric/B2Drop2LRS
+ */
+
 namespace OCA\SwitchboardBridge\Controller;
 
 use OCA\SwitchboardBridge\Service\ConfigService;
@@ -10,8 +23,24 @@ use OCP\AppFramework\Http\DataDisplayResponse;
 use OCP\IRequest;
 use OCP\Util;
 
+/**
+ * A contoller to redirect the client browser to the Switchboard. This is needed
+ * since the CSP might not be up to date on the client side. e.g. when the user
+ * sets up a custom URL for the Switchboard
+ *
+ * @category Nextcloud
+ * @package  SwitchboardBridge
+ * @author   André Moreira <andre@clarin.eu>
+ * @license  https://github.com/clarin-eric/B2Drop2LRS/blob/master/LICENSE AGPL v3
+ * @link     https://github.com/clarin-eric/B2Drop2LRS
+ */
 class RedirectController extends Controller
 {
+    /**
+     * Counstructor
+     *
+     * @param array(string) $urlParams a list of url parameters
+     */
     public function __construct(
         string $appName,
         IRequest $request,
@@ -22,6 +51,9 @@ class RedirectController extends Controller
     }
 
     /**
+     * Creates an auto submit form to redirect the users' browser to the Swithcboard
+     *
+     * @return void
      * @NoCSRFRequired
      * @psalm-return DataDisplayResponse<200>
      */
