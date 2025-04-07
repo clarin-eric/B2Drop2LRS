@@ -35,12 +35,12 @@ use OCP\Util;
  * @author   André Moreira <andre@clarin.eu>
  * @license  https://github.com/clarin-eric/B2Drop2LRS/blob/master/LICENSE AGPL v3
  * @link     https://github.com/clarin-eric/B2Drop2LRS
+ * @implements IEventListener<Event|LoadViewer>
  */
-/** @implements IEventListener<Event|LoadViewer> */
 class LoadViewerListener implements IEventListener
 {
-    private InitialStateProvider $initialStateProvider;
-    private IEventDispatcher $eventDispatcher;
+    private InitialStateProvider $_initialStateProvider;
+    private IEventDispatcher $_eventDispatcher;
 
     /**
      * Counstructor
@@ -56,8 +56,8 @@ class LoadViewerListener implements IEventListener
         private ConfigService $configService,
         private ?string $userId,
     ) {
-        $this->initialStateProvider = $initialStateProvider;
-        $this->eventDispatcher = $eventDispatcher;
+        $this->_initialStateProvider = $initialStateProvider;
+        $this->_eventDispatcher = $eventDispatcher;
     }
 
     /**
