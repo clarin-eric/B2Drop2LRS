@@ -1,6 +1,7 @@
 /* eslint no-useless-escape: 0 */
 const WebpackShellPluginNext = require('webpack-shell-plugin-next')
 const webpackConfig = require('@nextcloud/webpack-vue-config')
+const path = require('path')
 
 webpackConfig.plugins.push(
 	new WebpackShellPluginNext({
@@ -23,5 +24,10 @@ webpackConfig.plugins.push(
 	  },
 	}),
 )
+
+webpackConfig.entry = {
+	main: path.resolve(path.join('src', 'main.js')),
+	switchboardpopuplocal: path.resolve(path.join('src', 'lib/switchboardpopuplocal.js')),
+}
 
 module.exports = webpackConfig

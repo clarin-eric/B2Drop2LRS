@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Nextcloud - SwitchboardBridge App
  *
@@ -15,7 +16,8 @@
 namespace OCA\SwitchboardBridge\AppInfo;
 
 use OCP\AppFramework\App;
-use OCP\Util;
+use OCA\Viewer\Event\LoadViewer;
+use OCA\SwitchboardBridge\Listener\LoadViewerListener;
 use OCP\AppFramework\Bootstrap\IBootContext;
 use OCP\AppFramework\Bootstrap\IBootstrap;
 use OCP\AppFramework\Bootstrap\IRegistrationContext;
@@ -33,6 +35,9 @@ use OCA\SwitchboardBridge\Listener\AddContentSecurityPolicyListener;
  */
 class Application extends App implements IBootstrap
 {
+    public const APP_NAME = 'switchboardbridge';
+    public const SB_DEFAULT_URL = 'https://switchboard.clarin.eu';
+
     /**
      * Create a nextcloud application
      *
@@ -40,18 +45,7 @@ class Application extends App implements IBootstrap
      */
     public function __construct(array $urlParams = array())
     {
-        parent::__construct('switchboardbridge', $urlParams);
-    }
-
-    /**
-     * Load additional javascript files
-     *
-     * @return null
-     */
-    public static function loadScripts()
-    {
-        Util::addScript('switchboardbridge', 'switchboardbridge-main');
-        return;
+        parent::__construct(self::APP_NAME, $urlParams);
     }
 
     /**
@@ -64,6 +58,11 @@ class Application extends App implements IBootstrap
      **/
     public function register(IRegistrationContext $context): void
     {
+        $context->registerEventListener(
+            LoadViewer::class,
+            LoadViewerListener::class
+        );
+
         $context->registerEventListener(
             AddContentSecurityPolicyEvent::class,
             AddContentSecurityPolicyListener::class
@@ -79,7 +78,5 @@ class Application extends App implements IBootstrap
      */
     public function boot(IBootContext $context): void
     {
-        $this->loadScripts();
     }
-
 }

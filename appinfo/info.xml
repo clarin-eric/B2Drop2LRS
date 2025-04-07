@@ -1,24 +1,46 @@
 <?xml version="1.0"?>
-<info>
+<info xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
     <id>switchboardbridge</id>
     <name>CLARIN Switchboard bridge</name>
     <summary>The Switchboard bridge sends selected files to the CLARIN Language Resource Switchboard.</summary>
     <description><![CDATA[
-      This Nextcloud plugin allows users to directly send files from their personal cloud store to
-      the CLARIN Language Resource Switchboard. 
-      The user interface of Nextcloud is extended with an icon to open the files in the Switchboard. Once clicked, a new browser tab opens with the Switchboard website pre-loaded with the desired file. From there, the file can be processed by a number of different language-related processing tools.
-      When selecting multiple files within Nextcloud, an option button is also made available in the files-batch
-      options section.
-      This option will open a new tab with the Switchboard for each selected resource.]]>
+**Directly send files from your personal cloud store to the CLARIN Language Resource Switchboard.**
+
+This app extends the user interface of Nextcloud files app with an option to open the files in the Switchboard.
+Once clicked, a new browser tab opens with the Switchboard website pre-loaded for the selected file. From
+there, the user can discover a variety of language-related processing tools and call those tools with a single
+click.
+
+
+
+When selecting multiple files within Nextcloud, an option button is also made available in the files-batch
+options section. This option will open a new tab with the Switchboard for each selected resource.
+
+The files' settings section allows the configuration of a custom URL for the Switchboard. This is useful
+since there are multiple running instances, e.g. https://beta-switchboard.clarin.eu where the newest tools
+and feactures are available.
+
+For more information about the CLARIN Language Resource Switchboard visit:
+- **https://switchboard.clarin.eu** - main running instance of the Switchboard
+- **https://github.com/clarin-eric/switchboard** - main repository for the Switchboard code
+- **https://github.com/clarin-eric/switchboard-tool-registry** - metadata repository for all the tools available
+in the Switchboard
+- **https://github.com/clarin-eric/switchboard-doc** - various documentation, e.g. API specs, integration of tools,
+integration in 3rd party applications (as is the case for this Nextcloud app)
+      ]]>
     </description>
     <version>3.0.0-dev</version>
     <licence>AGPL</licence>
-    <author>CLARIN</author>
+    <author mail="switchboard@clarin.eu">CLARIN</author>
     <namespace>SwitchboardBridge</namespace>
     <category>integration</category>
     <website>https://switchboard.clarin.eu</website>    
     <bugs>https://github.com/clarin-eric/B2Drop2LRSwitchboard/issues</bugs>
-    <repository	type="git">https://github.com/clarin-eric/B2Drop2LRSwitchboard.git</repository>
+    <repository	type="git">https://github.com/clarin-eric/B2Drop2LRS.git</repository>
+    <screenshot>./img/screenshots/screenshot1.png</screenshot>
+    <screenshot>./img/screenshots/screenshot2.png</screenshot>
+    <screenshot>./img/screenshots/screenshot3.png</screenshot>
     <dependencies>
         <nextcloud min-version="21" max-version="31" />
     </dependencies>
