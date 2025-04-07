@@ -45,8 +45,8 @@ class LoadViewerListener implements IEventListener
     /**
      * Counstructor
      *
-     * @param IEventDispatcher $eventDispatcher
-     * @param InitialStateProvider $initialStateProvider
+     * @param InitialStateProvider $initialStateProvider InitialStateprovider.php
+     * @param IEventDispatcher $eventDispatcher the dispatcher
      * @param ConfigService $configService the configuration service
      * @param ?string $userId the user id
      */

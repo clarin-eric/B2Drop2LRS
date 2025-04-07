@@ -66,13 +66,17 @@ class RedirectController extends Controller
         $sbUrl = $this->configService->getSwitchboardUrlForUser($this->userId);
 
         $response = new DataDisplayResponse(
-'<body onload="document.forms.sbform.submit()">
-    <form name="sbform" action="' . $sbUrl . '" method="POST" enctype="multipart/form-data">
-        <input type="hidden" name="url" value="' . $this->request->getParam('url') .'">
-        <input type="hidden" name="origin" value="' . $this->request->getParam('origin') .'">
-        <input type="hidden" name="mimetype" value="' . $this->request->getParam('mimetype') .'">
-    </form>
-</body>',
+            '<body onload="document.forms.sbform.submit()">
+                <form name="sbform" action="' . $sbUrl . '" method="POST"
+                 enctype="multipart/form-data">
+                    <input type="hidden" name="url" value="'
+                     . $this->request->getParam('url') .'">
+                    <input type="hidden" name="origin" value="'
+                     . $this->request->getParam('origin') .'">
+                    <input type="hidden" name="mimetype" value="'
+                     . $this->request->getParam('mimetype') .'">
+                </form>
+            </body>',
             Http::STATUS_OK
         );
 
