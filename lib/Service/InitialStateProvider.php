@@ -33,10 +33,10 @@ class InitialStateProvider
     /**
      * Counstructor
      *
-     * @param IInitialState $initialState the initial state
-     * @param ConfigService $configService the configuration service
-     * @param IManager $taskProcessingManager task manager
-     * @param ?string $userId the user id
+     * @param IInitialState $initialState          the initial state
+     * @param ConfigService $configService         the configuration service
+     * @param IManager      $taskProcessingManager task manager
+     * @param ?string       $userId                the user id
      */
     public function __construct(
         private IInitialState $initialState,

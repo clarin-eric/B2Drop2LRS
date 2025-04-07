@@ -39,10 +39,10 @@ class RedirectController extends Controller
     /**
      * Counstructor
      *
-     * @param string $appName this app name
-     * @param IRequest $request the request
+     * @param string        $appName       this app name
+     * @param IRequest      $request       the request
      * @param ConfigService $configService the configuration service
-     * @param ?string $userId the user id
+     * @param ?string       $userId        the user id
      */
     public function __construct(
         string $appName,
@@ -56,9 +56,9 @@ class RedirectController extends Controller
     /**
      * Creates an auto submit form to redirect the users' browser to the Swithcboard
      *
-     * @return void
+     * @return         void
      * @NoCSRFRequired
-     * @psalm-return DataDisplayResponse<200>
+     * @psalm-return   DataDisplayResponse<200>
      */
     #[NoAdminRequired]
     public function redirectClient(): DataDisplayResponse
