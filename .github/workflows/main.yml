@@ -54,7 +54,7 @@ jobs:
         run: phpcbf --extensions=php --ignore=*/tests/*,*/node_modules/* .
 
       - name: PHP lint verify
-        run: phpcs --extensions=php --ignore=*/tests/*,*/node_modules/* . 
+        run: phpcs --extensions=php --ignore=*/tests/*,*/node_modules/* .
 
       - name: Archive workspace
         run: tar cf switchboardbridge-lint_node${{matrix.node-version}}_php${{ matrix.php-version }}.zip --exclude=./switchboardbridge-lint_node${{matrix.node-version}}_php${{ matrix.php-version }}.zip .
