@@ -12,7 +12,7 @@ webpackConfig.plugins.push(
 				if [ -n "${VERSION}" ];\
 				then\
 					echo "Github ref exists -> updating App version number to: "${VERSION}"";\
-					NEW_INFO=$(sed -E "s/<version>[0-9]{1,3}\.[0-9]{1,3}(\.[0-9]{1,3})?(-(alpha|beta|RC|dev)[0-9]+)?<\\/version>/<version>${VERSION}<\\/version>/g" appinfo/info.xml);\
+					NEW_INFO=$(sed -E "s/<version>[0-9]{1,3}\.[0-9]{1,3}(\.[0-9]{1,3})?(-(alpha|beta|RC|dev)[0-9]*)?<\\/version>/<version>${VERSION}<\\/version>/g" appinfo/info.xml);\
 					echo "$NEW_INFO" > appinfo/info.xml;\
 					cat appinfo/info.xml;\
 				else\
