@@ -91,7 +91,7 @@ function usePopUpToggled(event) {
 
 	// When enabling the Switchboard pop-up for the first time on a session, we still do not have the popUp JS code
 	// so we reload the page immediately for the browser to fetch it
-	if (useSwitchboardPopUp && (typeof window.setSwitchboardURL === 'undefined' || isSwitchboardUrlDirty) {
+	if (useSwitchboardPopUp && (typeof window.setSwitchboardURL === 'undefined' || isSwitchboardUrlDirty)) {
 		alert('When enabling the Switchboard pop-up for the first time on a session, it is necessary to reload the page for the pop-up to be available')
 		window.location.reload()
 	}
