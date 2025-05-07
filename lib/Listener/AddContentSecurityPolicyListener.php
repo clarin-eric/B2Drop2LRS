@@ -15,6 +15,7 @@
 
 namespace OCA\SwitchboardBridge\Listener;
 
+use OCA\SwitchboardBridge\Service\ConfigService;
 use OCP\AppFramework\Http\ContentSecurityPolicy;
 use OCP\EventDispatcher\Event;
 use OCP\EventDispatcher\IEventListener;
@@ -34,10 +35,21 @@ use OCP\Security\CSP\AddContentSecurityPolicyEvent;
  */
 class AddContentSecurityPolicyListener implements IEventListener
 {
+    /**
+     * Constructor
+     *
+     * @param ConfigService $configService the configuration service
+     * @param ?string       $userId        the user id
+     */
+    public function __construct(
+        private ConfigService $configService,
+        private ?string $userId,
+    ) {
+    }
 
     /**
      * Handle event
-     * 
+     *
      * @param Event $event The triggering event
      *
      * @return void
@@ -47,9 +59,12 @@ class AddContentSecurityPolicyListener implements IEventListener
         if (!($event instanceof AddContentSecurityPolicyEvent)) {
             return;
         }
+
+        $baseUrl = $this->configService->getSwitchboardUrlForUser($this->userId);
         $csp = new ContentSecurityPolicy();
-        $baseUrl = 'https://switchboard.clarin.eu/';
         $csp->addAllowedFormActionDomain($baseUrl);
+        $csp->addAllowedFrameDomain($baseUrl);
+
         $event->addPolicy($csp);
     }
 }

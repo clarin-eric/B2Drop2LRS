@@ -1,7 +1,7 @@
 {
   "name": "switchboardbridge",
-  "description": "An app to connect B2Drop with the CLARIN Language Resource Switchboard",
-  "version": "1.2.0",
+  "description": "A simple Nextcloud app to enable calling the CLARIN Language Resource Switchboard directly from within the Nextcloud files app",
+  "version": "3.0.0",
   "author": "André Moreira <andre@clarin.eu>",
   "repository": {
     "url": "https://github.com/clarin-eric/B2Drop2LRSwitchboard",
@@ -14,13 +14,18 @@
     "build": "NODE_ENV=production webpack --progress --config webpack.js",
     "dev": "NODE_ENV=development webpack --progress --config webpack.js",
     "watch": "NODE_ENV=development webpack --progress --watch --config webpack.js",
-    "lint": "eslint --ext .js,.vue --ignore-pattern js/ .",
-    "lint:fix": "eslint --ext .js,.vue --ignore-pattern js/ . --fix"
+    "lint": "eslint --ext .js,.vue --ignore-pattern js/ --ignore-pattern src/lib .",
+    "lint:fix": "eslint --ext .js,.vue --ignore-pattern js/ --ignore-pattern src/lib . --fix"
   },
   "dependencies": {
+    "@nextcloud/axios": "^2.5.1",
     "@nextcloud/event-bus": "^3.3.2",
     "@nextcloud/files": "^3.10.2",
-    "@nextcloud/router": "^3.0.1"
+    "@nextcloud/initial-state": "^2.2.0",
+    "@nextcloud/router": "^3.0.1",
+    "@nextcloud/vue": "^8.24.0",
+    "vue": "^2.7.16",
+    "vue-material-design-icons": "^5.3.1"
   },
   "browserslist": [
     "extends @nextcloud/browserslist-config"
