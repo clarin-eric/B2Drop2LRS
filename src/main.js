@@ -206,7 +206,7 @@ export const openSwitchboardAction = new FileAction({
 		} catch (e) {
 			// Do nothing if the user cancels
 		}
-		return true
+		return null
 	},
 	async execBatch(nodes, view, dir) {
 		try {
@@ -216,7 +216,7 @@ export const openSwitchboardAction = new FileAction({
 		} catch (e) {
 			// Do nothing if the user cancels
 		}
-		return Promise.all(nodes.map(node => true))
+		return Promise.all(nodes.map(node => null))
 	},
 	inline: () => false,
 	order: 22,
