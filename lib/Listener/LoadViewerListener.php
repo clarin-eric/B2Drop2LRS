@@ -39,8 +39,8 @@ use OCP\Util;
  */
 class LoadViewerListener implements IEventListener
 {
-    private InitialStateProvider $_initialStateProvider;
-    private IEventDispatcher $_eventDispatcher;
+    private InitialStateProvider $initialStateProvider;
+    private IEventDispatcher $eventDispatcher;
 
     /**
      * Counstructor
@@ -56,8 +56,8 @@ class LoadViewerListener implements IEventListener
         private ConfigService $configService,
         private ?string $userId,
     ) {
-        $this->_initialStateProvider = $initialStateProvider;
-        $this->_eventDispatcher = $eventDispatcher;
+        $this->initialStateProvider = $initialStateProvider;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     /**
@@ -82,7 +82,7 @@ class LoadViewerListener implements IEventListener
             );
         }
 
-        $this->_eventDispatcher->dispatchTyped(new RenderReferenceEvent());
-        $this->_initialStateProvider->provideState();
+        $this->eventDispatcher->dispatchTyped(new RenderReferenceEvent());
+        $this->initialStateProvider->provideState();
     }
 }
