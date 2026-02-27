@@ -1,5 +1,5 @@
 import { generateOcsUrl } from '@nextcloud/router'
-import { Permission, registerFileAction } from '@nextcloud/files'
+import { registerFileAction } from '@nextcloud/files'
 import { loadState } from '@nextcloud/initial-state'
 import { subscribe } from '@nextcloud/event-bus'
 import { createApp, h } from 'vue'
@@ -218,9 +218,7 @@ export const openSwitchboardAction = {
 }
 
 if (nextcloudVersionIsGreaterThanOr28) {
-	subscribe('files:initialized', () => {
-		registerFileAction(openSwitchboardAction)
-	})
+	registerFileAction(openSwitchboardAction)
 } else {
 	OCA.SwitchboardBridge = OCA.SwitchboardBridge || {}
 	OCA.SwitchboardBridge.Util = {
