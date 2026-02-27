@@ -29,7 +29,6 @@ use OCP\TaskProcessing\IManager;
  */
 class InitialStateProvider
 {
-
     /**
      * Constructor
      *

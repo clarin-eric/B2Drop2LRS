@@ -57,10 +57,10 @@ class SettingsController extends Controller
 
     /**
      * Store configuration value sent from the client
-     * 
+     *
      * @param string $key   the configuration option
      * @param string $value the value of the configuration option
-     * 
+     *
      * @throws \OCP\PreConditionNotMetException
      *
      * @return       DataResponse<key, value>
@@ -76,7 +76,9 @@ class SettingsController extends Controller
             );
         }
         $this->config->setUserValue(
-            $this->userId, $this->appName, $key,
+            $this->userId,
+            $this->appName,
+            $key,
             (string)$value
         );
         return new DataResponse(
