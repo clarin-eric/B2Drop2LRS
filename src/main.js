@@ -1,3 +1,5 @@
+window.__SWITCHBOARDBRIDGE_LOADED__ = true
+
 import { generateOcsUrl } from '@nextcloud/router'
 import { registerFileAction } from '@nextcloud/files'
 import { loadState } from '@nextcloud/initial-state'
