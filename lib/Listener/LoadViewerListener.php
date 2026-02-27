@@ -27,7 +27,7 @@ use OCP\Util;
 
 /**
  * Implementation for LoadViewerListener
- * This listener is triggered when the files app main screen is loaded and 
+ * This listener is triggered when the files app main screen is loaded and
  * loads our app
  *
  * @category   Nextcloud

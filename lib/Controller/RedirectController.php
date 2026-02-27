@@ -70,11 +70,11 @@ class RedirectController extends Controller
                 <form name="sbform" action="' . $sbUrl . '" method="POST"
                  enctype="multipart/form-data">
                     <input type="hidden" name="url" value="'
-                     . $this->request->getParam('url') .'">
+                     . $this->request->getParam('url') . '">
                     <input type="hidden" name="origin" value="'
-                     . $this->request->getParam('origin') .'">
+                     . $this->request->getParam('origin') . '">
                     <input type="hidden" name="mimetype" value="'
-                     . $this->request->getParam('mimetype') .'">
+                     . $this->request->getParam('mimetype') . '">
                 </form>
             </body>',
             Http::STATUS_OK
