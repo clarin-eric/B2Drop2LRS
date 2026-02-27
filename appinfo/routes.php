@@ -19,14 +19,14 @@ use OCA\SwitchboardBridge\Controller;
 
 return [
     'routes' => [
-        /** 
+        /**
          * Manage app user settings
          *
-         * @see Controller\SettingsController::updateConfig() 
+         * @see Controller\SettingsController::updateConfig()
 */
         ['name' => 'Settings#updateConfig', 'url' => '/settings', 'verb' => 'POST'],
         /**
-         * Redirect the user to the switchboard to avoid CSP issues 
+         * Redirect the user to the switchboard to avoid CSP issues
          *
          * @see Controller\RedirectController::redirectClient()
 */
