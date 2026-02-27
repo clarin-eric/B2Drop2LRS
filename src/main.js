@@ -194,7 +194,7 @@ export const openSwitchboardAction = {
 	displayName: (nodes) => 'Switchboard',
 	enabled: (nodes) => {
 		if (nodes.length >= 1) {
-			return !nodes.some(node => node.type === "folder") && nodes.every(node => node.permissions & Permission.READ)
+			return !nodes.some(node => node.type === 'folder') && nodes.every(node => node.permissions & Permission.READ)
 		}
 		return false
 	},
