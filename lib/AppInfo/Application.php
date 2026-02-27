@@ -73,7 +73,7 @@ class Application extends App implements IBootstrap
         $context->registerEventListener(
             LoadAdditionalScriptsEvent::class,
             function () {
-                Util::addScript('switchboardbridge', 'main');
+                Util::addScript('switchboardbridge', 'switchboardbridge-main');
             }
         );
     }
