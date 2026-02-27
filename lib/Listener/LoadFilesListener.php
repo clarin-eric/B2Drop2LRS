@@ -18,15 +18,13 @@ namespace OCA\SwitchboardBridge\Listener;
 use OCA\SwitchboardBridge\AppInfo\Application;
 use OCA\SwitchboardBridge\Service\InitialStateProvider;
 use OCA\SwitchboardBridge\Service\ConfigService;
-use OCA\Viewer\Event\LoadViewer;
-use OCP\Collaboration\Reference\RenderReferenceEvent;
+use OCA\Files\Event\LoadAdditionalScriptsEvent;
 use OCP\EventDispatcher\Event;
-use OCP\EventDispatcher\IEventDispatcher;
 use OCP\EventDispatcher\IEventListener;
 use OCP\Util;
 
 /**
- * Implementation for LoadViewerListener
+ * Implementation for LoadFilesListener
  * This listener is triggered when the files app main screen is loaded and
  * loads our app
  *
@@ -37,22 +35,19 @@ use OCP\Util;
  * @link       https://github.com/clarin-eric/B2Drop2LRS
  * @implements IEventListener<Event|LoadViewer>
  */
-class LoadViewerListener implements IEventListener
+class LoadFilesListener implements IEventListener
 {
     private InitialStateProvider $initialStateProvider;
-    private IEventDispatcher $eventDispatcher;
 
     /**
      * Counstructor
      *
      * @param InitialStateProvider $initialStateProvider InitialStateprovider.php
-     * @param IEventDispatcher     $eventDispatcher      the dispatcher
      * @param ConfigService        $configService        the configuration service
      * @param ?string              $userId               the user id
      */
     public function __construct(
         InitialStateProvider $initialStateProvider,
-        IEventDispatcher $eventDispatcher,
         private ConfigService $configService,
         private ?string $userId,
     ) {
@@ -69,7 +64,7 @@ class LoadViewerListener implements IEventListener
      */
     public function handle(Event $event): void
     {
-        if (!$event instanceof LoadViewer) {
+        if (!$event instanceof LoadAdditionalScriptsEvent) {
             return;
         }
 
@@ -82,7 +77,6 @@ class LoadViewerListener implements IEventListener
             );
         }
 
-        $this->eventDispatcher->dispatchTyped(new RenderReferenceEvent());
         $this->initialStateProvider->provideState();
     }
 }

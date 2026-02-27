@@ -16,8 +16,7 @@
 namespace OCA\SwitchboardBridge\AppInfo;
 
 use OCP\AppFramework\App;
-use OCA\Viewer\Event\LoadViewer;
-use OCA\SwitchboardBridge\Listener\LoadViewerListener;
+use OCA\SwitchboardBridge\Listener\LoadFilesListener;
 use OCP\AppFramework\Bootstrap\IBootContext;
 use OCP\AppFramework\Bootstrap\IBootstrap;
 use OCP\AppFramework\Bootstrap\IRegistrationContext;
@@ -61,20 +60,13 @@ class Application extends App implements IBootstrap
     public function register(IRegistrationContext $context): void
     {
         $context->registerEventListener(
-            LoadViewer::class,
-            LoadViewerListener::class
+            LoadAdditionalScriptsEvent::class,
+            LoadFilesListener::class
         );
 
         $context->registerEventListener(
             AddContentSecurityPolicyEvent::class,
             AddContentSecurityPolicyListener::class
-        );
-
-        $context->registerEventListener(
-            LoadAdditionalScriptsEvent::class,
-            function () {
-                Util::addScript('switchboardbridge', 'switchboardbridge-main');
-            }
         );
     }
 
