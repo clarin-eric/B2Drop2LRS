@@ -217,7 +217,7 @@ export const openSwitchboardAction = new FileAction({
 		} catch (e) {
 			// Do nothing if the user cancels
 		}
-		return Promise.all(nodes.map(node => null))
+		return nodes.map(() => null)
 	},
 	inline: () => false,
 	order: 22,
