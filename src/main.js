@@ -1,11 +1,11 @@
-window.__SWITCHBOARDBRIDGE_LOADED__ = true
-
 import { generateOcsUrl } from '@nextcloud/router'
 import { registerFileAction } from '@nextcloud/files'
 import { loadState } from '@nextcloud/initial-state'
 import { subscribe } from '@nextcloud/event-bus'
 import { createApp, h } from 'vue'
 import axios from '@nextcloud/axios'
+
+window.__SWITCHBOARDBRIDGE_LOADED__ = true
 /* global setSwitchboardURL, showSwitchboardPopup */
 
 const nextcloudVersionIsGreaterThanOr28 = parseInt(OC.config.version.split('.')[0]) >= 28
