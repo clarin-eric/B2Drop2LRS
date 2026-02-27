@@ -218,7 +218,9 @@ export const openSwitchboardAction = {
 }
 
 if (nextcloudVersionIsGreaterThanOr28) {
-	registerFileAction(openSwitchboardAction)
+	subscribe('files:initialized', () => {
+		registerFileAction(openSwitchboardAction)
+	})
 } else {
 	OCA.SwitchboardBridge = OCA.SwitchboardBridge || {}
 	OCA.SwitchboardBridge.Util = {
