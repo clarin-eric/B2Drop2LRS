@@ -23,6 +23,8 @@ use OCP\AppFramework\Bootstrap\IBootstrap;
 use OCP\AppFramework\Bootstrap\IRegistrationContext;
 use OCP\Security\CSP\AddContentSecurityPolicyEvent;
 use OCA\SwitchboardBridge\Listener\AddContentSecurityPolicyListener;
+use OCA\Files\Event\LoadAdditionalScriptsEvent;
+use OCP\Util;
 
 /**
  * Implement a NextCloud Application for our switchboardbridge
@@ -66,6 +68,13 @@ class Application extends App implements IBootstrap
         $context->registerEventListener(
             AddContentSecurityPolicyEvent::class,
             AddContentSecurityPolicyListener::class
+        );
+
+        $context->registerEventListener(
+            LoadAdditionalScriptsEvent::class,
+            function () {
+                Util::addScript('switchboardbridge', 'main');
+            }
         );
     }
 
