@@ -281,11 +281,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 		OCA.Files.Settings.register(
 			new OCA.Files.Settings.Setting('switchboardbridge', {
 				el: () => el,
-			})
+			}),
 		)
 	}
 })
-
 
 OCA.SwitchboardBridge = {
 	SwitchboardUrl: switchboardUrl,
