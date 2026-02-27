@@ -27,7 +27,7 @@ use OCP\Util;
 
 /**
  * Implementation for LoadViewerListener
- * This listener is triggered when the files app main screen is loaded and
+ * This listener is triggered when the files app main screen is loaded and 
  * loads our app
  *
  * @category   Nextcloud
@@ -39,8 +39,8 @@ use OCP\Util;
  */
 class LoadViewerListener implements IEventListener
 {
-    private InitialStateProvider $initialStateProvider;
-    private IEventDispatcher $eventDispatcher;
+    private InitialStateProvider $_initialStateProvider;
+    private IEventDispatcher $_eventDispatcher;
 
     /**
      * Counstructor
@@ -56,8 +56,8 @@ class LoadViewerListener implements IEventListener
         private ConfigService $configService,
         private ?string $userId,
     ) {
-        $this->initialStateProvider = $initialStateProvider;
-        $this->eventDispatcher = $eventDispatcher;
+        $this->_initialStateProvider = $initialStateProvider;
+        $this->_eventDispatcher = $eventDispatcher;
     }
 
     /**
@@ -82,7 +82,7 @@ class LoadViewerListener implements IEventListener
             );
         }
 
-        $this->eventDispatcher->dispatchTyped(new RenderReferenceEvent());
-        $this->initialStateProvider->provideState();
+        $this->_eventDispatcher->dispatchTyped(new RenderReferenceEvent());
+        $this->_initialStateProvider->provideState();
     }
 }

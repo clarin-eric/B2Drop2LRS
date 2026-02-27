@@ -30,6 +30,7 @@ use OCP\IConfig;
  */
 class ConfigService
 {
+
     /**
      * Constructor
      *
@@ -40,6 +41,7 @@ class ConfigService
         private IAppConfig $appConfig,
         private IConfig $config,
     ) {
+
     }
 
     /**
@@ -55,9 +57,7 @@ class ConfigService
             return Application::SB_DEFAULT_URL;
         }
         return $this->config->getUserValue(
-            $userId,
-            Application::APP_NAME,
-            'switchboard_url',
+            $userId, Application::APP_NAME, 'switchboard_url',
             Application::SB_DEFAULT_URL
         );
     }
@@ -75,10 +75,8 @@ class ConfigService
             return false;
         }
         return $this->config->getUserValue(
-            $userId,
-            Application::APP_NAME,
-            'use_switchboard_popup',
-            false
+            $userId, Application::APP_NAME,
+            'use_switchboard_popup', false
         );
     }
 }

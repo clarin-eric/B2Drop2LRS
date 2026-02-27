@@ -1,5 +1,5 @@
 import { generateOcsUrl } from '@nextcloud/router'
-import { FileType, File, Permission, registerFileAction } from '@nextcloud/files'
+import { FileAction, FileType, File, Permission, registerFileAction } from '@nextcloud/files'
 import { loadState } from '@nextcloud/initial-state'
 import { subscribe } from '@nextcloud/event-bus'
 import axios from '@nextcloud/axios'
@@ -188,7 +188,7 @@ async function handleClick(resource, batch = false) {
 
 }
 
-export const openSwitchboardAction = {
+export const openSwitchboardAction = new FileAction({
 	id: 'switchboardbridge-action',
 	title: (nodes) => 'Switchboard',
 	displayName: (nodes) => 'Switchboard',
@@ -216,11 +216,11 @@ export const openSwitchboardAction = {
 		} catch (e) {
 			// Do nothing if the user cancels
 		}
-		return nodes.map(() => null)
+		return Promise.all(nodes.map(node => null))
 	},
 	inline: () => false,
 	order: 22,
-}
+})
 
 if (nextcloudVersionIsGreaterThanOr28) {
 	registerFileAction(openSwitchboardAction)
