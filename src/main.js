@@ -223,7 +223,10 @@ export const openSwitchboardAction = {
 }
 
 if (nextcloudVersionIsGreaterThanOr28) {
-	subscribe('files:initialized', () => { console.log('Registering Switchboard action in NC32/33') registerFileAction(openSwitchboardAction) });
+	subscribe('files:initialized', () => {
+		console.log('Registering Switchboard action in NC32/33')
+		registerFileAction(openSwitchboardAction)
+	})
 } else {
 	OCA.SwitchboardBridge = OCA.SwitchboardBridge || {}
 	OCA.SwitchboardBridge.Util = {
