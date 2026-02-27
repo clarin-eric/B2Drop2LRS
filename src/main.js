@@ -258,22 +258,22 @@ if (nextcloudVersionIsGreaterThanOr28) {
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
-    if (switchboardUrl && OCA && OCA?.Files?.Settings) {
-        const { default: FilesSettings } = await import('./views/FilesSettings.vue')
+	if (switchboardUrl && OCA && OCA?.Files?.Settings) {
+		const { default: FilesSettings } = await import('./views/FilesSettings.vue')
 
-        const app = createApp({
-            render: () => h(FilesSettings),
-        })
+		const app = createApp({
+			render: () => h(FilesSettings),
+		})
 
-        const el = document.createElement('div')
-        app.mount(el)
+		const el = document.createElement('div')
+		app.mount(el)
 
-        OCA.Files.Settings.register(
-            new OCA.Files.Settings.Setting('switchboardbridge', {
-                el: () => el,
-            }),
-        )
-    }
+		OCA.Files.Settings.register(
+			new OCA.Files.Settings.Setting('switchboardbridge', {
+				el: () => el,
+			}),
+		)
+	}
 })
 
 OCA.SwitchboardBridge = {
