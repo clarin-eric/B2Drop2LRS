@@ -4,8 +4,11 @@ module.exports = {
 	],
 	settings: {
 		'import/resolver': {
-			webpack: {
-				config: 'webpack.js'
+			alias: {
+				map: [
+					['@nextcloud/files-v4', './node_modules/@nextcloud/files-v4']
+				],
+				extensions: ['.js', '.jsx', '.ts', '.tsx']
 			}
 		}
 	}
