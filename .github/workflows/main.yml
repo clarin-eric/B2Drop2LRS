@@ -121,7 +121,6 @@ jobs:
           - nextcloud-version-branch: stable30
             node-version: 20.x
             php-version: 8.1
-        include:
           - nextcloud-version-branch: stable31
             node-version: 20.x
             php-version: 8.4
