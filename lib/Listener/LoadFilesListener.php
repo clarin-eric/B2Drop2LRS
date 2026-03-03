@@ -52,7 +52,6 @@ class LoadFilesListener implements IEventListener
         private ?string $userId,
     ) {
         $this->initialStateProvider = $initialStateProvider;
-        $this->eventDispatcher = $eventDispatcher;
     }
 
     /**
