@@ -39,7 +39,7 @@
     "@nextcloud/eslint-config": "^8.4.2",
     "@nextcloud/files-v4": "npm:@nextcloud/files@^4.0.0",
     "@nextcloud/webpack-vue-config": "^7.0.2",
-    "eslint-import-resolver-alias": "^1.1.2",
+    "eslint-import-resolver-custom-alias": "^1.3.2",
     "webpack-shell-plugin-next": "^2.3.3"
   },
   "overrides": {
