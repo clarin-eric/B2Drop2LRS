@@ -34,7 +34,7 @@ webpackConfig.entry = {
 webpackConfig.resolve = webpackConfig.resolve || {}
 webpackConfig.resolve.alias = {
     ...(webpackConfig.resolve.alias || {}),
-    '@nextcloud/files-v5': path.resolve(__dirname, 'node_modules/@nextcloud/files-v4'),
+    '@nextcloud/files-v4': path.resolve(__dirname, 'node_modules/@nextcloud/files-v4'),
 }
 
 module.exports = webpackConfig
