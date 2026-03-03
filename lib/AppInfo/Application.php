@@ -16,13 +16,14 @@
 namespace OCA\SwitchboardBridge\AppInfo;
 
 use OCP\AppFramework\App;
-use OCA\Viewer\Event\LoadViewer;
-use OCA\SwitchboardBridge\Listener\LoadViewerListener;
+use OCA\SwitchboardBridge\Listener\LoadFilesListener;
 use OCP\AppFramework\Bootstrap\IBootContext;
 use OCP\AppFramework\Bootstrap\IBootstrap;
 use OCP\AppFramework\Bootstrap\IRegistrationContext;
 use OCP\Security\CSP\AddContentSecurityPolicyEvent;
 use OCA\SwitchboardBridge\Listener\AddContentSecurityPolicyListener;
+use OCA\Files\Event\LoadAdditionalScriptsEvent;
+use OCP\Util;
 
 /**
  * Implement a NextCloud Application for our switchboardbridge
@@ -59,8 +60,8 @@ class Application extends App implements IBootstrap
     public function register(IRegistrationContext $context): void
     {
         $context->registerEventListener(
-            LoadViewer::class,
-            LoadViewerListener::class
+            LoadAdditionalScriptsEvent::class,
+            LoadFilesListener::class
         );
 
         $context->registerEventListener(

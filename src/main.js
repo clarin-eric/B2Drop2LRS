@@ -1,7 +1,8 @@
 import { generateOcsUrl } from '@nextcloud/router'
-import { FileType, File, Permission, registerFileAction } from '@nextcloud/files'
+import { FileAction, FileType, File, Permission, registerFileAction } from '@nextcloud/files'
 import { loadState } from '@nextcloud/initial-state'
 import { subscribe } from '@nextcloud/event-bus'
+import { createApp, h } from 'vue'
 import axios from '@nextcloud/axios'
 /* global setSwitchboardURL, showSwitchboardPopup */
 
@@ -188,7 +189,7 @@ async function handleClick(resource, batch = false) {
 
 }
 
-export const openSwitchboardAction = {
+export const openSwitchboardAction = new FileAction({
 	id: 'switchboardbridge-action',
 	title: (nodes) => 'Switchboard',
 	displayName: (nodes) => 'Switchboard',
@@ -220,7 +221,7 @@ export const openSwitchboardAction = {
 	},
 	inline: () => false,
 	order: 22,
-}
+})
 
 if (nextcloudVersionIsGreaterThanOr28) {
 	registerFileAction(openSwitchboardAction)
@@ -258,16 +259,20 @@ if (nextcloudVersionIsGreaterThanOr28) {
 
 document.addEventListener('DOMContentLoaded', async () => {
 	if (switchboardUrl && OCA && OCA?.Files?.Settings) {
-		const { default: Vue } = await import('vue')
 		const { default: FilesSettings } = await import('./views/FilesSettings.vue')
 
-		const vm = new Vue({
-			render: h => h(FilesSettings, {}),
+		const app = createApp({
+			render: () => h(FilesSettings),
 		})
-		const el = vm.$mount().$el
-		OCA.Files.Settings.register(new OCA.Files.Settings.Setting('switchboardbridge', {
-			el: () => { return el },
-		}))
+
+		const el = document.createElement('div')
+		app.mount(el)
+
+		OCA.Files.Settings.register(
+			new OCA.Files.Settings.Setting('switchboardbridge', {
+				el: () => el,
+			}),
+		)
 	}
 })
 
