@@ -247,7 +247,7 @@ if (nextcloudVersionIsGreaterThanOr32) {
         inline: () => false,
         order: 22,
     })
-	registerFileAction(openSwitchboardAction)
+	registerFileAction32(openSwitchboardAction)
 } else {
     // NC 27 and below
 	OCA.SwitchboardBridge = OCA.SwitchboardBridge || {}
