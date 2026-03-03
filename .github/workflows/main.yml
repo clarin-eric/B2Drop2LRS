@@ -109,13 +109,16 @@ jobs:
     strategy:
       matrix:
         node-version: [ 20.x ]
-        nextcloud-version-branch: [ stable28, stable29, stable30, stable31, stable32 ]
+        nextcloud-version-branch: [ stable28, stable29, stable30, stable31, stable32, stable33 ]
         php-version: [ 8.1, 8.2, 8.3 ]
         include:
           - nextcloud-version-branch: stable31
             node-version: 20.x
             php-version: 8.4
           - nextcloud-version-branch: stable32
+            node-version: 20.x
+            php-version: 8.4
+          - nextcloud-version-branch: stable33
             node-version: 20.x
             php-version: 8.4
 

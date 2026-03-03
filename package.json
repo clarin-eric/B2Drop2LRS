@@ -38,7 +38,8 @@
     "@nextcloud/browserslist-config": "^3.1.2",
     "@nextcloud/eslint-config": "^8.4.2",
     "@nextcloud/webpack-vue-config": "^7.0.2",
-    "webpack-shell-plugin-next": "^2.3.3"
+    "webpack-shell-plugin-next": "^2.3.3",
+    "@nextcloud/files-v4": "npm:@nextcloud/files@^4.0.0"
   },
   "overrides": {
     "fast-xml-parser": "5.4.1"
