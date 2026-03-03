@@ -1,7 +1,7 @@
 import { generateOcsUrl } from '@nextcloud/router'
-import { FileAction, FileType, File, Permission, registerFileAction as registerFileAction32, } from '@nextcloud/files'
+import { FileAction, FileType, File, Permission, registerFileAction as registerFileAction32 } from '@nextcloud/files-v3'
 // NC 33+ API (no FileAction class)
-import { registerFileAction as registerFileAction33, Permission as Permission33,} from '@nextcloud/files-v4/dist/index.js'
+import { registerFileAction as registerFileAction33, Permission as Permission33 } from '@nextcloud/files'
 
 import { loadState } from '@nextcloud/initial-state'
 import { subscribe } from '@nextcloud/event-bus'
