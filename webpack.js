@@ -30,4 +30,11 @@ webpackConfig.entry = {
 	switchboardpopuplocal: path.resolve(path.join('src', 'lib/switchboardpopuplocal.js')),
 }
 
+// Add alias so Webpack can resolve @nextcloud/files-v5
+webpackConfig.resolve = webpackConfig.resolve || {}
+webpackConfig.resolve.alias = {
+    ...(webpackConfig.resolve.alias || {}),
+    '@nextcloud/files-v4': path.resolve(__dirname, 'node_modules/@nextcloud/files-v4'),
+}
+
 module.exports = webpackConfig
