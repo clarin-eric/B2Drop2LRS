@@ -29,7 +29,7 @@
 		</NcActions>
 		<div id="popupbox">
 			<NcCheckboxRadioSwitch :model-value="usePopUp" :loading="loading" @update:modelValue="togglePopUp">
-				Use Switchboard on-screen pop-up to open single files (experimental)
+				Use Switchboard on-screen pop-up to open single files
 			</NcCheckboxRadioSwitch>
 		</div>
 	</div>
