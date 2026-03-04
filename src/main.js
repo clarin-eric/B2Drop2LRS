@@ -9,7 +9,7 @@ import axios from '@nextcloud/axios'
 /* global setSwitchboardURL, showSwitchboardPopup */
 
 const nextcloudVersionIsGreaterThanOr28 = parseInt(OC.config.version.split('.')[0]) >= 28
-const nextcloudVersionIsGreaterThanOr32 = parseInt(OC.config.version.split('.')[0]) >= 32
+const nextcloudVersionIsGreaterThanOr33 = parseInt(OC.config.version.split('.')[0]) >= 33
 const switchboardDefaultUrl = 'https://switchboard.clarin.eu'
 
 let switchboardUrl = loadState('switchboardbridge', 'switchboard_url')
@@ -191,7 +191,7 @@ async function handleClick(resource, batch = false) {
 	}
 }
 
-if (nextcloudVersionIsGreaterThanOr32) {
+if (nextcloudVersionIsGreaterThanOr33) {
 	// NC 33+
 	const baseAction = {
 		id: 'switchboardbridge-action',
