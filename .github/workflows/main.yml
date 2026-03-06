@@ -15,6 +15,8 @@ on:
 
 jobs:
   lint:
+    if: >
+       !(github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository)
     runs-on: ubuntu-latest
 
     strategy:
@@ -26,7 +28,7 @@ jobs:
 
     steps:
       - name: Setup Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node-version }}
 
@@ -37,7 +39,7 @@ jobs:
           ini-file: apps/switchboardbridge/tests/php.ini
           tools: phpcs, phpcbf
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         name: Checkout switchboardbridge
 
       - name: Install npm dependencies for switchboardbridge
@@ -60,7 +62,7 @@ jobs:
         run: tar cf switchboardbridge-lint_node${{matrix.node-version}}_php${{ matrix.php-version }}.zip --exclude=./switchboardbridge-lint_node${{matrix.node-version}}_php${{ matrix.php-version }}.zip .
 
       - name: Upload lint result workspace
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: switchboardbridge-lint_node${{matrix.node-version}}_php${{ matrix.php-version }}
           path: switchboardbridge-lint_node${{matrix.node-version}}_php${{ matrix.php-version }}.zip
@@ -79,12 +81,12 @@ jobs:
 
     steps:
       - name: Setup Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node-version }}
 
       - name: Download lint job workspace
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: switchboardbridge-lint_node${{matrix.node-version}}_php${{ matrix.php-version }}
 
@@ -98,7 +100,7 @@ jobs:
         run: tar cf switchboardbridge-build_node${{matrix.node-version}}_php${{ matrix.php-version }}.zip --exclude=./switchboardbridge-build_node${{matrix.node-version}}_php${{ matrix.php-version }}.zip .
 
       - name: Upload build result workspace
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: switchboardbridge-build_node${{matrix.node-version}}_php${{ matrix.php-version }}
           path: switchboardbridge-build_node${{matrix.node-version}}_php${{ matrix.php-version }}.zip
@@ -109,13 +111,25 @@ jobs:
     strategy:
       matrix:
         node-version: [ 20.x ]
-        nextcloud-version-branch: [ stable28, stable29, stable30, stable31, stable32 ]
-        php-version: [ 8.1, 8.2, 8.3 ]
+        nextcloud-version-branch: [ stable28, stable29, stable30, stable31, stable32, stable33 ]
+        php-version: [ 8.2, 8.3 ]
         include:
+          - nextcloud-version-branch: stable28
+            node-version: 20.x
+            php-version: 8.1
+          - nextcloud-version-branch: stable29
+            node-version: 20.x
+            php-version: 8.1
+          - nextcloud-version-branch: stable30
+            node-version: 20.x
+            php-version: 8.1
           - nextcloud-version-branch: stable31
             node-version: 20.x
             php-version: 8.4
           - nextcloud-version-branch: stable32
+            node-version: 20.x
+            php-version: 8.4
+          - nextcloud-version-branch: stable33
             node-version: 20.x
             php-version: 8.4
 
@@ -132,7 +146,7 @@ jobs:
           mysql -u${{ env.DB_ROOT }} -p${{ env.DB_ROOT }} -e "CREATE USER 'oc_autotest'@'localhost' IDENTIFIED BY '';"
           mysql -u${{ env.DB_ROOT }} -p${{ env.DB_ROOT }} -e "grant all on oc_autotest.* to 'oc_autotest'@'localhost';"
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         name: Checkout Nextcloud ${{matrix.nextcloud-version-branch}}
         with:
           repository: nextcloud/server
@@ -141,7 +155,7 @@ jobs:
           submodules: true  # 'Composer autoloader' is required in order to run the code check
 
       - name: Add switchboardbridge to nextcloud from build job workspace
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: switchboardbridge-build_node${{matrix.node-version}}_php${{ matrix.php-version }} # node version not relevant for this job
 
@@ -177,11 +191,13 @@ jobs:
     name: Commit from PHP${{ matrix.php-version}} and Node${{ matrix.node-version }}
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         name: Checkout switchboardbridge
+        with:
+          fetch-depth: 0
 
       - name: Get switchboardbridge build job workspace
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: switchboardbridge-build_node${{ matrix.node-version }}_php${{ matrix.php-version }}
 
@@ -189,7 +205,7 @@ jobs:
         run: tar xvf switchboardbridge-build_node${{ matrix.node-version }}_php${{ matrix.php-version }}.zip -C . --exclude=.git --exclude=node_modules
 
       - name: Commit lint fixes and target Js
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@v7
         with:
           repository: .
           file_pattern: '*.php *.js *.map'
@@ -208,7 +224,7 @@ jobs:
     name: Update release tag
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         name: Checkout switchboardbridge
         with:
           fetch-depth: 0
@@ -221,13 +237,13 @@ jobs:
           echo "branch=$branch" >> $GITHUB_OUTPUT
           echo "Branch is $branch."
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         name: Checkout switchboardbridge
         with:
           ref: ${{ steps.branchstep.outputs.branch }}
 
       - name: Get switchboardbridge build job workspace
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: switchboardbridge-build_node${{ matrix.node-version }}_php${{ matrix.php-version }}
 
@@ -235,7 +251,7 @@ jobs:
         run: tar xvf switchboardbridge-build_node${{ matrix.node-version }}_php${{ matrix.php-version }}.zip ./appinfo/info.xml -C .
 
       - name: Commit package version upgrade
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@v7
         with:
           repository: .
           file_pattern: 'appinfo/info.xml'
