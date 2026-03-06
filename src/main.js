@@ -102,9 +102,9 @@ function usePopUpToggled(event) {
 }
 
 /**
- * Helper function to make sure the resource.data object provides the .path field
- * In NC <32 the path comes in `resouce.path` in NC 33+ it comes in `resource.data.path`
- * after callint this method `resource.data.path` should exist in both scenarios
+ * Helper function to make sure the `node.data` has `.path`
+ * In NC <32 the file path is `node.path` in NC 33+ it is `node.data.path`
+ * This method returns `node.data` with `.path` in both scenarios
  *
  * @param {File} node to extract the data object
  */
