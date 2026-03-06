@@ -8,7 +8,6 @@ import { createApp, h } from 'vue'
 import axios from '@nextcloud/axios'
 /* global setSwitchboardURL, showSwitchboardPopup */
 
-const nextcloudVersionIsGreaterThanOr28 = parseInt(OC.config.version.split('.')[0]) >= 28
 const nextcloudVersionIsGreaterThanOr33 = parseInt(OC.config.version.split('.')[0]) >= 33
 const switchboardDefaultUrl = 'https://switchboard.clarin.eu'
 
@@ -248,7 +247,7 @@ if (nextcloudVersionIsGreaterThanOr33) {
 		order: 22,
 	}
 	registerFileAction(baseAction)
-} else if (nextcloudVersionIsGreaterThanOr28) {
+} else {
 	// NC 28-32
 	const openSwitchboardAction = new FileAction({
 		id: 'switchboardbridge-action',
@@ -283,37 +282,6 @@ if (nextcloudVersionIsGreaterThanOr33) {
 		order: 22,
 	})
 	registerFileAction32(openSwitchboardAction)
-} else {
-	// NC 27 and below
-	OCA.SwitchboardBridge = OCA.SwitchboardBridge || {}
-	OCA.SwitchboardBridge.Util = {
-		/**
-		 * Initialize the switchboardbridge plugin.
-		 *
-		 * @param {OCA.Files.FileList} fileList file list to be extended
-		 */
-		attach(fileList) {
-			if (fileList.id === 'trashbin' || fileList.id === 'files.public') {
-				return
-			}
-			const fileActions = fileList.fileActions
-
-			fileActions.registerAction({
-				name: 'SWITCHBOARD',
-				displayName: 'Switchboard',
-				mime: 'all',
-				permissions: OC.PERMISSION_READ,
-				iconClass: 'icon-settings-dark',
-				actionHandler(fileName, path) {
-					// console.log(fileName, path, path.dir);
-					let filePath = path.dir + '/' + fileName
-					filePath = filePath.replace('//', '/')
-					handleClick(filePath)
-				},
-			})
-		},
-	}
-	OC.Plugins.register('OCA.Files.FileList', OCA.SwitchboardBridge.Util)
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
