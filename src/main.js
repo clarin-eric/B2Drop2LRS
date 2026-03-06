@@ -335,7 +335,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 	}
 })
 
-OCA.SwitchboardBridge = {
+OCA.SwitchboardBridge = {  
 	SwitchboardUrl: switchboardUrl,
 	SwitchboardDefaultUrl: switchboardDefaultUrl,
 	UsePopUp: useSwitchboardPopUp,
