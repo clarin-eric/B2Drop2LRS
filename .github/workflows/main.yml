@@ -191,6 +191,8 @@ jobs:
     steps:
       - uses: actions/checkout@v6
         name: Checkout switchboardbridge
+        with:
+          fetch-depth: 0
 
       - name: Get switchboardbridge build job workspace
         uses: actions/download-artifact@v8
