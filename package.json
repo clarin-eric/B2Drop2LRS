@@ -1,7 +1,7 @@
 {
   "name": "switchboardbridge",
   "description": "A simple Nextcloud app to enable calling the CLARIN Language Resource Switchboard directly from within the Nextcloud files app",
-  "version": "3.0.2",
+  "version": "3.1.0",
   "author": "André Moreira <andre@clarin.eu>",
   "repository": {
     "url": "https://github.com/clarin-eric/B2Drop2LRSwitchboard",
@@ -20,7 +20,8 @@
   "dependencies": {
     "@nextcloud/axios": "^2.5.2",
     "@nextcloud/event-bus": "^3.3.3",
-    "@nextcloud/files": "^3.12.2",
+    "@nextcloud/files": "^4.0.0",
+    "@nextcloud/files-v3": "npm:@nextcloud/files@^3.12.2",
     "@nextcloud/initial-state": "^3.0.0",
     "@nextcloud/router": "^3.1.0",
     "@nextcloud/vue": "^9.5.0",
@@ -38,6 +39,7 @@
     "@nextcloud/browserslist-config": "^3.1.2",
     "@nextcloud/eslint-config": "^8.4.2",
     "@nextcloud/webpack-vue-config": "^7.0.2",
+    "eslint-import-resolver-custom-alias": "^1.3.2",
     "webpack-shell-plugin-next": "^2.3.3"
   },
   "overrides": {
