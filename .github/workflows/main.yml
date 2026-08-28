@@ -112,17 +112,11 @@ jobs:
       matrix:
         node-version: [ 20.x ]
         nextcloud-version-branch: [ stable30, stable31, stable32, stable33, stable34, stable35 ]
-        php-version: [ 8.2, 8.3 ]
+        php-version: [ 8.3 ]
         include:
-          - nextcloud-version-branch: stable28
-            node-version: 20.x
-            php-version: 8.1
-          - nextcloud-version-branch: stable29
-            node-version: 20.x
-            php-version: 8.1
           - nextcloud-version-branch: stable30
             node-version: 20.x
-            php-version: 8.1
+            php-version: 8.2
           - nextcloud-version-branch: stable31
             node-version: 20.x
             php-version: 8.4
@@ -130,6 +124,12 @@ jobs:
             node-version: 20.x
             php-version: 8.4
           - nextcloud-version-branch: stable33
+            node-version: 20.x
+            php-version: 8.4
+          - nextcloud-version-branch: stable34
+            node-version: 20.x
+            php-version: 8.4
+          - nextcloud-version-branch: stable35
             node-version: 20.x
             php-version: 8.4
 
