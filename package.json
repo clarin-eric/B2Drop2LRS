@@ -43,6 +43,7 @@
     "webpack-shell-plugin-next": "^2.3.3"
   },
   "overrides": {
-    "fast-xml-parser": "5.11.1"
+    "fast-xml-parser": "5.11.1",
+    "eslint": "10.9.1"
   }
 }
