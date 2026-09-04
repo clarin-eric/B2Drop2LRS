@@ -1,15 +1,14 @@
 {
   "name": "switchboardbridge",
-  "description": "A simple Nextcloud app to enable calling the CLARIN Language Resource Switchboard directly from within the Nextcloud files app",
-  "version": "3.1.1",
-  "author": "André Moreira <andre@clarin.eu>",
-  "repository": {
-    "url": "https://github.com/clarin-eric/B2Drop2LRSwitchboard",
-    "type": "git"
-  },
-  "homepage": "https://github.com/clarin-eric/B2Drop2LRSwitchboard",
-  "license": "AGPLv3",
+  "version": "3.1.1-rc1",
   "private": true,
+  "description": "A simple Nextcloud app to enable calling the CLARIN Language Resource Switchboard directly from within the Nextcloud files app",
+  "homepage": "https://github.com/clarin-eric/B2Drop2LRSwitchboard",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/clarin-eric/B2Drop2LRSwitchboard"
+  },
+  "license": "AGPLv3",
   "author": "André Moreira <andre@clarin.eu>",
   "scripts": {
     "build": "NODE_ENV=production webpack --progress --config webpack.js",
