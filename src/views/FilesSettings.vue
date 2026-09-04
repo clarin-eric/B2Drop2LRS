@@ -3,23 +3,24 @@
 		<h4 id="title">
 			Switchboard settings
 		</h4>
-		<NcTextField v-model="switchboardUrl"
+		<NcTextField
+			v-model="switchboardUrl"
 			label="Switchboard URL"
-			:helper-text="helpText"
+			:helperText="helpText"
 			type="url"
 			placeholder="e.g. https://switchboard.clarin.eu"
-			trailing-button-icon="undo"
-			trailing-button-label="Reset to default"
-			:show-trailing-button="switchboardUrl !== switchboardDefaultUrl"
+			trailingButtonIcon="undo"
+			trailingButtonLabel="Reset to default"
+			:showTrailingButton="switchboardUrl !== switchboardDefaultUrl"
 			:error="invalid"
 			:success="submitted"
-			@trailing-button-click="reset"
+			@trailingButtonClick="reset"
 			@update:modelValue="updateUI">
 			<template #icon>
 				<LinkEdit :size="20" />
 			</template>
 		</NcTextField>
-		<NcActions :force-name="true">
+		<NcActions :forceName="true">
 			<NcActionButton :disabled="submitDisabled" @click="submit">
 				<template #icon>
 					<ContentSaveOutline :size="20" />
@@ -28,7 +29,7 @@
 			</NcActionButton>
 		</NcActions>
 		<div id="popupbox">
-			<NcCheckboxRadioSwitch :model-value="usePopUp" :loading="loading" @update:modelValue="togglePopUp">
+			<NcCheckboxRadioSwitch :modelValue="usePopUp" :loading="loading" @update:modelValue="togglePopUp">
 				Use Switchboard on-screen pop-up to open single files
 			</NcCheckboxRadioSwitch>
 		</div>
@@ -36,12 +37,12 @@
 </template>
 
 <script>
-import { emit } from '@nextcloud/event-bus'
 import axios from '@nextcloud/axios'
+import { emit } from '@nextcloud/event-bus'
 import { generateUrl } from '@nextcloud/router'
-import { NcActions, NcActionButton, NcTextField, NcCheckboxRadioSwitch } from '@nextcloud/vue'
-import LinkEdit from 'vue-material-design-icons/LinkEdit.vue'
+import { NcActionButton, NcActions, NcCheckboxRadioSwitch, NcTextField } from '@nextcloud/vue'
 import ContentSaveOutline from 'vue-material-design-icons/ContentSaveOutline.vue'
+import LinkEdit from 'vue-material-design-icons/LinkEdit.vue'
 
 const defaultHelpText = 'The URL of the CLARIN Language Resource Switchboard'
 
@@ -55,6 +56,7 @@ export default {
 		LinkEdit,
 		ContentSaveOutline,
 	},
+
 	data() {
 		return {
 			switchboardUrl: OCA.SwitchboardBridge.SwitchboardUrl,
@@ -68,18 +70,20 @@ export default {
 			helpText: defaultHelpText,
 		}
 	},
+
 	methods: {
 		reset() {
 			this.switchboardUrl = this.switchboardDefaultUrl
 			this.setValid()
 			this.submitDisabled = this.switchboardUrl.trim() === this.switchboardSavedUrl.trim()
 		},
+
 		submit() {
 			if (this.switchboardUrl) {
 				axios.post(generateUrl('/apps/switchboardbridge/settings'), {
 					key: 'switchboard_url',
 					value: this.switchboardUrl,
-				}).then(response => {
+				}).then((response) => {
 					emit('SwitchboardBridge::sbUrlChanged', {
 						newUrl: this.switchboardUrl,
 					})
@@ -91,6 +95,7 @@ export default {
 				})
 			}
 		},
+
 		updateUI() {
 			this.submitted = false
 			if (this.switchboardSavedUrl === this.switchboardUrl) {
@@ -99,6 +104,7 @@ export default {
 			}
 			this.validate()
 		},
+
 		validate() {
 			if (this.isValidUrl(this.switchboardUrl)) {
 				this.setValid()
@@ -106,16 +112,19 @@ export default {
 				this.setInvalid()
 			}
 		},
+
 		setValid() {
 			this.helpText = defaultHelpText
 			this.invalid = false
 			this.submitDisabled = false
 		},
+
 		setInvalid() {
 			this.helpText = 'Must be a valid URL in the form: "https://..."'
 			this.invalid = true
 			this.submitDisabled = true
 		},
+
 		isValidUrl(string) {
 			let url
 			try {
@@ -125,18 +134,20 @@ export default {
 			}
 			return url.protocol === 'https:' && string.startsWith('https://')
 		},
+
 		togglePopUp() {
 			this.loading = true
 			this.usePopUp = !this.usePopUp
 			axios.post(generateUrl('/apps/switchboardbridge/settings'), {
 				key: 'use_switchboard_popup',
 				value: this.usePopUp ? '1' : '0',
-			}).then(response => {
+			}).then((response) => {
 				emit('SwitchboardBridge::usePopUpToggled')
 				this.loading = false
 			})
 		},
 	},
+
 	order: -99,
 }
 
