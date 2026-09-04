@@ -83,7 +83,7 @@ export default {
 				axios.post(generateUrl('/apps/switchboardbridge/settings'), {
 					key: 'switchboard_url',
 					value: this.switchboardUrl,
-				}).then((response) => {
+				}).then(() => {
 					emit('SwitchboardBridge::sbUrlChanged', {
 						newUrl: this.switchboardUrl,
 					})
@@ -129,7 +129,7 @@ export default {
 			let url
 			try {
 				url = new URL(string)
-			} catch (_) {
+			} catch {
 				return false
 			}
 			return url.protocol === 'https:' && string.startsWith('https://')
@@ -141,7 +141,7 @@ export default {
 			axios.post(generateUrl('/apps/switchboardbridge/settings'), {
 				key: 'use_switchboard_popup',
 				value: this.usePopUp ? '1' : '0',
-			}).then((response) => {
+			}).then(() => {
 				emit('SwitchboardBridge::usePopUpToggled')
 				this.loading = false
 			})
