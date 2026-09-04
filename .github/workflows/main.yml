@@ -21,7 +21,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [ 18.x, 20.x ]
+        node-version: [ 22.x, 23.x ]
         php-version: [ 8.1, 8.2, 8.3, 8.4 ]
 
     name: Lint on Node${{matrix.node-version}}, PHP${{ matrix.php-version }}
@@ -76,7 +76,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [ 18.x, 20.x ]
+        node-version: [ 22.x, 23.x ]
         php-version: [ 8.1, 8.2, 8.3, 8.4 ]
 
     steps:
@@ -110,27 +110,27 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [ 20.x ]
+        node-version: [ 23.x ]
         nextcloud-version-branch: [ stable28, stable29, stable30, stable31, stable32, stable33 ]
         php-version: [ 8.2, 8.3 ]
         include:
           - nextcloud-version-branch: stable28
-            node-version: 20.x
+            node-version: 23.x
             php-version: 8.1
           - nextcloud-version-branch: stable29
-            node-version: 20.x
+            node-version: 23.x
             php-version: 8.1
           - nextcloud-version-branch: stable30
-            node-version: 20.x
+            node-version: 23.x
             php-version: 8.1
           - nextcloud-version-branch: stable31
-            node-version: 20.x
+            node-version: 23.x
             php-version: 8.4
           - nextcloud-version-branch: stable32
-            node-version: 20.x
+            node-version: 23.x
             php-version: 8.4
           - nextcloud-version-branch: stable33
-            node-version: 20.x
+            node-version: 23.x
             php-version: 8.4
 
     name: Deploy on NC${{matrix.nextcloud-version-branch}}, PHP${{ matrix.php-version }}
@@ -185,7 +185,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [ 20.x ]
+        node-version: [ 23.x ]
         php-version: [ 8.4 ]
 
     name: Commit from PHP${{ matrix.php-version}} and Node${{ matrix.node-version }}
@@ -218,7 +218,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [ 20.x ]
+        node-version: [ 23.x ]
         php-version: [ 8.4 ]
 
     name: Update release tag
