@@ -45,7 +45,7 @@
     "webpack-shell-plugin-next": "^2.3.3"
   },
   "engines": {
-    "node": "^20.0.0",
+    "node": "^23.0.0",
     "npm": "^11.2.0"
   }
 }
