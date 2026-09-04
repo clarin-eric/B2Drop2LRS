@@ -1,14 +1,13 @@
-/* eslint no-useless-escape: 0 */
-const WebpackShellPluginNext = require('webpack-shell-plugin-next')
 const webpackConfig = require('@nextcloud/webpack-vue-config')
 const path = require('path')
+/* eslint no-useless-escape: 0 */
+const WebpackShellPluginNext = require('webpack-shell-plugin-next')
 
-webpackConfig.plugins.push(
-	new WebpackShellPluginNext({
-		onBuildStart: {
-			scripts: [
-				// eslint-disable-next-line no-multi-str, no-template-curly-in-string
-				'VERSION="${GITHUB_REF##*/}";\
+webpackConfig.plugins.push(new WebpackShellPluginNext({
+	onBuildStart: {
+		scripts: [
+
+			'VERSION="${GITHUB_REF##*/}";\
 				if [ -n "${VERSION}" ];\
 				then\
 					echo "Github ref exists -> updating App version number to: "${VERSION}"";\
@@ -18,12 +17,11 @@ webpackConfig.plugins.push(
 				else\
 					echo "No Github ref -> using HEAD version";\
 				fi',
-			],
-			blocking: true,
-			parallel: false,
-	  },
-	}),
-)
+		],
+		blocking: true,
+		parallel: false,
+	},
+}))
 
 webpackConfig.entry = {
 	main: path.resolve(path.join('src', 'main.js')),
