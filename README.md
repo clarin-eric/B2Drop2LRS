@@ -43,6 +43,13 @@ for each selected resource following the process decribed above for each file.
 	```php occ app:enable switchboardbridge ```
 
 
+# Some app screenshots
+
+![screenshot1](https://github.com/user-attachments/assets/36935a2c-1c8a-49d5-b471-ae105f0f520d)
+![screenshot2](https://github.com/user-attachments/assets/53662bac-f6f3-4196-80df-2fc3b6cbf59f)
+![screenshot3](https://github.com/user-attachments/assets/384c8ff4-4b22-4ba3-b8ae-7c443f0fee73)
+![screenshot4](https://github.com/user-attachments/assets/3ec66483-3d46-46fe-912a-973611142315)
+
 # Website
 
 The official B2Drop cloud space:
